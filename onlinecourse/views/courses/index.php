@@ -45,7 +45,7 @@ require __DIR__ . '/../layouts/header.php';
             <div class="col-md-4 mb-4">
                 <div class="card h-100 shadow-sm">
                     <?php if($course['image']): ?>
-                        <img src="assets/uploads/courses/<?php echo $course['image']; ?>" 
+                        <img src="<?php echo htmlspecialchars($course['image']); ?>" 
                              class="card-img-top" alt="<?php echo $course['title']; ?>"
                              style="height: 200px; object-fit: cover;">
                     <?php else: ?>
@@ -79,11 +79,15 @@ require __DIR__ . '/../layouts/header.php';
                             <small class="text-muted">
                                 <i class="fas fa-user"></i> <?php echo $course['instructor_name']; ?>
                             </small>
+                            <br>
+                            <small class="text-muted">
+                                <i class="fas fa-users"></i> <?php echo number_format($course['enrolled_count'] ?? 0); ?> học viên
+                            </small>
                         </div>
                     </div>
                     
                     <div class="card-footer bg-white">
-                        <a href="index.php?controller=Course&action=detail&id=<?php echo $course['id']; ?>" 
+                        <a href="/onlinecourse/onlinecourse/index.php?controller=Course&action=detail&id=<?php echo $course['id']; ?>" 
                            class="btn btn-primary w-100">
                             <i class="fas fa-eye"></i> Xem chi tiết
                         </a>
@@ -94,7 +98,14 @@ require __DIR__ . '/../layouts/header.php';
     <?php else: ?>
         <div class="col-12">
             <div class="alert alert-info text-center">
-                <i class="fas fa-info-circle"></i> Không tìm thấy khóa học nào.
+                <i class="fas fa-info-circle"></i> 
+                <?php 
+                if (isset($_GET['keyword']) || isset($_GET['category_id'])) {
+                    echo 'Không tìm thấy khóa học nào phù hợp với tiêu chí tìm kiếm.';
+                } else {
+                    echo 'Chưa có khóa học nào được duyệt. Khóa học sẽ hiển thị sau khi được quản trị viên phê duyệt.';
+                }
+                ?>
             </div>
         </div>
     <?php endif; ?>

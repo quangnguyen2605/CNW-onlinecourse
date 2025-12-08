@@ -10,15 +10,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
     <style>
         :root {
-            --primary-color: #0056d2;
-            --secondary-color: #1967d2;
-            --accent-color: #ff6b6b;
-            --success-color: #28a745;
-            --warning-color: #ffc107;
-            --text-color: #2d3748;
-            --light-gray: #f8f9fa;
-            --border-color: #e2e8f0;
-            --dark-blue: #1a365d;
+            --primary-color: #6366f1;
+            --secondary-color: #8b5cf6;
+            --accent-color: #ec4899;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --info-color: #3b82f6;
+            --text-color: #1f2937;
+            --light-gray: #f3f4f6;
+            --border-color: #e5e7eb;
+            --dark-blue: #1e293b;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-4: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
         }
 
         * {
@@ -196,6 +202,123 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
         }
 
+        /* New Colorful Styles */
+        .text-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .text-gradient-secondary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .bg-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .btn-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+            color: white;
+        }
+
+        .btn-outline-gradient {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-gradient:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: white;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .hero-stats {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .stat-item {
+            text-align: center;
+            color: white;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            opacity: 0.9;
+            margin: 0;
+        }
+
+        .image-wrapper {
+            position: relative;
+        }
+
+        .floating-card {
+            position: absolute;
+            background: white;
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .floating-card.card-1 {
+            top: 20px;
+            right: -30px;
+            animation-delay: 0s;
+        }
+
+        .floating-card.card-2 {
+            bottom: 30px;
+            left: -20px;
+            animation-delay: 1s;
+        }
+
+        .floating-card.card-3 {
+            top: 50%;
+            right: -40px;
+            animation-delay: 2s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
         /* Features Section */
         .section-title {
             font-size: 2.5rem;
@@ -264,8 +387,74 @@
 
         .feature-text {
             color: #6c757d;
-            margin-bottom: 0;
+            margin-bottom: 1rem;
             line-height: 1.7;
+        }
+
+        .feature-footer {
+            margin-top: auto;
+            padding-top: 1rem;
+        }
+
+        /* Colorful Feature Card Variations */
+        .feature-card-1 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+        }
+
+        .feature-card-1 .feature-title,
+        .feature-card-1 .feature-text {
+            color: white;
+        }
+
+        .feature-card-1::before {
+            background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .feature-card-1 .feature-icon {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .feature-card-2 {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+        }
+
+        .feature-card-2 .feature-title,
+        .feature-card-2 .feature-text {
+            color: white;
+        }
+
+        .feature-card-2::before {
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .feature-card-2 .feature-icon {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .feature-card-3 {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: white;
+            border: none;
+        }
+
+        .feature-card-3 .feature-title,
+        .feature-card-3 .feature-text {
+            color: white;
+        }
+
+        .feature-card-3::before {
+            background: linear-gradient(90deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .feature-card-3 .feature-icon {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
         }
 
         /* Course Cards */
@@ -867,8 +1056,8 @@
                             <i class="fas fa-search"></i>
                             <input type="text" class="form-control" placeholder="Tìm kiếm khóa học...">
                         </div>
-                        <a href="../auth/login.php" class="btn btn-outline-primary me-2">Đăng nhập</a>
-                        <a href="../auth/register.php" class="btn btn-primary">Đăng ký</a>
+                        <a href="/onlinecourse/onlinecourse/index.php?controller=Auth&action=login" class="btn btn-outline-primary me-2">Đăng nhập</a>
+                        <a href="/onlinecourse/onlinecourse/index.php?controller=Auth&action=register" class="btn btn-primary">Đăng ký</a>
                     </div>
                 </div>
             </div>
@@ -881,25 +1070,73 @@
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <div class="hero-content">
-                        <h1 class="hero-title">Học Lập Trình Trực Tuyến</h1>
+                        <div class="badge bg-gradient text-white mb-3 px-3 py-2">
+                            <i class="fas fa-star me-2"></i>Top 1 Platform 2024
+                        </div>
+                        <h1 class="hero-title">
+                            <span class="text-gradient">Học Lập Trình</span><br>
+                            <span class="text-gradient-secondary">Trực Tuyến</span>
+                        </h1>
                         <p class="hero-subtitle">
                             Khám phá các khóa học lập trình chất lượng cao với lộ trình học tập bài bản, 
                             được thiết kế bởi các chuyên gia hàng đầu trong ngành công nghệ thông tin.
                         </p>
                         <div class="hero-buttons">
-                            <a href="#courses" class="btn btn-light btn-lg">
-                                <i class="fas fa-search"></i> Khám phá khóa học
+                            <a href="#courses" class="btn btn-gradient btn-lg px-4 py-3">
+                                <i class="fas fa-search me-2"></i> Khám phá khóa học
                             </a>
-                            <a href="#" class="btn btn-outline-light btn-lg">
-                                <i class="fas fa-play-circle"></i> Xem giới thiệu
+                            <a href="#" class="btn btn-outline-gradient btn-lg px-4 py-3">
+                                <i class="fas fa-play-circle me-2"></i> Xem giới thiệu
                             </a>
+                        </div>
+                        <div class="hero-stats mt-4">
+                            <div class="row g-3">
+                                <div class="col-4">
+                                    <div class="stat-item">
+                                        <h3 class="stat-number">50K+</h3>
+                                        <p class="stat-label">Học viên</p>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="stat-item">
+                                        <h3 class="stat-number">100+</h3>
+                                        <p class="stat-label">Khóa học</p>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="stat-item">
+                                        <h3 class="stat-number">95%</h3>
+                                        <p class="stat-label">Hài lòng</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="hero-image">
-                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" 
-                             alt="Học lập trình" class="img-fluid">
+                        <div class="image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" 
+                                 alt="Học lập trình" class="img-fluid rounded-4 shadow-lg">
+                            <div class="floating-card card-1">
+                                <div class="card-body">
+                                    <i class="fas fa-code text-primary"></i>
+                                    <span>Web Development</span>
+                                </div>
+                            </div>
+                            <div class="floating-card card-2">
+                                <div class="card-body">
+                                    <i class="fas fa-mobile-alt text-success"></i>
+                                    <span>Mobile Apps</span>
+                                </div>
+                            </div>
+                            <div class="floating-card card-3">
+                                <div class="card-body">
+                                    <i class="fas fa-brain text-warning"></i>
+                                    <span>AI & ML</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -910,49 +1147,6 @@
     <section class="py-5" id="about">
         <div class="container">
             <h2 class="section-title">Tại sao chọn OnlineCourse?</h2>
-            <p class="section-subtitle">
-                Nền tảng học tập trực tuyến hàng đầu với nhiều ưu điểm vượt trội, giúp bạn đạt được mục tiêu học tập hiệu quả
-            </p>
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="feature-card fade-in">
-                        <div class="feature-icon">
-                            <i class="fas fa-laptop-code"></i>
-                        </div>
-                        <h3 class="feature-title">Học thực tế</h3>
-                        <p class="feature-text">
-                            Thực hành lập trình ngay trên trình duyệt với các bài tập thực tế và dự án thực tế, 
-                            giúp bạn áp dụng kiến thức vào công việc ngay lập tức.
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="feature-card fade-in">
-                        <div class="feature-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <h3 class="feature-title">Cộng đồng</h3>
-                        <p class="feature-text">
-                            Kết nối với hàng ngàn học viên và giảng viên để trao đổi kiến thức, 
-                            chia sẻ kinh nghiệm và giải đáp thắc mắc trong quá trình học tập.
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="feature-card fade-in">
-                        <div class="feature-icon">
-                            <i class="fas fa-certificate"></i>
-                        </div>
-                        <h3 class="feature-title">Chứng nhận</h3>
-                        <p class="feature-text">
-                            Nhận chứng chỉ sau khi hoàn thành khóa học, giúp bạn nổi bật hơn trong mắt nhà tuyển dụng 
-                            và mở rộng cơ hội nghề nghiệp.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Popular Courses -->
     <section class="py-5 bg-light" id="courses">
@@ -1045,7 +1239,7 @@
                     Tham gia ngay hôm nay và nhận ưu đãi đặc biệt dành cho học viên mới
                 </p>
                 <div class="d-flex gap-3 justify-content-center flex-wrap">
-                    <a href="../auth/register.php" class="btn btn-light btn-lg">
+                    <a href="/onlinecourse/onlinecourse/index.php?controller=Auth&action=register" class="btn btn-light btn-lg">
                         <i class="fas fa-rocket"></i> Bắt đầu học miễn phí
                     </a>
                     <a href="#courses" class="btn btn-outline-light btn-lg">

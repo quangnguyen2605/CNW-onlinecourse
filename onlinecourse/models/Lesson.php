@@ -60,21 +60,28 @@ class Lesson
 
     public function markCompleted($lessonId, $studentId)
     {
-        $sql = 'INSERT INTO lesson_progress (lesson_id, student_id, completed_at) 
-                VALUES (:lesson_id, :student_id, NOW())
-                ON DUPLICATE KEY UPDATE completed_at = NOW()';
+        // Get lesson info to get course_id
+        $lesson = $this->findById($lessonId);
+        if (!$lesson) {
+            return false;
+        }
+        
+        // Insert into completed_lessons table
+        $sql = 'INSERT IGNORE INTO completed_lessons (student_id, lesson_id, course_id) VALUES (:student_id, :lesson_id, :course_id)';
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([
-            ':lesson_id' => $lessonId,
             ':student_id' => $studentId,
+            ':lesson_id' => $lessonId,
+            ':course_id' => $lesson['course_id'],
         ]);
     }
 
     public function getCompletedByStudent($courseId, $studentId)
     {
-        $sql = 'SELECT l.* FROM lessons l 
-                JOIN lesson_progress lp ON l.id = lp.lesson_id 
-                WHERE l.course_id = :course_id AND lp.student_id = :student_id';
+        $sql = 'SELECT l.*, cl.completed_at FROM lessons l 
+                JOIN completed_lessons cl ON l.id = cl.lesson_id 
+                WHERE cl.course_id = :course_id AND cl.student_id = :student_id 
+                ORDER BY l.`order` ASC';
         $stmt = $this->db->prepare($sql);
         $stmt->execute([
             ':course_id' => $courseId,
@@ -85,12 +92,12 @@ class Lesson
 
     public function isCompleted($lessonId, $studentId)
     {
-        $sql = 'SELECT 1 FROM lesson_progress WHERE lesson_id = :lesson_id AND student_id = :student_id LIMIT 1';
+        $sql = 'SELECT id FROM completed_lessons WHERE lesson_id = :lesson_id AND student_id = :student_id LIMIT 1';
         $stmt = $this->db->prepare($sql);
         $stmt->execute([
             ':lesson_id' => $lessonId,
             ':student_id' => $studentId,
         ]);
-        return $stmt->fetchColumn() !== false;
+        return $stmt->fetch(PDO::FETCH_ASSOC) !== false;
     }
 }

@@ -59,7 +59,7 @@ if (session_status() === PHP_SESSION_NONE) {
                                 <i class="fas fa-book"></i> Khóa học của tôi
                             </a>
                         <?php elseif ($role === 1): ?>
-                            <a href="index.php?controller=Instructor&action=courses" class="btn btn-outline-primary me-2">
+                            <a href="index.php?controller=Instructor&action=dashboard" class="btn btn-outline-primary me-2">
                                 <i class="fas fa-chalkboard-teacher"></i> Giảng viên
                             </a>
                         <?php elseif ($role === 2): ?>
@@ -71,11 +71,11 @@ if (session_status() === PHP_SESSION_NONE) {
                         <div class="dropdown">
                             <a class="btn btn-link text-decoration-none dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                                 <i class="fas fa-user-circle"></i> 
-                                <?= htmlspecialchars($_SESSION['user_fullname'] ?? 'User') ?>
+                                <?= htmlspecialchars($_SESSION['user_name'] ?? 'User') ?>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="auth/profile.php"><i class="fas fa-user"></i> Hồ sơ cá nhân</a></li>
-                                <li><a class="dropdown-item" href="auth/profile.php#password-tab"><i class="fas fa-key"></i> Đổi mật khẩu</a></li>
+                                <li><a class="dropdown-item" href="index.php?controller=Auth&action=profile"><i class="fas fa-user"></i> Hồ sơ cá nhân</a></li>
+                                <li><a class="dropdown-item" href="index.php?controller=Auth&action=profile#password-tab"><i class="fas fa-key"></i> Đổi mật khẩu</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="index.php?controller=Auth&action=logout">
                                     <i class="fas fa-sign-out-alt"></i> Đăng xuất
@@ -83,8 +83,8 @@ if (session_status() === PHP_SESSION_NONE) {
                             </ul>
                         </div>
                     <?php else: ?>
-                        <a href="index.php?controller=Auth&action=login" class="btn btn-outline-primary me-2">Đăng nhập</a>
-                        <a href="index.php?controller=Auth&action=register" class="btn btn-primary">Đăng ký</a>
+                        <a href="/onlinecourse/onlinecourse/index.php?controller=Auth&action=login" class="btn btn-outline-primary me-2">Đăng nhập</a>
+                        <a href="/onlinecourse/onlinecourse/index.php?controller=Auth&action=register" class="btn btn-primary">Đăng ký</a>
                     <?php endif; ?>
                 </div>
             </div>

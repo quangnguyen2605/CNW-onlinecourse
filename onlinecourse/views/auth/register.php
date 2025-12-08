@@ -26,8 +26,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $error = 'Vui lòng nhập đầy đủ thông tin';
         } elseif (strlen($username) < 3) {
             $error = 'Username phải có ít nhất 3 ký tự';
-        } elseif (strlen($password) < 6) {
-            $error = 'Mật khẩu phải có ít nhất 6 ký tự';
+        } elseif (strlen($password) < 8) {
+            $error = 'Mật khẩu phải có ít nhất 8 ký tự';
+        } elseif (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/', $password)) {
+            $error = 'Mật khẩu phải chứa ít nhất 1 chữ hoa, 1 chữ thường và 1 số';
         } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $error = 'Email không hợp lệ';
         } else {
@@ -39,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $error = 'Email hoặc username đã được sử dụng';
             } else {
                 // Tạo user mới
-                $hash = password_hash($password, PASSWORD_DEFAULT);
+                $hash = password_hash($password, PASSWORD_ARGON2ID, ['memory_cost' => 65536, 'time_cost' => 4, 'threads' => 3]);
                 $created = $userModel->create([
                     'username' => $username,
                     'email' => $email,
@@ -49,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ]);
                 
                 if ($created) {
-                    $success = 'Đăng ký thành công! <a href="login.php" style="color: #16a34a;">Nhấn vào đây để đăng nhập</a>';
+                    $success = 'Đăng ký thành công! <a href="/onlinecourse/onlinecourse/index.php?controller=Auth&action=login" style="color: #16a34a;">Nhấn vào đây để đăng nhập</a>';
                     // Clear form
                     $_POST = [];
                 } else {
@@ -327,7 +329,7 @@ require __DIR__ . '/../layouts/header.php';
             </div>
         <?php endif; ?>
         
-        <form method="post" action="register.php" id="registerForm">
+        <form method="post" action="/onlinecourse/onlinecourse/index.php?controller=Auth&action=register" id="registerForm">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" required 
@@ -352,7 +354,7 @@ require __DIR__ . '/../layouts/header.php';
             <div class="form-group">
                 <label for="password">Mật khẩu</label>
                 <input type="password" id="password" name="password" required 
-                       placeholder="Nhập mật khẩu (ít nhất 6 ký tự)">
+                       placeholder="Nhập mật khẩu (ít nhất 8 ký tự, 1 hoa, 1 thường, 1 số)" minlength="8">
                 <div class="password-strength" id="passwordStrength"></div>
             </div>
 
@@ -391,7 +393,7 @@ require __DIR__ . '/../layouts/header.php';
 
         <div class="form-footer">
             <p>Đã có tài khoản?</p>
-            <a href="login.php">Đăng nhập ngay</a>
+            <a href="/onlinecourse/onlinecourse/index.php?controller=Auth&action=login">Đăng nhập ngay</a>
         </div>
     </div>
 </div>

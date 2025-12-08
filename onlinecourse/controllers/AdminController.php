@@ -18,6 +18,14 @@ class AdminController
         $totalCourses = (int)$db->query('SELECT COUNT(*) FROM courses')->fetchColumn();
         $totalEnrollments = (int)$db->query('SELECT COUNT(*) FROM enrollments')->fetchColumn();
 
+        // Users by role
+        $students = (int)$db->query('SELECT COUNT(*) FROM users WHERE role = 0')->fetchColumn();
+        $instructors = (int)$db->query('SELECT COUNT(*) FROM users WHERE role = 1')->fetchColumn();
+        $admins = (int)$db->query('SELECT COUNT(*) FROM users WHERE role = 2')->fetchColumn();
+        
+        // Courses by status - database không có status column
+        $pendingCourses = 0; // Database không có status, set = 0
+
         $pageTitle = 'Admin Dashboard';
         require __DIR__ . '/../views/admin/dashboard.php';
     }
@@ -32,19 +40,78 @@ class AdminController
         require __DIR__ . '/../views/admin/users/manage.php';
     }
 
+    public function createUser()
+    {
+        $this->requireAdmin();
+        $pageTitle = 'Thêm người dùng mới';
+        require __DIR__ . '/../views/admin/users/create.php';
+    }
+
+    public function storeUser()
+    {
+        $this->requireAdmin();
+        
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $password = $_POST['password'] ?? '';
+            
+            // Password validation
+            if (strlen($password) < 8) {
+                $_SESSION['error'] = 'Mật khẩu phải có ít nhất 8 ký tự!';
+                header('Location: index.php?controller=Admin&action=createUser');
+                exit;
+            }
+            
+            if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/', $password)) {
+                $_SESSION['error'] = 'Mật khẩu phải chứa ít nhất 1 chữ hoa, 1 chữ thường và 1 số!';
+                header('Location: index.php?controller=Admin&action=createUser');
+                exit;
+            }
+            
+            $data = [
+                'username' => $_POST['username'] ?? '',
+                'email' => $_POST['email'] ?? '',
+                'password' => password_hash($password, PASSWORD_ARGON2ID, ['memory_cost' => 65536, 'time_cost' => 4, 'threads' => 3]),
+                'fullname' => $_POST['fullname'] ?? '',
+                'role' => (int)($_POST['role'] ?? 0),
+                'phone' => $_POST['phone'] ?? '',
+                'bio' => $_POST['bio'] ?? ''
+            ];
+            
+            $userModel = new User();
+            
+            // Check if username or email already exists
+            if ($userModel->getByUsername($data['username'])) {
+                $_SESSION['error'] = 'Tên đăng nhập đã tồn tại!';
+                header('Location: index.php?controller=Admin&action=createUser');
+                exit;
+            }
+            
+            if ($userModel->getByEmail($data['email'])) {
+                $_SESSION['error'] = 'Email đã tồn tại!';
+                header('Location: index.php?controller=Admin&action=createUser');
+                exit;
+            }
+            
+            if ($userModel->create($data)) {
+                $_SESSION['success'] = 'Tạo người dùng thành công! Mật khẩu đã được mã hóa bằng Argon2ID.';
+                header('Location: index.php?controller=Admin&action=users');
+                exit;
+            } else {
+                $_SESSION['error'] = 'Có lỗi xảy ra, vui lòng thử lại!';
+                header('Location: index.php?controller=Admin&action=createUser');
+                exit;
+            }
+        }
+    }
+
     public function toggleUserStatus()
     {
         $this->requireAdmin();
         $userId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
         
         if ($userId > 0) {
-            $userModel = new User();
-            $user = $userModel->findById($userId);
-            if ($user) {
-                $newStatus = $user['status'] === 'active' ? 'inactive' : 'active';
-                $userModel->updateStatus($userId, $newStatus);
-                $_SESSION['success'] = 'Cập nhật trạng thái người dùng thành công';
-            }
+            // Database không có status column, chỉ thông báo
+            $_SESSION['success'] = 'Tính năng status không được hỗ trợ trong database hiện tại';
         }
         
         header('Location: index.php?controller=Admin&action=users');
@@ -135,6 +202,12 @@ class AdminController
     }
 
     // Quản lý duyệt khóa học
+    public function courseApproval()
+    {
+        // Alias for pendingCourses - redirect to the correct method
+        $this->pendingCourses();
+    }
+
     public function pendingCourses()
     {
         $this->requireAdmin();
@@ -194,6 +267,20 @@ class AdminController
         $approvedCourses = (int)$db->query('SELECT COUNT(*) FROM courses WHERE status = "approved"')->fetchColumn();
         $pendingCourses = (int)$db->query('SELECT COUNT(*) FROM courses WHERE status = "pending"')->fetchColumn();
         
+        // Revenue statistics
+        $totalRevenue = (float)$db->query('SELECT SUM(c.price) FROM enrollments e JOIN courses c ON e.course_id = c.id')->fetchColumn() ?: 0;
+        $todayRevenue = (float)$db->query('SELECT SUM(c.price) FROM enrollments e JOIN courses c ON e.course_id = c.id WHERE DATE(e.enrolled_date) = CURDATE()')->fetchColumn() ?: 0;
+        $monthRevenue = (float)$db->query('SELECT SUM(c.price) FROM enrollments e JOIN courses c ON e.course_id = c.id WHERE MONTH(e.enrolled_date) = MONTH(CURDATE()) AND YEAR(e.enrolled_date) = YEAR(CURDATE())')->fetchColumn() ?: 0;
+        
+        // Daily statistics
+        $todayUsers = (int)$db->query('SELECT COUNT(*) FROM users WHERE DATE(created_at) = CURDATE()')->fetchColumn();
+        $todayEnrollments = (int)$db->query('SELECT COUNT(*) FROM enrollments WHERE DATE(enrolled_date) = CURDATE()')->fetchColumn();
+        $todayCourses = (int)$db->query('SELECT COUNT(*) FROM courses WHERE DATE(created_at) = CURDATE()')->fetchColumn();
+        
+        // Last 7 days statistics
+        $weekEnrollments = $db->query('SELECT DATE(e.enrolled_date) as date, COUNT(*) as count FROM enrollments e WHERE e.enrolled_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY) GROUP BY DATE(e.enrolled_date) ORDER BY date')->fetchAll(PDO::FETCH_ASSOC);
+        $weekRevenue = $db->query('SELECT DATE(e.enrolled_date) as date, SUM(c.price) as revenue FROM enrollments e JOIN courses c ON e.course_id = c.id WHERE e.enrolled_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY) GROUP BY DATE(e.enrolled_date) ORDER BY date')->fetchAll(PDO::FETCH_ASSOC);
+        
         // Recent activity
         $recentEnrollments = $db->query('SELECT e.*, u.fullname, c.title FROM enrollments e 
                                         JOIN users u ON e.student_id = u.id 
@@ -206,6 +293,14 @@ class AdminController
                                      ORDER BY c.created_at DESC LIMIT 10')
                                      ->fetchAll(PDO::FETCH_ASSOC);
 
+        // Top courses by enrollment
+        $topCourses = $db->query('SELECT c.title, COUNT(e.id) as enrollment_count, SUM(c.price) as revenue FROM courses c 
+                                 LEFT JOIN enrollments e ON c.id = e.course_id 
+                                 WHERE c.status = "approved" 
+                                 GROUP BY c.id, c.title 
+                                 ORDER BY enrollment_count DESC 
+                                 LIMIT 5')->fetchAll(PDO::FETCH_ASSOC);
+
         $stats = [
             'totalUsers' => $totalUsers,
             'totalCourses' => $totalCourses,
@@ -215,8 +310,17 @@ class AdminController
             'admins' => $admins,
             'approvedCourses' => $approvedCourses,
             'pendingCourses' => $pendingCourses,
+            'totalRevenue' => $totalRevenue,
+            'todayRevenue' => $todayRevenue,
+            'monthRevenue' => $monthRevenue,
+            'todayUsers' => $todayUsers,
+            'todayEnrollments' => $todayEnrollments,
+            'todayCourses' => $todayCourses,
+            'weekEnrollments' => $weekEnrollments,
+            'weekRevenue' => $weekRevenue,
             'recentEnrollments' => $recentEnrollments,
-            'recentCourses' => $recentCourses
+            'recentCourses' => $recentCourses,
+            'topCourses' => $topCourses
         ];
 
         $pageTitle = 'Thống kê hệ thống';

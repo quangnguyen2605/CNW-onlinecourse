@@ -8,6 +8,17 @@ class Course
         $this->db = Database::getInstance()->getConnection();
     }
 
+    public function getAllApproved()
+    {
+        $sql = 'SELECT c.*, u.full_name as instructor_name 
+                FROM courses c 
+                LEFT JOIN users u ON c.instructor_id = u.id 
+                WHERE c.status = "approved" 
+                ORDER BY c.created_at DESC';
+        $stmt = $this->db->query($sql);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function getAll()
     {
         $stmt = $this->db->query('SELECT * FROM courses ORDER BY created_at DESC');
@@ -82,6 +93,14 @@ class Course
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function findById($id)
+    {
+        $sql = 'SELECT * FROM courses WHERE id = :id LIMIT 1';
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([':id' => $id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     public function getByInstructor($instructorId)
     {
         $sql = 'SELECT * FROM courses WHERE instructor_id = :instructor_id ORDER BY created_at DESC';
@@ -93,7 +112,7 @@ class Course
     public function create($data)
     {
         $sql = 'INSERT INTO courses (title, description, instructor_id, category_id, price, duration_weeks, level, image, status, created_at, updated_at) 
-                VALUES (:title, :description, :instructor_id, :category_id, :price, :duration_weeks, :level, :image, "pending", NOW(), NOW())';
+                VALUES (:title, :description, :instructor_id, :category_id, :price, :duration_weeks, :level, :image, :status, NOW(), NOW())';
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([
             ':title' => $data['title'],
@@ -104,6 +123,7 @@ class Course
             ':duration_weeks' => $data['duration_weeks'],
             ':level' => $data['level'],
             ':image' => $data['image'] ?? '',
+            ':status' => 'pending', // New courses start as pending
         ]);
     }
 
@@ -137,23 +157,29 @@ class Course
         $sql = 'UPDATE courses SET status = :status, updated_at = NOW() WHERE id = :id';
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([
-            ':status' => $status,
             ':id' => $id,
+            ':status' => $status
         ]);
     }
 
     public function getPendingApproval()
     {
-        $sql = 'SELECT c.*, u.fullname as instructor_name FROM courses c 
+        $sql = 'SELECT c.*, u.fullname as instructor_name, cat.name as category_name FROM courses c 
                 JOIN users u ON c.instructor_id = u.id 
-                WHERE c.status = "pending" ORDER BY c.created_at DESC';
-        $stmt = $this->db->query($sql);
+                LEFT JOIN categories cat ON c.category_id = cat.id
+                WHERE c.status = "pending"
+                ORDER BY c.created_at DESC';
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getApproved()
     {
-        $sql = 'SELECT * FROM courses WHERE status = "approved" ORDER BY created_at DESC';
+        $sql = 'SELECT c.*, u.fullname as instructor_name FROM courses c 
+                LEFT JOIN users u ON c.instructor_id = u.id 
+                WHERE c.status = "approved" 
+                ORDER BY c.created_at DESC';
         $stmt = $this->db->query($sql);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

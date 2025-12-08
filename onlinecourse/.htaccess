@@ -1,0 +1,12 @@
+RewriteEngine On
+
+# Redirect requests for auth files to the proper routing
+RewriteRule ^auth/(login|register)\.php$ index.php?controller=Auth&action=$1 [L,QSA]
+
+# Handle clean URLs for controllers
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)$ index.php?controller=$1&action=$2 [L,QSA]
+
+# Default route
+RewriteRule ^$ index.php [L]

@@ -1,6 +1,6 @@
 <?php require __DIR__ . '/../../layouts/header.php'; ?>
 <h2>Chỉnh sửa khóa học</h2>
-<form method="post" action="index.php?controller=Course&action=update">
+<form method="post" action="index.php?controller=Course&action=update" enctype="multipart/form-data">
     <input type="hidden" name="id" value="<?= $course['id'] ?>">
 
     <label>Tiêu đề</label>
@@ -31,8 +31,15 @@
         <option value="Advanced" <?= $course['level'] == 'Advanced' ? 'selected' : '' ?>>Advanced</option>
     </select>
 
-    <label>Ảnh (đường dẫn)</label>
-    <input type="text" name="image" value="<?= htmlspecialchars($course['image']) ?>">
+    <label>Ảnh khóa học</label>
+    <?php if ($course['image']): ?>
+        <div>
+            <img src="<?= htmlspecialchars($course['image']) ?>" alt="Course image" style="max-width: 200px; height: auto; margin-bottom: 10px;">
+            <br>
+        </div>
+    <?php endif; ?>
+    <input type="file" name="image" accept="image/*">
+    <small>Định dạng: JPG, PNG, GIF. Tối đa 5MB</small>
 
     <button type="submit">Cập nhật</button>
 </form>

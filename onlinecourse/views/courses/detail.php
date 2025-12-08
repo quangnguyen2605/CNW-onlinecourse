@@ -28,7 +28,7 @@ require __DIR__ . '/../layouts/header.php';
                         </div>
                         <div class="meta-item">
                             <i class="fas fa-users"></i>
-                            <span>1,234 học viên</span>
+                            <span><?= number_format($course['enrolled_count'] ?? 0) ?> học viên</span>
                         </div>
                         <div class="meta-item">
                             <i class="fas fa-star text-warning"></i>
@@ -50,10 +50,27 @@ require __DIR__ . '/../layouts/header.php';
                                 </a>
                             </div>
                         <?php else: ?>
-                            <a href="index.php?controller=Enrollment&action=enroll&course_id=<?= $course['id'] ?>" 
-                               class="btn btn-primary btn-lg me-3">
-                                <i class="fas fa-user-plus"></i> Đăng ký ngay
-                            </a>
+                            <form action="index.php?controller=Student&action=enroll" method="POST" style="display: inline;">
+                                <input type="hidden" name="course_id" value="<?= $course['id'] ?>">
+                                <input type="hidden" name="redirect" value="index.php?controller=Course&action=detail&id=<?= $course['id'] ?>">
+                                <button type="submit" class="btn btn-primary btn-lg me-3">
+                                    <i class="fas fa-user-plus"></i> Đăng ký ngay
+                                </button>
+                            </form>
+                        <?php endif; ?>
+                    <?php elseif (isset($_SESSION['user_id']) && $_SESSION['user_role'] == 1): ?>
+                        <?php if ($course['instructor_id'] == $_SESSION['user_id']): ?>
+                            <div class="alert alert-info">
+                                <i class="fas fa-user-tie"></i> Bạn là giảng viên của khóa học này
+                                <div class="mt-2">
+                                    <a href="/onlinecourse/onlinecourse/index.php?controller=Instructor&action=manageCourses" class="btn btn-sm btn-primary me-2">
+                                        <i class="fas fa-cog"></i> Quản lý khóa học
+                                    </a>
+                                    <a href="/onlinecourse/onlinecourse/index.php?controller=Course&action=edit&id=<?= $course['id'] ?>" class="btn btn-sm btn-outline-primary me-2">
+                                        <i class="fas fa-edit"></i> Sửa khóa học
+                                    </a>
+                                </div>
+                            </div>
                         <?php endif; ?>
                     <?php elseif (!isset($_SESSION['user_id'])): ?>
                         <a href="index.php?controller=Auth&action=login" class="btn btn-primary btn-lg me-3">
@@ -103,30 +120,22 @@ require __DIR__ . '/../layouts/header.php';
                     </div>
                 </div>
                 
-                <!-- Course Materials -->
-                <?php if (!empty($materials)): ?>
-                <div class="mb-5">
-                    <h3 class="fw-bold mb-3">Tài liệu học tập</h3>
-                    <div class="list-group">
-                        <?php foreach ($materials as $material): ?>
-                            <div class="list-group-item d-flex justify-content-between align-items-center">
-                                <div>
-                                    <i class="fas fa-file-pdf text-danger me-2"></i>
-                                    <?= htmlspecialchars($material['filename']) ?>
-                                </div>
-                                <a href="<?= htmlspecialchars($material['file_path']) ?>" class="btn btn-sm btn-outline-primary" target="_blank">
-                                    <i class="fas fa-download"></i> Tải xuống
-                                </a>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-                <?php endif; ?>
             </div>
             
             <!-- Sidebar -->
             <div class="col-lg-4">
                 <div class="sticky-top" style="top: 100px;">
+                    <!-- Course Image Card -->
+                    <div class="card border-0 shadow-sm mb-4">
+                        <?php if ($course['image']): ?>
+                            <img src="<?= htmlspecialchars($course['image']) ?>" class="card-img-top" alt="<?= htmlspecialchars($course['title']) ?>" style="height: 200px; object-fit: cover;">
+                        <?php else: ?>
+                            <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                                <i class="fas fa-image fa-3x text-muted"></i>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                    
                     <!-- Course Info Card -->
                     <div class="card border-0 shadow-sm mb-4">
                         <div class="card-body">
@@ -143,7 +152,7 @@ require __DIR__ . '/../layouts/header.php';
                                 </div>
                                 <div class="d-flex justify-content-between mb-2">
                                     <span><i class="fas fa-users"></i> Học viên</span>
-                                    <span>1,234</span>
+                                    <span><?= number_format($course['enrolled_count'] ?? 0) ?></span>
                                 </div>
                                 <div class="d-flex justify-content-between mb-2">
                                     <span><i class="fas fa-certificate"></i> Chứng nhận</span>
@@ -156,10 +165,13 @@ require __DIR__ . '/../layouts/header.php';
                             </div>
                             
                             <?php if (isset($_SESSION['user_id']) && $_SESSION['user_role'] == 0 && !$isEnrolled): ?>
-                                <a href="index.php?controller=Enrollment&action=enroll&course_id=<?= $course['id'] ?>" 
-                                   class="btn btn-primary w-100 btn-lg">
+                                <form action="index.php?controller=Student&action=enroll" method="POST">
+                                <input type="hidden" name="course_id" value="<?= $course['id'] ?>">
+                                <input type="hidden" name="redirect" value="index.php?controller=Course&action=detail&id=<?= $course['id'] ?>">
+                                <button type="submit" class="btn btn-primary w-100 btn-lg">
                                     <i class="fas fa-user-plus"></i> Đăng ký khóa học
-                                </a>
+                                </button>
+                            </form>
                             <?php endif; ?>
                         </div>
                     </div>

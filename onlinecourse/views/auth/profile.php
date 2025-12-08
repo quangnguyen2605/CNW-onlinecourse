@@ -8,7 +8,7 @@ require __DIR__ . '/../layouts/header.php';
 
 // Kiểm tra đăng nhập
 if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php');
+    header('Location: /onlinecourse/onlinecourse/index.php?controller=Auth&action=login');
     exit;
 } 
 
@@ -59,31 +59,38 @@ $profileError = '';
 $profileSuccess = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_profile'])) {
+    // Debug logging
+    error_log("Profile update attempt - POST data: " . print_r($_POST, true));
+    
     $fullname = trim($_POST['fullname'] ?? '');
     $email = trim($_POST['email'] ?? '');
-    $phone = trim($_POST['phone'] ?? '');
-    $bio = trim($_POST['bio'] ?? '');
+    
+    error_log("Processed data - fullname: '$fullname', email: '$email'");
     
     if (empty($fullname) || empty($email)) {
         $profileError = 'Vui lòng nhập đầy đủ họ tên và email';
+        error_log("Validation error: empty fields");
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $profileError = 'Email không hợp lệ';
+        error_log("Validation error: invalid email");
     } else {
-        // Kiểm tra email có bị trùng không
+        // Kiểm tra email đã tồn tại chưa (nếu thay đổi)
         if ($email !== $user['email']) {
             $existing = $userModel->findByEmailOrUsername($email);
             if ($existing && $existing['id'] !== $user['id']) {
                 $profileError = 'Email đã được sử dụng bởi tài khoản khác';
+                error_log("Validation error: email already exists");
             }
         }
         
         if (!$profileError) {
+            error_log("Attempting to update user ID: " . $user['id']);
             $updated = $userModel->update($user['id'], [
                 'fullname' => $fullname,
-                'email' => $email,
-                'phone' => $phone,
-                'bio' => $bio
+                'email' => $email
             ]);
+            
+            error_log("Update result: " . ($updated ? 'SUCCESS' : 'FAILED'));
             
             if ($updated) {
                 $profileSuccess = 'Cập nhật thông tin thành công!';
@@ -91,8 +98,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_profile'])) {
                 $_SESSION['user_name'] = $fullname;
                 $_SESSION['user_email'] = $email;
                 $user = $userModel->findById($_SESSION['user_id']);
+                error_log("Session updated and user data refreshed");
             } else {
                 $profileError = 'Không thể cập nhật thông tin. Vui lòng thử lại.';
+                error_log("Update failed in database");
             }
         }
     }
@@ -348,7 +357,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_profile'])) {
                     </div>
                 <?php endif; ?>
 
-                <form method="post" action="profile.php">
+                <form method="post" action="">
                     <input type="hidden" name="update_profile" value="1">
                     
                     <div class="info-grid">
@@ -364,14 +373,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_profile'])) {
                             <div class="info-label">Ngày tạo</div>
                             <div class="info-value"><?= date('d/m/Y', strtotime($user['created_at'])) ?></div>
                         </div>
-                        <div class="info-item">
-                            <div class="info-label">Trạng thái</div>
-                            <div class="info-value"><?= ucfirst($user['status']) ?></div>
-                        </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="fullname">Họ và tên</label>
+                        <label for="email">Họ và tên</label>
                         <input type="text" id="fullname" name="fullname" required
                                value="<?= htmlspecialchars($user['fullname']) ?>"
                                placeholder="Nhập họ và tên đầy đủ">
@@ -382,18 +387,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_profile'])) {
                         <input type="email" id="email" name="email" required
                                value="<?= htmlspecialchars($user['email']) ?>"
                                placeholder="Nhập email của bạn">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="phone">Số điện thoại</label>
-                        <input type="tel" id="phone" name="phone"
-                               value="<?= htmlspecialchars($user['phone'] ?? '') ?>"
-                               placeholder="Nhập số điện thoại (tùy chọn)">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="bio">Giới thiệu bản thân</label>
-                        <textarea id="bio" name="bio" placeholder="Giới thiệu ngắn về bản thân của bạn..."><?= htmlspecialchars($user['bio'] ?? '') ?></textarea>
                     </div>
 
                     <button type="submit" class="btn btn-primary">
@@ -416,7 +409,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_profile'])) {
                     </div>
                 <?php endif; ?>
 
-                <form method="post" action="profile.php">
+                <form method="post" action="">
                     <input type="hidden" name="change_password" value="1">
                     
                     <div class="form-group">

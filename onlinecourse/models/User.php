@@ -39,16 +39,25 @@ class User
 
     public function getAll()
     {
-        $stmt = $this->db->query('SELECT * FROM users ORDER BY created_at DESC');
+        $sql = 'SELECT * FROM users ORDER BY created_at DESC';
+        $stmt = $this->db->query($sql);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getByRole($role)
+    public function getByUsername($username)
     {
-        $sql = 'SELECT * FROM users WHERE role = :role ORDER BY created_at DESC';
+        $sql = 'SELECT * FROM users WHERE username = :username LIMIT 1';
         $stmt = $this->db->prepare($sql);
-        $stmt->execute([':role' => (int)$role]);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->execute([':username' => $username]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function getByEmail($email)
+    {
+        $sql = 'SELECT * FROM users WHERE email = :email LIMIT 1';
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([':email' => $email]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     public function delete($id)
@@ -56,16 +65,6 @@ class User
         $sql = 'DELETE FROM users WHERE id = :id';
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([':id' => $id]);
-    }
-
-    public function updateStatus($id, $status)
-    {
-        $sql = 'UPDATE users SET status = :status WHERE id = :id';
-        $stmt = $this->db->prepare($sql);
-        return $stmt->execute([
-            ':status' => $status,
-            ':id' => $id,
-        ]);
     }
 
     public function update($id, $data)

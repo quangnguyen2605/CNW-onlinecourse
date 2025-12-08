@@ -18,14 +18,16 @@ class Material
 
     public function create($data)
     {
-        $sql = 'INSERT INTO materials (lesson_id, filename, file_path, file_type, uploaded_at)
-                VALUES (:lesson_id, :filename, :file_path, :file_type, NOW())';
+        $sql = 'INSERT INTO materials (course_id, lesson_id, filename, file_path, file_type, description, uploaded_at)
+                VALUES (:course_id, :lesson_id, :filename, :file_path, :file_type, :description, NOW())';
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([
-            ':lesson_id' => $data['lesson_id'],
+            ':course_id' => $data['course_id'] ?? null,
+            ':lesson_id' => $data['lesson_id'] ?? null,
             ':filename' => $data['filename'],
             ':file_path' => $data['file_path'],
             ':file_type' => $data['file_type'],
+            ':description' => $data['description'] ?? null,
         ]);
     }
 
@@ -33,9 +35,9 @@ class Material
     {
         $sql = 'SELECT m.*, l.title as lesson_title 
                 FROM materials m 
-                JOIN lessons l ON m.lesson_id = l.id 
-                WHERE l.course_id = :course_id 
-                ORDER BY l.order, m.uploaded_at';
+                LEFT JOIN lessons l ON m.lesson_id = l.id 
+                WHERE m.course_id = :course_id OR l.course_id = :course_id
+                ORDER BY COALESCE(l.order, 999), m.uploaded_at DESC';
         $stmt = $this->db->prepare($sql);
         $stmt->execute([':course_id' => $courseId]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

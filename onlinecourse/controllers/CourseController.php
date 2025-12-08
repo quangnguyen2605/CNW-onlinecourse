@@ -13,12 +13,19 @@ class CourseController
     {
         $courseModel = new Course();
         $categoryModel = new Category();
+        $enrollmentModel = new Enrollment();
 
         $keyword = isset($_GET['keyword']) ? trim($_GET['keyword']) : '';
         $categoryId = isset($_GET['category_id']) ? $_GET['category_id'] : null;
 
         // Only show approved courses to general users
         $courses = $courseModel->searchApproved($keyword, $categoryId);
+        
+        // Add enrollment counts to each course
+        foreach ($courses as &$course) {
+            $course['enrolled_count'] = $enrollmentModel->getEnrolledCount($course['id']);
+        }
+        
         $categories = $categoryModel->getAll();
 
         $pageTitle = 'Danh sách khóa học';
@@ -41,6 +48,9 @@ class CourseController
             header('Location: index.php?controller=Course&action=index');
             exit;
         }
+
+        // Add enrollment count
+        $course['enrolled_count'] = $enrollmentModel->getEnrolledCount($id);
 
         // Kiểm tra xem người dùng đã đăng ký chưa
         $isEnrolled = false;
@@ -85,6 +95,22 @@ class CourseController
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $courseModel = new Course();
+            
+            // Handle image upload
+            $imagePath = '';
+            if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+                $uploadDir = 'assets/uploads/courses/';
+                if (!is_dir($uploadDir)) {
+                    mkdir($uploadDir, 0777, true);
+                }
+                
+                $fileName = time() . '_' . basename($_FILES['image']['name']);
+                $targetPath = $uploadDir . $fileName;
+                
+                if (move_uploaded_file($_FILES['image']['tmp_name'], $targetPath)) {
+                    $imagePath = $targetPath;
+                }
+            }
 
             $data = [
                 'title' => $_POST['title'] ?? '',
@@ -94,7 +120,7 @@ class CourseController
                 'price' => (float)($_POST['price'] ?? 0),
                 'duration_weeks' => (int)($_POST['duration_weeks'] ?? 0),
                 'level' => $_POST['level'] ?? 'Beginner',
-                'image' => $_POST['image'] ?? '',
+                'image' => $imagePath,
             ];
 
             $courseModel->create($data);
@@ -125,6 +151,30 @@ class CourseController
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && $id > 0) {
             $courseModel = new Course();
+            
+            // Get current course data
+            $currentCourse = $courseModel->findById($id);
+            $imagePath = $currentCourse['image'] ?? '';
+            
+            // Handle image upload
+            if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+                $uploadDir = 'assets/uploads/courses/';
+                if (!is_dir($uploadDir)) {
+                    mkdir($uploadDir, 0777, true);
+                }
+                
+                $fileName = time() . '_' . basename($_FILES['image']['name']);
+                $targetPath = $uploadDir . $fileName;
+                
+                if (move_uploaded_file($_FILES['image']['tmp_name'], $targetPath)) {
+                    // Delete old image if exists
+                    if ($imagePath && file_exists($imagePath)) {
+                        unlink($imagePath);
+                    }
+                    $imagePath = $targetPath;
+                }
+            }
+            
             $data = [
                 'title' => $_POST['title'] ?? '',
                 'description' => $_POST['description'] ?? '',
@@ -132,7 +182,7 @@ class CourseController
                 'price' => (float)($_POST['price'] ?? 0),
                 'duration_weeks' => (int)($_POST['duration_weeks'] ?? 0),
                 'level' => $_POST['level'] ?? 'Beginner',
-                'image' => $_POST['image'] ?? '',
+                'image' => $imagePath,
             ];
             $courseModel->update($id, $data);
         }

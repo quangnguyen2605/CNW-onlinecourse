@@ -509,8 +509,8 @@
                                 <i class="fas fa-search"></i>
                             </button>
                         </div>
-                        <a href="auth/login.php" class="btn btn-outline-primary me-2">Đăng nhập</a>
-                        <a href="auth/register.php" class="btn btn-primary">Đăng ký</a>
+                        <a href="/onlinecourse/onlinecourse/index.php?controller=Auth&action=login" class="btn btn-outline-primary me-2">Đăng nhập</a>
+                        <a href="/onlinecourse/onlinecourse/index.php?controller=Auth&action=register" class="btn btn-primary">Đăng ký</a>
                     </div>
                 </div>
             </div>

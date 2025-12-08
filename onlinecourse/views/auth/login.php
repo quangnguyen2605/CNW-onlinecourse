@@ -4,29 +4,66 @@ require __DIR__ . '/../layouts/header.php';
 ?>
 
 <style>
+:root {
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --success-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
 .login-container {
     min-height: 100vh;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: var(--primary-gradient);
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.login-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+    background-size: cover;
 }
 
 .login-form {
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    padding: 2rem;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    padding: 3rem;
     width: 100%;
-    max-width: 400px;
+    max-width: 450px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    z-index: 2;
+}
+
+.login-form::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--secondary-gradient);
+    border-radius: 20px 20px 0 0;
 }
 
 .login-form h2 {
-    color: #333;
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 1.5rem;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
     text-align: center;
 }
 
@@ -36,30 +73,47 @@ require __DIR__ . '/../layouts/header.php';
 
 .form-group label {
     display: block;
-    color: #555;
-    font-weight: 500;
+    color: #4a5568;
+    font-weight: 600;
     margin-bottom: 0.5rem;
     font-size: 0.9rem;
 }
 
 .form-group input {
     width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 0.95rem;
-    transition: border-color 0.3s ease;
+    padding: 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.8);
 }
 
 .form-group input:focus {
     outline: none;
     border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    transform: translateY(-2px);
 }
 
 .btn-login {
     width: 100%;
-    padding: 0.75rem;
-    background: #667eea;
+    padding: 1rem;
+    background: var(--primary-gradient);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
     color: white;
     border: none;
     border-radius: 4px;
@@ -257,7 +311,7 @@ require __DIR__ . '/../layouts/header.php';
             </div>
         <?php endif; ?>
         
-        <form method="post" action="../../index.php?controller=Auth&action=login">
+        <form method="post" action="/onlinecourse/onlinecourse/index.php?controller=Auth&action=login">
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" required 
@@ -274,7 +328,7 @@ require __DIR__ . '/../layouts/header.php';
             <div class="remember-me">
                 <input type="checkbox" id="remember" name="remember">
                 <label for="remember">Ghi nhớ đăng nhập</label>
-                <a href="forgot_password.php" class="forgot-password">Quên mật khẩu?</a>
+                <a href="/onlinecourse/onlinecourse/index.php?controller=Auth&action=forgot_password" class="forgot-password">Quên mật khẩu?</a>
             </div>
 
             <button type="submit" class="btn-login">Đăng nhập</button>
@@ -296,7 +350,7 @@ require __DIR__ . '/../layouts/header.php';
 
         <div class="form-footer">
             <p>Chưa có tài khoản?</p>
-            <a href="register.php">Đăng ký ngay</a>
+            <a href="/onlinecourse/onlinecourse/index.php?controller=Auth&action=register">Đăng ký ngay</a>
         </div>
     </div>
 </div>

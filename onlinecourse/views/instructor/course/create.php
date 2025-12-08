@@ -1,6 +1,6 @@
 <?php require __DIR__ . '/../../layouts/header.php'; ?>
 <h2>Tạo khóa học mới</h2>
-<form method="post" action="index.php?controller=Course&action=store">
+<form method="post" action="index.php?controller=Course&action=store" enctype="multipart/form-data">
     <label>Tiêu đề</label>
     <input type="text" name="title" required>
 
@@ -27,8 +27,9 @@
         <option value="Advanced">Advanced</option>
     </select>
 
-    <label>Ảnh (đường dẫn)</label>
-    <input type="text" name="image">
+    <label>Ảnh khóa học</label>
+    <input type="file" name="image" accept="image/*">
+    <small>Định dạng: JPG, PNG, GIF. Tối đa 5MB</small>
 
     <button type="submit">Lưu</button>
 </form>

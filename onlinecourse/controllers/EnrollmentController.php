@@ -67,8 +67,9 @@ class EnrollmentController
         $lessonModel = new Lesson();
 
         $enrollment = $enrollmentModel->getOne($courseId, $studentId);
-        $course = $courseModel->findById($courseId);
+        $course = $courseModel->getCourseWithInstructor($courseId);
         $lessons = $lessonModel->getByCourse($courseId);
+        $completedLessons = $lessonModel->getCompletedByStudent($courseId, $studentId);
 
         if (!$enrollment || !$course) {
             http_response_code(404);
@@ -134,5 +135,47 @@ class EnrollmentController
 
         header('Location: index.php?controller=Enrollment&action=progress&course_id=' . $courseId);
         exit;
+    }
+
+    public function courseMaterials()
+    {
+        $this->requireLogin();
+        $courseId = isset($_GET['course_id']) ? (int)$_GET['course_id'] : 0;
+        $studentId = (int)$_SESSION['user_id'];
+
+        $enrollmentModel = new Enrollment();
+        $courseModel = new Course();
+        $materialModel = new Material();
+
+        // Check if student is enrolled
+        if (!$enrollmentModel->isEnrolled($studentId, $courseId)) {
+            $_SESSION['error'] = 'Bạn chưa đăng ký khóa học này!';
+            header('Location: index.php?controller=Course&action=index');
+            exit;
+        }
+
+        $course = $courseModel->getCourseWithInstructor($courseId);
+        $allMaterials = $materialModel->getByCourse($courseId);
+
+        // Separate course-level and lesson-level materials
+        $courseMaterials = [];
+        $lessonMaterials = [];
+
+        foreach ($allMaterials as $material) {
+            if ($material['lesson_id'] === null) {
+                $courseMaterials[] = $material;
+            } else {
+                if (!isset($lessonMaterials[$material['lesson_id']])) {
+                    $lessonMaterials[$material['lesson_id']] = [
+                        'lesson_title' => $material['lesson_title'],
+                        'files' => []
+                    ];
+                }
+                $lessonMaterials[$material['lesson_id']]['files'][] = $material;
+            }
+        }
+
+        $pageTitle = 'Tài liệu khóa học - ' . htmlspecialchars($course['title']);
+        require __DIR__ . '/../views/student/course_materials.php';
     }
 }

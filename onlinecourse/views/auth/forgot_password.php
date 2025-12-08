@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($updated) {
                 // Xóa session reset
                 unset($_SESSION['reset_code'], $_SESSION['reset_email'], $_SESSION['reset_expiry'], $_SESSION['reset_user_id']);
-                $success = 'Đổi mật khẩu thành công! <a href="login.php" style="color: #16a34a;">Nhấn vào đây để đăng nhập</a>';
+                $success = 'Đổi mật khẩu thành công! <a href="/onlinecourse/onlinecourse/index.php?controller=Auth&action=login" style="color: #16a34a;">Nhấn vào đây để đăng nhập</a>';
                 $step = 4; // Hoàn thành
             } else {
                 $error = 'Không thể cập nhật mật khẩu. Vui lòng thử lại.';
@@ -357,7 +357,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php if ($step === 1): ?>
             <p class="subtitle">Nhập email của bạn để nhận mã xác nhận đặt lại mật khẩu</p>
             
-            <form method="post" action="forgot_password.php">
+            <form method="post" action="/onlinecourse/onlinecourse/index.php?controller=Auth&action=forgot_password">
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" id="email" name="email" required 
@@ -380,7 +380,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="note">Mã có hiệu lực đến: <?= date('H:i', strtotime($_SESSION['reset_expiry'])) ?></div>
             </div>
             
-            <form method="post" action="forgot_password.php">
+            <form method="post" action="/onlinecourse/onlinecourse/index.php?controller=Auth&action=forgot_password">
                 <div class="form-group">
                     <label for="reset_code">Mã xác nhận</label>
                     <input type="text" id="reset_code" name="reset_code" required 
@@ -396,7 +396,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php elseif ($step === 3): ?>
             <p class="subtitle">Đặt mật khẩu mới cho tài khoản của bạn</p>
             
-            <form method="post" action="forgot_password.php">
+            <form method="post" action="/onlinecourse/onlinecourse/index.php?controller=Auth&action=forgot_password">
                 <div class="form-group">
                     <label for="new_password">Mật khẩu mới</label>
                     <input type="password" id="new_password" name="new_password" required 
@@ -422,7 +422,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php endif; ?>
 
         <div class="back-link">
-            <a href="login.php">
+            <a href="/onlinecourse/onlinecourse/index.php?controller=Auth&action=login">
                 <i class="fas fa-arrow-left"></i> Quay lại trang đăng nhập
             </a>
         </div>

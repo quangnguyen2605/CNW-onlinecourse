@@ -19,6 +19,8 @@ class LessonController
 
         $lessonModel = new Lesson();
         $materialModel = new Material();
+        $courseModel = new Course();
+        $enrollmentModel = new Enrollment();
 
         // Lấy thông tin bài học
         $sql = 'SELECT * FROM lessons WHERE id = :id LIMIT 1';
@@ -34,6 +36,21 @@ class LessonController
         }
 
         $materials = $materialModel->getByLesson($id);
+        
+        // Get course info
+        $course = $courseModel->getCourseWithInstructor($lesson['course_id']);
+        
+        // Get all lessons for navigation
+        $allLessons = $lessonModel->getByCourse($lesson['course_id']);
+        
+        // Check if lesson is completed (for logged in students)
+        $isCompleted = false;
+        if (isset($_SESSION['user_id']) && (int)($_SESSION['user_role'] ?? 0) === 0) {
+            $studentId = (int)$_SESSION['user_id'];
+            if ($enrollmentModel->isEnrolled($studentId, $lesson['course_id'])) {
+                $isCompleted = $enrollmentModel->getLessonProgress($lesson['course_id'], $studentId, $id) !== false;
+            }
+        }
 
         $pageTitle = $lesson['title'];
         require __DIR__ . '/../views/student/lesson_view.php';
@@ -162,6 +179,10 @@ class LessonController
             exit;
         }
 
+        // Get lesson information for the view
+        $lessonModel = new Lesson();
+        $lesson = $lessonModel->findById($lessonId);
+        
         $pageTitle = 'Tải tài liệu lên';
         require __DIR__ . '/../views/instructor/materials/upload.php';
     }

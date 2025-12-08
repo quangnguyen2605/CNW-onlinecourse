@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+// Debug information
+error_log("Index.php accessed - REQUEST_URI: " . ($_SERVER['REQUEST_URI'] ?? 'Not set'));
+error_log("GET parameters: " . print_r($_GET, true));
+
 spl_autoload_register(function ($class) {
     $paths = [
         __DIR__ . '/controllers/' . $class . '.php',
@@ -16,20 +20,14 @@ spl_autoload_register(function ($class) {
     }
 });
 
-// Check if user is accessing auth pages
-if (isset($_GET['controller']) && $_GET['controller'] === 'Auth') {
-    $controllerName = 'AuthController';
-    $actionName = isset($_GET['action']) ? $_GET['action'] : 'login';
-} else {
-    // Default to showing the main Coursera interface
-    if (!isset($_GET['controller'])) {
-        // Show the main Coursera interface
-        include __DIR__ . '/views/coursera/index.php';
-        exit;
-    }
-    $controllerName = isset($_GET['controller']) ? $_GET['controller'] . 'Controller' : 'HomeController';
-    $actionName = isset($_GET['action']) ? $_GET['action'] : 'index';
+// Redirect to coursera index page if no controller specified
+if (empty($_GET['controller'])) {
+    header('Location: views/coursera/index.php');
+    exit;
 }
+
+$controllerName = ucfirst($_GET['controller']) . 'Controller';
+$actionName = isset($_GET['action']) ? $_GET['action'] : 'index';
 
 if (!class_exists($controllerName)) {
     http_response_code(404);

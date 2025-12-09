@@ -25,11 +25,45 @@ $webRoot = dirname(dirname($_SERVER['PHP_SELF']));
                     <!-- Video if available -->
                     <?php if (!empty($lesson['video_url'])): ?>
                         <div class="ratio ratio-16x9 mb-4">
-                            <iframe src="<?= htmlspecialchars($lesson['video_url']) ?>" 
-                                    allowfullscreen 
-                                    class="rounded"
-                                    title="Video bài học: <?= htmlspecialchars($lesson['title']) ?>">
-                            </iframe>
+                            <?php
+                            $videoUrl = $lesson['video_url'];
+                            // Handle different video types
+                            if (strpos($videoUrl, 'youtube.com') !== false || strpos($videoUrl, 'youtu.be') !== false) {
+                                // YouTube video
+                                if (strpos($videoUrl, 'youtu.be') !== false) {
+                                    $videoId = explode('youtu.be/', $videoUrl)[1];
+                                    $embedUrl = 'https://www.youtube.com/embed/' . $videoId;
+                                } else {
+                                    preg_match('/v=([^&]+)/', $videoUrl, $matches);
+                                    $videoId = $matches[1] ?? '';
+                                    $embedUrl = 'https://www.youtube.com/embed/' . $videoId;
+                                }
+                            } elseif (strpos($videoUrl, 'vimeo.com') !== false) {
+                                // Vimeo video
+                                $videoId = explode('vimeo.com/', $videoUrl)[1];
+                                $embedUrl = 'https://player.vimeo.com/video/' . $videoId;
+                            } elseif (strpos($videoUrl, '.mp4') !== false || strpos($videoUrl, '.webm') !== false || strpos($videoUrl, '.avi') !== false) {
+                                // Direct video file
+                                $embedUrl = $videoUrl;
+                            } else {
+                                // Try to embed directly
+                                $embedUrl = $videoUrl;
+                            }
+                            ?>
+                            
+                            <?php if (strpos($embedUrl, 'youtube') !== false || strpos($embedUrl, 'vimeo') !== false): ?>
+                                <iframe src="<?= htmlspecialchars($embedUrl) ?>" 
+                                        allowfullscreen 
+                                        class="rounded"
+                                        title="Video bài học: <?= htmlspecialchars($lesson['title']) ?>">
+                                </iframe>
+                            <?php else: ?>
+                                <video controls class="rounded w-100" style="max-height: 450px;">
+                                    <source src="<?= htmlspecialchars($embedUrl) ?>" type="video/mp4">
+                                    <source src="<?= htmlspecialchars($embedUrl) ?>" type="video/webm">
+                                    Trình duyệt của bạn không hỗ trợ video.
+                                </video>
+                            <?php endif; ?>
                         </div>
                     <?php endif; ?>
 
@@ -179,13 +213,65 @@ function markMaterialAccessed(materialId) {
 function watchVideo(materialId) {
     materialsViewed.add(materialId);
     
-    // Open video in modal or new window
-    const videoUrl = '<?= htmlspecialchars($lesson['video_url'] ?? '') ?>';
-    if (videoUrl) {
-        window.open(videoUrl, '_blank', 'width=800,height=600');
+    // Find the material and get its video URL
+    const materials = <?= json_encode($materials ?? []) ?>;
+    const material = materials.find(m => m.id == materialId);
+    
+    if (material && material.file_path) {
+        const videoUrl = material.file_path;
+        
+        // Create modal for video
+        const modal = document.createElement('div');
+        modal.className = 'modal fade';
+        modal.innerHTML = `
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">${material.filename}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body p-0">
+                        <div class="ratio ratio-16x9">
+                            ${getVideoEmbed(videoUrl)}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+        const bsModal = new bootstrap.Modal(modal);
+        bsModal.show();
+        
+        // Remove modal when hidden
+        modal.addEventListener('hidden.bs.modal', () => {
+            document.body.removeChild(modal);
+        });
     }
     
     checkAutoComplete();
+}
+
+function getVideoEmbed(videoUrl) {
+    if (videoUrl.includes('youtube.com') || videoUrl.includes('youtu.be')) {
+        let videoId = '';
+        if (videoUrl.includes('youtu.be')) {
+            videoId = videoUrl.split('youtu.be/')[1];
+        } else {
+            const matches = videoUrl.match(/v=([^&]+)/);
+            videoId = matches ? matches[1] : '';
+        }
+        return `<iframe src="https://www.youtube.com/embed/${videoId}" allowfullscreen></iframe>`;
+    } else if (videoUrl.includes('vimeo.com')) {
+        const videoId = videoUrl.split('vimeo.com/')[1];
+        return `<iframe src="https://player.vimeo.com/video/${videoId}" allowfullscreen></iframe>`;
+    } else {
+        return `<video controls class="w-100">
+            <source src="${videoUrl}" type="video/mp4">
+            <source src="${videoUrl}" type="video/webm">
+            Trình duyệt không hỗ trợ video.
+        </video>`;
+    }
 }
 
 function checkAutoComplete() {

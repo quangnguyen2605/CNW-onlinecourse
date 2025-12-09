@@ -62,17 +62,17 @@ class StudentController
                 if ($enrollmentModel->isEnrolled($studentId, $courseId)) {
                     $_SESSION['error'] = 'Bạn đã đăng ký khóa học này rồi!';
                 } else {
+                    // For production with payment flow
+                    header("Location: index.php?controller=Payment&action=checkout&course_id=$courseId");
+                    exit;
+                    
                     // For testing: Direct enrollment without payment
                     // Comment this out for production with real payment
-                    if ($enrollmentModel->enroll($courseId, $studentId)) {
-                        $_SESSION['success'] = 'Đăng ký khóa học thành công!';
-                    } else {
-                        $_SESSION['error'] = 'Đăng ký khóa học thất bại!';
-                    }
-                    
-                    // Uncomment this for production with payment flow
-                    // header("Location: index.php?controller=Payment&action=checkout&course_id=$courseId");
-                    // exit;
+                    // if ($enrollmentModel->enroll($courseId, $studentId)) {
+                    //     $_SESSION['success'] = 'Đăng ký khóa học thành công!';
+                    // } else {
+                    //     $_SESSION['error'] = 'Đăng ký khóa học thất bại!';
+                    // }
                 }
             }
         }

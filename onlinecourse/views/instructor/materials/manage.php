@@ -69,7 +69,7 @@
                                                 ?>
                                             </td>
                                             <td>
-                                                <?= date('d/m/Y H:i', strtotime($material['created_at'])) ?>
+                                                <?= date('d/m/Y H:i', strtotime($material['uploaded_at'])) ?>
                                             </td>
                                             <td>
                                                 <div class="btn-group" role="group">
@@ -77,7 +77,7 @@
                                                        target="_blank" class="btn btn-sm btn-outline-primary">
                                                         <i class="fas fa-eye"></i> Xem
                                                     </a>
-                                                    <a href="<?= htmlspecialchars($material['file_path'])" 
+                                                    <a href="<?= htmlspecialchars($material['file_path']) ?>" 
                                                        download class="btn btn-sm btn-outline-success">
                                                         <i class="fas fa-download"></i> Tải
                                                     </a>

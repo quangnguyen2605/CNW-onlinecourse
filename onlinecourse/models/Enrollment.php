@@ -127,4 +127,17 @@ class Enrollment
         ]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function deleteByCourse($courseId)
+    {
+        // Delete completed lessons first
+        $sql = 'DELETE FROM completed_lessons WHERE course_id = :course_id';
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([':course_id' => $courseId]);
+        
+        // Delete enrollments
+        $sql = 'DELETE FROM enrollments WHERE course_id = :course_id';
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute([':course_id' => $courseId]);
+    }
 }

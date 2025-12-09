@@ -201,6 +201,129 @@ class AdminController
         exit;
     }
 
+    // Quản lý khóa học
+    public function courses()
+    {
+        $this->requireAdmin();
+        
+        try {
+            // Get courses with instructor and category info
+            $db = Database::getInstance()->getConnection();
+            $sql = 'SELECT c.*, u.fullname as instructor_name, cat.name as category_name 
+                    FROM courses c 
+                    LEFT JOIN users u ON c.instructor_id = u.id 
+                    LEFT JOIN categories cat ON c.category_id = cat.id 
+                    ORDER BY c.created_at DESC';
+            $stmt = $db->query($sql);
+            $courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
+            // Debug: Log the results
+            error_log("Courses query executed. Results: " . count($courses) . " courses found");
+            
+        } catch (Exception $e) {
+            error_log("Error in courses method: " . $e->getMessage());
+            $courses = [];
+        }
+        
+        $pageTitle = 'Quản lý khóa học';
+        require __DIR__ . '/../views/admin/courses/manage.php';
+    }
+
+    public function deleteCourse()
+    {
+        $this->requireAdmin();
+        $courseId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+        
+        if ($courseId > 0) {
+            $courseModel = new Course();
+            
+            // Check if course exists
+            $course = $courseModel->findById($courseId);
+            if ($course) {
+                // Delete related enrollments first
+                $enrollmentModel = new Enrollment();
+                $enrollmentModel->deleteByCourse($courseId);
+                
+                // Delete the course
+                if ($courseModel->delete($courseId)) {
+                    $_SESSION['success'] = 'Xóa khóa học thành công!';
+                } else {
+                    $_SESSION['error'] = 'Xóa khóa học thất bại!';
+                }
+            } else {
+                $_SESSION['error'] = 'Khóa học không tồn tại!';
+            }
+        }
+        
+        header('Location: index.php?controller=Admin&action=courses');
+        exit;
+    }
+
+    public function courseEnrollments()
+    {
+        $this->requireAdmin();
+        $courseId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+        
+        if ($courseId > 0) {
+            $db = Database::getInstance()->getConnection();
+            
+            // Get course info
+            $sql = 'SELECT c.*, u.fullname as instructor_name, cat.name as category_name 
+                    FROM courses c 
+                    LEFT JOIN users u ON c.instructor_id = u.id 
+                    LEFT JOIN categories cat ON c.category_id = cat.id 
+                    WHERE c.id = :course_id';
+            $stmt = $db->prepare($sql);
+            $stmt->execute([':course_id' => $courseId]);
+            $course = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            // Get enrolled students
+            $sql = 'SELECT e.*, u.username, u.fullname, u.email 
+                    FROM enrollments e 
+                    JOIN users u ON e.student_id = u.id 
+                    WHERE e.course_id = :course_id 
+                    ORDER BY e.enrolled_date DESC';
+            $stmt = $db->prepare($sql);
+            $stmt->execute([':course_id' => $courseId]);
+            $enrollments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
+            $pageTitle = 'Quản lý học viên - ' . ($course['title'] ?? 'Khóa học');
+            require __DIR__ . '/../views/admin/courses/enrollments.php';
+        } else {
+            $_SESSION['error'] = 'ID khóa học không hợp lệ!';
+            header('Location: index.php?controller=Admin&action=courses');
+            exit;
+        }
+    }
+
+    public function removeStudent()
+    {
+        $this->requireAdmin();
+        $courseId = isset($_GET['course_id']) ? (int)$_GET['course_id'] : 0;
+        $studentId = isset($_GET['student_id']) ? (int)$_GET['student_id'] : 0;
+        
+        if ($courseId > 0 && $studentId > 0) {
+            $db = Database::getInstance()->getConnection();
+            
+            // Delete completed lessons first
+            $sql = 'DELETE FROM completed_lessons WHERE course_id = :course_id AND student_id = :student_id';
+            $stmt = $db->prepare($sql);
+            $stmt->execute([':course_id' => $courseId, ':student_id' => $studentId]);
+            
+            // Delete enrollment
+            $sql = 'DELETE FROM enrollments WHERE course_id = :course_id AND student_id = :student_id';
+            $stmt = $db->prepare($sql);
+            if ($stmt->execute([':course_id' => $courseId, ':student_id' => $studentId])) {
+                $_SESSION['success'] = 'Xóa học viên khỏi khóa học thành công!';
+            } else {
+                $_SESSION['error'] = 'Xóa học viên thất bại!';
+            }
+        }
+        
+        header('Location: index.php?controller=Admin&action=courseEnrollments&id=' . $courseId);
+        exit;
+    }
+
     // Quản lý duyệt khóa học
     public function courseApproval()
     {

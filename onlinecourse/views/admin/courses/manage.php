@@ -54,15 +54,7 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Tên khóa học</th>
-                                        <th>Giảng viên</th>
-                                        <th>Danh mục</th>
-                                        <th>Giá</th>
-                                        <th>Trạng thái</th>
-                                        <th>Học viên</th>
-                                        <th>Ngày tạo</th>
-                                        <th>Hành động</th>
+                                      
                                     </tr>
                                 </thead>
                                 <tbody>

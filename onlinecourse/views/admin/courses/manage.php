@@ -123,7 +123,7 @@
                                             <td>
                                                 <div class="btn-group" role="group">
                                                     <a href="/onlinecourse/onlinecourse/index.php?controller=Course&action=detail&id=<?= $course['id'] ?>" 
-                                                       target="_blank" class="btn btn-sm btn-outline-primary">
+                                                       class="btn btn-sm btn-outline-primary">
                                                         <i class="fas fa-eye"></i> Xem
                                                     </a>
                                                     <a href="index.php?controller=Admin&action=courseEnrollments&id=<?= $course['id'] ?>" 

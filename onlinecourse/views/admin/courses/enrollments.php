@@ -123,7 +123,7 @@ ION
                                             <td>
                                                 <div class="btn-group" role="group">
                                                     <a href="index.php?controller=Student&action=profile&id=<?= $enrollment['student_id'] ?>" 
-                                                       target="_blank" class="btn btn-sm btn-outline-primary">
+                                                       class="btn btn-sm btn-outline-primary">
                                                         <i class="fas fa-user"></i> Xem hồ sơ
                                                     </a>
                                                     <a href="index.php?controller=Admin&action=removeStudent&course_id=<?= $course['id'] ?>&student_id=<?= $enrollment['student_id'] ?>" 

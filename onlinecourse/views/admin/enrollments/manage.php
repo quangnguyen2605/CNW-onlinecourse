@@ -72,7 +72,7 @@
                                                         <i class="fas fa-users"></i> Xem lớp
                                                     </a>
                                                     <a href="index.php?controller=Student&action=profile&id=<?= $enrollment['student_id'] ?>" 
-                                                       target="_blank" class="btn btn-sm btn-outline-primary">
+                                                   class="btn btn-sm btn-outline-primary">
                                                         <i class="fas fa-user"></i> Hồ sơ
                                                     </a>
                                                     <a href="index.php?controller=Admin&action=removeStudent&course_id=<?= $enrollment['course_id'] ?>&student_id=<?= $enrollment['student_id'] ?>" 

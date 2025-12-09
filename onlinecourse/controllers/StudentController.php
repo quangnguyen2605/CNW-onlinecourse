@@ -8,6 +8,14 @@ class StudentController
             exit;
         }
     }
+    
+    private function requireAdmin()
+    {
+        if (empty($_SESSION['user_id']) || (int)($_SESSION['user_role'] ?? 0) !== 2) {
+            header('Location: index.php?controller=Auth&action=login');
+            exit;
+        }
+    }
 
     public function dashboard()
     {
@@ -301,6 +309,81 @@ class StudentController
         
         header("Location: index.php?controller=Student&action=courseProgress&course_id=$courseId");
         exit;
+    }
+
+    public function profile()
+    {
+        // Allow access for students viewing their own profile OR admins viewing any profile
+        $studentId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+        $isOwnProfile = false;
+        
+        if ($studentId === 0) {
+            // No ID specified, show current user's profile
+            $this->requireStudent();
+            $studentId = (int)$_SESSION['user_id'];
+            $isOwnProfile = true;
+        } else {
+            // ID specified, check permissions
+            if ((int)($_SESSION['user_role'] ?? 0) === 2) {
+                // Admin can view any profile
+                $this->requireAdmin();
+            } else {
+                // Student can only view their own profile
+                $this->requireStudent();
+                if ($studentId !== (int)$_SESSION['user_id']) {
+                    $_SESSION['error'] = 'Bạn không có quyền xem hồ sơ này!';
+                    header('Location: index.php?controller=Student&action=dashboard');
+                    exit;
+                }
+                $isOwnProfile = true;
+            }
+        }
+        
+        // Get student information
+        $db = Database::getInstance()->getConnection();
+        $sql = 'SELECT id, username, email, fullname, created_at FROM users WHERE id = :id AND role = 0';
+        $stmt = $db->prepare($sql);
+        $stmt->execute([':id' => $studentId]);
+        $student = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        if (!$student) {
+            $_SESSION['error'] = 'Học viên không tồn tại!';
+            if ($isOwnProfile) {
+                header('Location: index.php?controller=Student&action=dashboard');
+            } else {
+                header('Location: index.php?controller=Admin&action=allEnrollments');
+            }
+            exit;
+        }
+        
+        // Get enrollment information with course details
+        $enrollmentModel = new Enrollment();
+        $db = Database::getInstance()->getConnection();
+        
+        $sql = 'SELECT e.*, c.title, c.description, cat.name as category_name, u.fullname as instructor_name
+                FROM enrollments e 
+                JOIN courses c ON e.course_id = c.id
+                LEFT JOIN categories cat ON c.category_id = cat.id
+                LEFT JOIN users u ON c.instructor_id = u.id
+                WHERE e.student_id = :student_id
+                ORDER BY e.enrolled_date DESC';
+        $stmt = $db->prepare($sql);
+        $stmt->execute([':student_id' => $studentId]);
+        $enrollments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        // Calculate statistics
+        $totalCourses = count($enrollments);
+        $avgProgress = 0;
+        $completedCourses = 0;
+        
+        if ($totalCourses > 0) {
+            $totalProgress = array_sum(array_column($enrollments, 'progress'));
+            $avgProgress = round($totalProgress / $totalCourses, 1);
+            $completedCourses = count(array_filter($enrollments, function($e) { return $e['progress'] >= 100; }));
+        }
+        
+        $pageTitle = $isOwnProfile ? 'Hồ sơ của tôi' : 'Hồ sơ học viên: ' . $student['fullname'];
+        require __DIR__ . '/../views/student/profile.php';
     }
 
     public function browseCourses()

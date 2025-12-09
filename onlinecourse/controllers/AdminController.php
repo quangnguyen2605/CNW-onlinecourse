@@ -259,6 +259,96 @@ class AdminController
         exit;
     }
 
+    public function allEnrollments()
+    {
+        $this->requireAdmin();
+        $db = Database::getInstance()->getConnection();
+        
+        // Get all enrollments with course and student info
+        $sql = 'SELECT e.*, c.title as course_title, u.fullname as student_name, u.email as student_email,
+                u.username as student_username, cat.name as category_name, ins.fullname as instructor_name
+                FROM enrollments e 
+                JOIN courses c ON e.course_id = c.id
+                JOIN users u ON e.student_id = u.id
+                LEFT JOIN categories cat ON c.category_id = cat.id
+                LEFT JOIN users ins ON c.instructor_id = ins.id
+                ORDER BY e.enrolled_date DESC';
+        $stmt = $db->query($sql);
+        $enrollments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        $pageTitle = 'Quản lý đăng ký khóa học';
+        require __DIR__ . '/../views/admin/enrollments/manage.php';
+    }
+
+    public function addStudentToCourse()
+    {
+        $this->requireAdmin();
+        
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $courseId = (int)($_POST['course_id'] ?? 0);
+            $studentId = (int)($_POST['student_id'] ?? 0);
+            
+            if ($courseId > 0 && $studentId > 0) {
+                $enrollmentModel = new Enrollment();
+                
+                // Check if already enrolled
+                if ($enrollmentModel->isEnrolled($studentId, $courseId)) {
+                    $_SESSION['error'] = 'Học viên đã đăng ký khóa học này!';
+                } else {
+                    // Add enrollment
+                    if ($enrollmentModel->enroll($courseId, $studentId)) {
+                        $_SESSION['success'] = 'Thêm học viên vào khóa học thành công!';
+                    } else {
+                        $_SESSION['error'] = 'Thêm học viên thất bại!';
+                    }
+                }
+            }
+        }
+        
+        $redirect = $_POST['redirect'] ?? 'index.php?controller=Admin&action=allEnrollments';
+        header("Location: $redirect");
+        exit;
+    }
+
+    public function addStudentForm()
+    {
+        $this->requireAdmin();
+        $courseId = isset($_GET['course_id']) ? (int)$_GET['course_id'] : 0;
+        
+        if ($courseId > 0) {
+            $db = Database::getInstance()->getConnection();
+            
+            // Get course info
+            $sql = 'SELECT c.*, u.fullname as instructor_name, cat.name as category_name 
+                    FROM courses c 
+                    LEFT JOIN users u ON c.instructor_id = u.id 
+                    LEFT JOIN categories cat ON c.category_id = cat.id 
+                    WHERE c.id = :course_id';
+            $stmt = $db->prepare($sql);
+            $stmt->execute([':course_id' => $courseId]);
+            $course = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            // Get students not enrolled in this course
+            $sql = 'SELECT u.id, u.username, u.fullname, u.email 
+                    FROM users u 
+                    WHERE u.role = 0 
+                    AND u.id NOT IN (
+                        SELECT e.student_id FROM enrollments e WHERE e.course_id = :course_id
+                    )
+                    ORDER BY u.fullname';
+            $stmt = $db->prepare($sql);
+            $stmt->execute([':course_id' => $courseId]);
+            $students = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
+            $pageTitle = 'Thêm học viên - ' . ($course['title'] ?? '');
+            require __DIR__ . '/../views/admin/enrollments/add_student.php';
+        } else {
+            $_SESSION['error'] = 'ID khóa học không hợp lệ!';
+            header('Location: index.php?controller=Admin&action=allEnrollments');
+            exit;
+        }
+    }
+
     public function courseEnrollments()
     {
         $this->requireAdmin();

@@ -475,6 +475,16 @@
             box-shadow: 0 12px 40px rgba(0,0,0,0.15);
         }
 
+        .course-card-link {
+            text-decoration: none !important;
+            color: inherit !important;
+        }
+
+        .course-card-link:hover {
+            text-decoration: none !important;
+            color: inherit !important;
+        }
+
         .course-img {
             height: 200px;
             width: 100%;
@@ -1078,7 +1088,7 @@
                             <span class="text-gradient-secondary">Trực Tuyến</span>
                         </h1>
                         <p class="hero-subtitle">
-                            Khám phá các khóa học lập trình chất lượng cao với lộ trình học tập bài bản, 
+                            Khám phá các khóa học lập trình chất lượng cao, 
                             được thiết kế bởi các chuyên gia hàng đầu trong ngành công nghệ thông tin.
                         </p>
                         <div class="hero-buttons">
@@ -1165,7 +1175,7 @@
             </div>
             
             <div class="text-center mt-4">
-                <a href="#" class="btn btn-outline-primary btn-lg">
+                <a href="/onlinecourse/onlinecourse/index.php?controller=Course&action=index" class="btn btn-outline-primary btn-lg">
                     <i class="fas fa-arrow-right"></i> Xem tất cả khóa học
                 </a>
             </div>
@@ -1443,8 +1453,56 @@
             }
         ];
 
-        // Load courses
-        function loadCourses() {
+        // Load courses from database
+        async function loadCourses() {
+            console.log('Loading courses...');
+            try {
+                const response = await fetch('load_courses.php');
+                console.log('Response received:', response);
+                const courses = await response.json();
+                console.log('Courses loaded:', courses);
+                
+                const container = document.getElementById('courses-container');
+                container.innerHTML = courses.map(course => `
+                    <div class="col-md-6 col-lg-4">
+                        <a href="/onlinecourse/onlinecourse/index.php?controller=Course&action=detail&id=${course.id}" class="text-decoration-none">
+                            <div class="course-card">
+                                <div class="position-relative">
+                                    <img src="${course.image}" alt="${course.title}" class="course-img">
+                                    <span class="course-badge">${course.badge}</span>
+                                </div>
+                                <div class="course-body">
+                                    <div class="course-category">${course.category}</div>
+                                    <h3 class="course-title">${course.title}</h3>
+                                    <p class="course-instructor">Bởi ${course.instructor}</p>
+                                    <div class="course-meta">
+                                        <div class="course-rating">
+                                            <span class="stars">
+                                                ${generateStars(course.rating)}
+                                            </span>
+                                            <span class="rating-count">${course.rating}</span>
+                                            <span class="rating-count">(${course.ratingCount})</span>
+                                        </div>
+                                        <div class="course-price">
+                                            ${course.originalPrice ? `<span class="original-price">${formatCurrency(course.originalPrice)}</span>` : ''}
+                                            ${formatCurrency(course.price)}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                `).join('');
+                console.log('Courses rendered successfully');
+            } catch (error) {
+                console.error('Error loading courses:', error);
+                // Fallback to sample data
+                loadSampleCourses();
+            }
+        }
+
+        // Fallback function with sample data
+        function loadSampleCourses() {
             const container = document.getElementById('courses-container');
             container.innerHTML = courses.map(course => `
                 <div class="col-md-6 col-lg-4">
@@ -1476,42 +1534,128 @@
             `).join('');
         }
 
-        // Load categories
-        function loadCategories() {
-            const container = document.getElementById('categories-container');
-            container.innerHTML = categories.map(category => `
-                <div class="col-md-6 col-lg-3">
-                    <div class="category-card">
-                        <div class="category-icon">
-                            <i class="fas ${category.icon}"></i>
-                        </div>
-                        <h3 class="category-title">${category.name}</h3>
-                        <p class="category-count">${category.count} khóa học</p>
-                    </div>
-                </div>
-            `).join('');
+        // Load real statistics from database
+        function loadStats() {
+            return fetch('load_stats.php')
+                .then(response => response.json())
+                .then(stats => {
+                    console.log('Stats loaded:', stats);
+                    
+                    // Update stat numbers with real data
+                    const statElements = document.querySelectorAll('.stat-number');
+                    
+                    // Students
+                    if (statElements[0]) {
+                        statElements[0].setAttribute('data-count', stats.students);
+                        statElements[0].textContent = '0'; // Reset to 0 for animation
+                    }
+                    
+                    // Courses
+                    if (statElements[1]) {
+                        statElements[1].setAttribute('data-count', stats.courses);
+                        statElements[1].textContent = '0'; // Reset to 0 for animation
+                    }
+                    
+                    // Instructors
+                    if (statElements[2]) {
+                        statElements[2].setAttribute('data-count', stats.instructors);
+                        statElements[2].textContent = '0'; // Reset to 0 for animation
+                    }
+                    
+                    // Satisfaction
+                    if (statElements[3]) {
+                        statElements[3].innerHTML = '0<small>%</small>'; // Reset to 0 for animation
+                        statElements[3].setAttribute('data-count', stats.satisfaction);
+                    }
+                    
+                    return stats;
+                })
+                .catch(error => {
+                    console.error('Error loading stats:', error);
+                });
         }
-
-        // Load testimonials
-        function loadTestimonials() {
-            const container = document.getElementById('testimonials-container');
-            container.innerHTML = testimonials.map(testimonial => `
-                <div class="col-md-6 col-lg-4">
-                    <div class="testimonial-card">
-                        <p class="testimonial-text">${testimonial.text}</p>
-                        <div class="testimonial-author">
-                            <img src="${testimonial.avatar}" alt="${testimonial.name}" class="testimonial-avatar">
-                            <div class="testimonial-info">
-                                <h5>${testimonial.name}</h5>
-                                <p>${testimonial.role}</p>
+        // Load categories from database
+        function loadCategories() {
+            fetch('load_categories.php')
+                .then(response => response.json())
+                .then(categories => {
+                    console.log('Categories loaded:', categories);
+                    const container = document.getElementById('categories-container');
+                    container.innerHTML = categories.map(category => `
+                        <div class="col-md-6 col-lg-3">
+                            <div class="category-card">
+                                <div class="category-icon">
+                                    <i class="fas ${category.icon}"></i>
+                                </div>
+                                <h3 class="category-title">${category.name}</h3>
+                                <p class="category-count">${category.count} khóa học</p>
                             </div>
                         </div>
-                        <div class="testimonial-rating">
-                            ${generateStars(testimonial.rating)}
+                    `).join('');
+                })
+                .catch(error => {
+                    console.error('Error loading categories:', error);
+                    // Fallback to sample data
+                    const container = document.getElementById('categories-container');
+                    container.innerHTML = categories.map(category => `
+                        <div class="col-md-6 col-lg-3">
+                            <div class="category-card">
+                                <div class="category-icon">
+                                    <i class="fas ${category.icon}"></i>
+                                </div>
+                                <h3 class="category-title">${category.name}</h3>
+                                <p class="category-count">${category.count} khóa học</p>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            `).join('');
+                    `).join('');
+                });
+        }
+
+        // Load testimonials from database
+        function loadTestimonials() {
+            fetch('load_testimonials.php')
+                .then(response => response.json())
+                .then(testimonials => {
+                    console.log('Testimonials loaded:', testimonials);
+                    const container = document.getElementById('testimonials-container');
+                    container.innerHTML = testimonials.map(testimonial => `
+                        <div class="col-md-6 col-lg-4">
+                            <div class="testimonial-card">
+                                <p class="testimonial-text">${testimonial.text}</p>
+                                <div class="testimonial-author">
+                                    <div class="testimonial-info">
+                                        <h5>${testimonial.name}</h5>
+                                        <p>${testimonial.role}</p>
+                                    </div>
+                                </div>
+                                <div class="testimonial-rating">
+                                    ${generateStars(testimonial.rating)}
+                                </div>
+                            </div>
+                        </div>
+                    `).join('');
+                })
+                .catch(error => {
+                    console.error('Error loading testimonials:', error);
+                    // Fallback to sample data
+                    const container = document.getElementById('testimonials-container');
+                    container.innerHTML = testimonials.map(testimonial => `
+                        <div class="col-md-6 col-lg-4">
+                            <div class="testimonial-card">
+                                <p class="testimonial-text">${testimonial.text}</p>
+                                <div class="testimonial-author">
+                                    <div class="testimonial-info">
+                                        <h5>${testimonial.name}</h5>
+                                        <p>${testimonial.role}</p>
+                                    </div>
+                                </div>
+                                <div class="testimonial-rating">
+                                    ${generateStars(testimonial.rating)}
+                                </div>
+                            </div>
+                        </div>
+                    `).join('');
+                });
         }
 
         // Helper functions
@@ -1553,7 +1697,13 @@
                     current = target;
                     clearInterval(timer);
                 }
-                element.textContent = Math.floor(current).toLocaleString();
+                
+                // Check if this is the percentage element (last stat)
+                if (element.innerHTML.includes('%')) {
+                    element.innerHTML = Math.floor(current) + '<small>%</small>';
+                } else {
+                    element.textContent = Math.floor(current).toLocaleString();
+                }
             }, 16);
         }
 
@@ -1576,24 +1726,32 @@
             loadCategories();
             loadTestimonials();
             
-            // Initialize animations
-            handleScroll();
-            window.addEventListener('scroll', handleScroll);
-            
-            // Animate stats when visible
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const statNumber = entry.target;
-                        const target = parseInt(statNumber.getAttribute('data-count'));
-                        animateCounter(statNumber, target);
-                        observer.unobserve(statNumber);
-                    }
+            // Load stats first, then setup animations
+            loadStats().then(() => {
+                console.log('Stats loaded, setting up animations...');
+                
+                // Initialize animations after stats are loaded
+                handleScroll();
+                window.addEventListener('scroll', handleScroll);
+                
+                // Animate stats when visible
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const statNumber = entry.target;
+                            const target = parseInt(statNumber.getAttribute('data-count'));
+                            console.log('Animating stat to:', target);
+                            animateCounter(statNumber, target);
+                            observer.unobserve(statNumber);
+                        }
+                    });
                 });
-            });
-            
-            document.querySelectorAll('.stat-number').forEach(stat => {
-                observer.observe(stat);
+                
+                document.querySelectorAll('.stat-number').forEach(stat => {
+                    observer.observe(stat);
+                });
+            }).catch(error => {
+                console.error('Error in stats loading:', error);
             });
             
             // Smooth scrolling for anchor links

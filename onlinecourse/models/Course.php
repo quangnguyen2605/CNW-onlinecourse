@@ -10,7 +10,7 @@ class Course
 
     public function getAllApproved()
     {
-        $sql = 'SELECT c.*, u.full_name as instructor_name 
+        $sql = 'SELECT c.*, u.fullname as instructor_name 
                 FROM courses c 
                 LEFT JOIN users u ON c.instructor_id = u.id 
                 WHERE c.status = "approved" 

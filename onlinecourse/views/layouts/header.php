@@ -38,16 +38,6 @@ if (session_status() === PHP_SESSION_NONE) {
                     <li class="nav-item">
                         <a class="nav-link" href="index.php?controller=Course&action=index">Khóa học</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
-                            Lộ trình học
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Lập trình Web</a></li>
-                            <li><a class="dropdown-item" href="#">Lập trình Mobile</a></li>
-                            <li><a class="dropdown-item" href="#">Data Science</a></li>
-                        </ul>
-                    </li>
                 </ul>
                 
                 <div class="d-flex align-items-center">

@@ -8,9 +8,9 @@
                     <h5 class="fw-bold mb-3">
                         <i class="fas fa-code"></i> OnlineCourse
                     </h5>
-                    <p class="text-muted">
+                    <p class="text-white">
                         Nền tảng học lập trình trực tuyến hàng đầu với các khóa học chất lượng cao 
-                        và lộ trình học tập bài bản.
+                        và chuyên đề bài bản.
                     </p>
                     <div class="d-flex gap-3">
                         <a href="#" class="text-light"><i class="fab fa-facebook-f"></i></a>
@@ -23,26 +23,26 @@
                 <div class="col-lg-2 mb-4">
                     <h6 class="fw-bold mb-3">Khóa học</h6>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Lập trình Web</a></li>
-                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Lập trình Mobile</a></li>
-                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Data Science</a></li>
-                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Machine Learning</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Lập trình Web</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Lập trình Mobile</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Data Science</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Machine Learning</a></li>
                     </ul>
                 </div>
                 
                 <div class="col-lg-2 mb-4">
                     <h6 class="fw-bold mb-3">Hỗ trợ</h6>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Trợ giúp</a></li>
-                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Liên hệ</a></li>
-                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">FAQ</a></li>
-                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Điều khoản</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Trợ giúp</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Liên hệ</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">FAQ</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Điều khoản</a></li>
                     </ul>
                 </div>
                 
                 <div class="col-lg-4 mb-4">
                     <h6 class="fw-bold mb-3">Đăng ký nhận tin</h6>
-                    <p class="text-muted">Nhận thông tin về các khóa học mới và ưu đãi đặc biệt</p>
+                    <p class="text-white">Nhận thông tin về các khóa học mới và ưu đãi đặc biệt</p>
                     <form class="d-flex gap-2">
                         <input type="email" class="form-control" placeholder="Email của bạn">
                         <button type="submit" class="btn btn-primary">Đăng ký</button>
@@ -53,7 +53,7 @@
             <hr class="bg-secondary">
             
             <div class="text-center">
-                <p class="mb-0 text-muted">
+                <p class="mb-0 text-white">
                     &copy; <?= date('Y') ?> OnlineCourse. All rights reserved. 
                     Made with <i class="fas fa-heart text-danger"></i> in Vietnam
                 </p>

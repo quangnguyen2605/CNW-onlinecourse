@@ -19,10 +19,10 @@ class EnrollmentController
             $enrollmentModel = new Enrollment();
             $courseModel = new Course();
             
-            // Check if course exists
+            // Check if course exists and is approved
             $course = $courseModel->findById($courseId);
-            if (!$course) {
-                $_SESSION['error'] = 'Khóa học không tồn tại';
+            if (!$course || $course['status'] !== 'approved') {
+                $_SESSION['error'] = 'Khóa học không tồn tại hoặc chưa được duyệt';
                 header('Location: index.php?controller=Course&action=index');
                 exit;
             }

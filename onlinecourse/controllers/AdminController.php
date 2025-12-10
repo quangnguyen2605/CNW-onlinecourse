@@ -23,8 +23,8 @@ class AdminController
         $instructors = (int)$db->query('SELECT COUNT(*) FROM users WHERE role = 1')->fetchColumn();
         $admins = (int)$db->query('SELECT COUNT(*) FROM users WHERE role = 2')->fetchColumn();
         
-        // Courses by status - database không có status column
-        $pendingCourses = 0; // Database không có status, set = 0
+        // Courses by status
+        $pendingCourses = (int)$db->query('SELECT COUNT(*) FROM courses WHERE status = "pending"')->fetchColumn();
 
         $pageTitle = 'Admin Dashboard';
         require __DIR__ . '/../views/admin/dashboard.php';

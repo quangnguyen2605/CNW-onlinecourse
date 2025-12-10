@@ -43,8 +43,9 @@ class CourseController
         // Lấy thông tin khóa học với tên giảng viên và danh mục
         $course = $courseModel->getCourseWithInstructor($id);
         
-        if (!$course) {
-            $_SESSION['error'] = 'Khóa học không tồn tại';
+        // Kiểm tra xem khóa học đã được duyệt chưa
+        if ($course['status'] !== 'approved') {
+            $_SESSION['error'] = 'Khóa học chưa được duyệt hoặc không tồn tại';
             header('Location: index.php?controller=Course&action=index');
             exit;
         }

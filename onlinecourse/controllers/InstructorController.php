@@ -555,6 +555,17 @@ class InstructorController
         $stmt->execute([':instructor_id' => $instructorId]);
         $courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
+        // Separate courses by status
+        $pendingCourses = array_filter($courses, function($course) {
+            return $course['status'] === 'pending';
+        });
+        $approvedCourses = array_filter($courses, function($course) {
+            return $course['status'] === 'approved';
+        });
+        $rejectedCourses = array_filter($courses, function($course) {
+            return $course['status'] === 'rejected';
+        });
+        
         $pageTitle = 'Quản lý khóa học của tôi';
         require __DIR__ . '/../views/instructor/course/manage.php';
     }

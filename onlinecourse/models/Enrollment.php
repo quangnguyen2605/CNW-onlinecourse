@@ -140,4 +140,15 @@ class Enrollment
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([':course_id' => $courseId]);
     }
+    
+    public function findByUserAndCourse($userId, $courseId)
+    {
+        $sql = 'SELECT * FROM enrollments WHERE student_id = :user_id AND course_id = :course_id LIMIT 1';
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([
+            ':user_id' => $userId,
+            ':course_id' => $courseId,
+        ]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }

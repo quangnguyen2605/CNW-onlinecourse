@@ -1,5 +1,7 @@
 <?php 
 $pageTitle = $course['title'];
+require_once __DIR__ . '/../../models/Review.php';
+$reviewModel = new Review();
 require __DIR__ . '/../layouts/header.php'; 
 ?>
 
@@ -139,43 +141,6 @@ require __DIR__ . '/../layouts/header.php';
                     <!-- Course Info Card -->
                     <div class="card border-0 shadow-sm mb-4">
                         <div class="card-body">
-                            <h5 class="card-title fw-bold mb-3">Thông tin khóa học</h5>
-                            
-                            <div class="mb-3">
-                                <?php
-                                $avgRating = $reviewModel->getAverageRating($course['id']);
-                                $avgRatingValue = round($avgRating['avg_rating'] ?? 0, 1);
-                                $totalReviews = $avgRating['total_reviews'] ?? 0;
-                                ?>
-                                <div class="d-flex justify-content-between mb-2">
-                                    <span><i class="fas fa-star text-warning"></i> Đánh giá</span>
-                                    <span>
-                                        <span class="text-warning fw-bold"><?= $avgRatingValue ?></span>
-                                        <small class="text-muted">(<?= $totalReviews ?> đánh giá)</small>
-                                    </span>
-                                </div>
-                                <div class="d-flex justify-content-between mb-2">
-                                    <span><i class="fas fa-clock"></i> Thời lượng</span>
-                                    <span><?= (int)$course['duration_weeks'] ?> tuần</span>
-                                </div>
-                                <div class="d-flex justify-content-between mb-2">
-                                    <span><i class="fas fa-signal"></i> Cấp độ</span>
-                                    <span><?= htmlspecialchars($course['level']) ?></span>
-                                </div>
-                                <div class="d-flex justify-content-between mb-2">
-                                    <span><i class="fas fa-users"></i> Học viên</span>
-                                    <span><?= number_format($course['enrolled_count'] ?? 0) ?></span>
-                                </div>
-                                <div class="d-flex justify-content-between mb-2">
-                                    <span><i class="fas fa-certificate"></i> Chứng nhận</span>
-                                    <span>Có</span>
-                                </div>
-                                <div class="d-flex justify-content-between mb-2">
-                                    <span><i class="fas fa-language"></i> Ngôn ngữ</span>
-                                    <span>Tiếng Việt</span>
-                                </div>
-                            </div>
-                            
                             <?php if (isset($_SESSION['user_id']) && $_SESSION['user_role'] == 0 && !$isEnrolled): ?>
                                 <form action="index.php?controller=Student&action=enroll" method="POST">
                                 <input type="hidden" name="course_id" value="<?= $course['id'] ?>">

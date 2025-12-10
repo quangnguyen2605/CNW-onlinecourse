@@ -81,4 +81,11 @@ class User
         $stmt = $this->db->prepare($sql);
         return $stmt->execute($params);
     }
+    
+    public function updateAvatar($id, $avatarPath)
+    {
+        $sql = 'UPDATE users SET avatar = :avatar WHERE id = :id';
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute([':avatar' => $avatarPath, ':id' => $id]);
+    }
 }

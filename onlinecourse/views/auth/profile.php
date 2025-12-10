@@ -19,6 +19,49 @@ require_once __DIR__ . '/../../models/User.php';
 $userModel = new User();
 $user = $userModel->findById($_SESSION['user_id']);
 
+// Xử lý upload avatar
+$avatarError = '';
+$avatarSuccess = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['upload_avatar'])) {
+    if (isset($_FILES['avatar']) && $_FILES['avatar']['error'] === UPLOAD_ERR_OK) {
+        $allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+        $maxSize = 5 * 1024 * 1024; // 5MB
+        
+        $fileType = $_FILES['avatar']['type'];
+        $fileSize = $_FILES['avatar']['size'];
+        
+        if (!in_array($fileType, $allowedTypes)) {
+            $avatarError = 'Chỉ chấp nhận file ảnh (JPG, PNG, GIF, WebP)';
+        } elseif ($fileSize > $maxSize) {
+            $avatarError = 'Kích thước file không quá 5MB';
+        } else {
+            // Tạo tên file unique
+            $fileName = 'avatar_' . $_SESSION['user_id'] . '_' . time() . '.' . pathinfo($_FILES['avatar']['name'], PATHINFO_EXTENSION);
+            $uploadPath = __DIR__ . '/../../uploads/avatars/' . $fileName;
+            
+            // Tạo thư mục nếu chưa có
+            if (!is_dir(__DIR__ . '/../../uploads/avatars/')) {
+                mkdir(__DIR__ . '/../../uploads/avatars/', 0777, true);
+            }
+            
+            if (move_uploaded_file($_FILES['avatar']['tmp_name'], $uploadPath)) {
+                // Cập nhật database
+                $avatarPath = '/onlinecourse/onlinecourse/uploads/avatars/' . $fileName;
+                $userModel->updateAvatar($_SESSION['user_id'], $avatarPath);
+                $avatarSuccess = 'Cập nhật ảnh đại diện thành công!';
+                
+                // Load lại user data
+                $user = $userModel->findById($_SESSION['user_id']);
+            } else {
+                $avatarError = 'Không thể upload file. Vui lòng thử lại.';
+            }
+        }
+    } else {
+        $avatarError = 'Vui lòng chọn file ảnh';
+    }
+}
+
 // Xử lý đổi mật khẩu
 $passwordError = '';
 $passwordSuccess = '';
@@ -135,6 +178,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_profile'])) {
     margin: 0 auto 1rem;
     font-size: 2.5rem;
     color: #667eea;
+    overflow: hidden;
+    border: 3px solid white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .profile-name {
@@ -322,7 +374,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_profile'])) {
     <!-- Profile Header -->
     <div class="profile-header">
         <div class="profile-avatar">
-            <i class="fas fa-user"></i>
+            <?php if (!empty($user['avatar'])): ?>
+                <img src="<?= htmlspecialchars($user['avatar']) ?>" alt="Avatar" class="avatar-img">
+            <?php else: ?>
+                <i class="fas fa-user"></i>
+            <?php endif; ?>
         </div>
         <h1 class="profile-name"><?= htmlspecialchars($user['fullname']) ?></h1>
         <div class="profile-role">
@@ -332,6 +388,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_profile'])) {
             ?>
         </div>
         <div class="profile-email"><?= htmlspecialchars($user['email']) ?></div>
+        
+        <!-- Upload Avatar Button -->
+        <button type="button" class="btn btn-outline-primary btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#avatarModal">
+            <i class="fas fa-camera"></i> Đổi ảnh đại diện
+        </button>
     </div>
 
     <!-- Profile Tabs -->
@@ -501,6 +562,67 @@ document.querySelectorAll('form').forEach(form => {
             }
         }
     });
+});
+</script>
+
+<!-- Avatar Upload Modal -->
+<div class="modal fade" id="avatarModal" tabindex="-1" aria-labelledby="avatarModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="avatarModalLabel">Đổi ảnh đại diện</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="POST" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <?php if ($avatarError): ?>
+                        <div class="alert alert-danger"><?= $avatarError ?></div>
+                    <?php endif; ?>
+                    
+                    <?php if ($avatarSuccess): ?>
+                        <div class="alert alert-success"><?= $avatarSuccess ?></div>
+                    <?php endif; ?>
+                    
+                    <div class="mb-3">
+                        <label for="avatar" class="form-label">Chọn ảnh đại diện</label>
+                        <input type="file" class="form-control" id="avatar" name="avatar" accept="image/*" required>
+                        <div class="form-text">Chấp nhận file JPG, PNG, GIF, WebP. Tối đa 5MB</div>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="avatar-preview mb-3" id="avatarPreview">
+                            <?php if (!empty($user['avatar'])): ?>
+                                <img src="<?= htmlspecialchars($user['avatar']) ?>" alt="Current avatar" class="img-fluid rounded-circle" style="max-width: 150px;">
+                            <?php else: ?>
+                                <div class="bg-light rounded-circle d-flex align-items-center justify-content-center" style="width: 150px; height: 150px; margin: 0 auto;">
+                                    <i class="fas fa-user fa-3x text-muted"></i>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" name="upload_avatar" class="btn btn-primary">Cập nhật ảnh</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+// Avatar preview
+document.getElementById('avatar').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    const preview = document.getElementById('avatarPreview');
+    
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            preview.innerHTML = `<img src="${e.target.result}" alt="Preview" class="img-fluid rounded-circle" style="max-width: 150px;">`;
+        }
+        reader.readAsDataURL(file);
+    }
 });
 </script>
 

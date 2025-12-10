@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -1066,8 +1069,41 @@
                             <i class="fas fa-search"></i>
                             <input type="text" class="form-control" placeholder="Tìm kiếm khóa học...">
                         </div>
-                        <a href="/onlinecourse/onlinecourse/index.php?controller=Auth&action=login" class="btn btn-outline-primary me-2">Đăng nhập</a>
-                        <a href="/onlinecourse/onlinecourse/index.php?controller=Auth&action=register" class="btn btn-primary">Đăng ký</a>
+                        <?php if (!empty($_SESSION['user_id'])): ?>
+                            <?php $role = (int)($_SESSION['user_role'] ?? 0); ?>
+                            
+                            <?php if ($role === 0): ?>
+                                <a href="/onlinecourse/onlinecourse/index.php?controller=Enrollment&action=myCourses" class="btn btn-outline-primary me-2">
+                                    <i class="fas fa-book"></i> Khóa học của tôi
+                                </a>
+                            <?php elseif ($role === 1): ?>
+                                <a href="/onlinecourse/onlinecourse/index.php?controller=Instructor&action=dashboard" class="btn btn-outline-primary me-2">
+                                    <i class="fas fa-chalkboard-teacher"></i> Giảng viên
+                                </a>
+                            <?php elseif ($role === 2): ?>
+                                <a href="/onlinecourse/onlinecourse/index.php?controller=Admin&action=dashboard" class="btn btn-outline-primary me-2">
+                                    <i class="fas fa-cog"></i> Quản trị
+                                </a>
+                            <?php endif; ?>
+                            
+                            <div class="dropdown">
+                                <a class="btn btn-link text-decoration-none dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                    <i class="fas fa-user-circle"></i> 
+                                    <?= htmlspecialchars($_SESSION['user_name'] ?? 'User') ?>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item" href="/onlinecourse/onlinecourse/index.php?controller=Auth&action=profile"><i class="fas fa-user"></i> Hồ sơ cá nhân</a></li>
+                                    <li><a class="dropdown-item" href="/onlinecourse/onlinecourse/index.php?controller=Auth&action=profile#password-tab"><i class="fas fa-key"></i> Đổi mật khẩu</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="/onlinecourse/onlinecourse/index.php?controller=Auth&action=logout">
+                                        <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                                    </a></li>
+                                </ul>
+                            </div>
+                        <?php else: ?>
+                            <a href="/onlinecourse/onlinecourse/index.php?controller=Auth&action=login" class="btn btn-outline-primary me-2">Đăng nhập</a>
+                            <a href="/onlinecourse/onlinecourse/index.php?controller=Auth&action=register" class="btn btn-primary">Đăng ký</a>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -1317,8 +1353,8 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <script>
         // Sample data

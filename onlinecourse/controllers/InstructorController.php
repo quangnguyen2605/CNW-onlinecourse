@@ -582,7 +582,7 @@ class InstructorController
         
         // Check if course belongs to this instructor
         $courseModel = new Course();
-        $course = $courseModel->findById($courseId);
+        $course = $courseModel->getCourseWithInstructor($courseId);
         
         if (!$course || $course['instructor_id'] != (int)$_SESSION['user_id']) {
             $_SESSION['error'] = 'Bạn không có quyền quản lý tài liệu của khóa học này!';

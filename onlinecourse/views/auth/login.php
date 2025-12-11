@@ -374,8 +374,12 @@ document.querySelector('form').addEventListener('submit', function(e) {
 });
 
 function socialLogin(provider) {
-    // Hiển thị thông báo đang phát triển
-    alert(`Đăng nhập với ${provider} - Chức năng đang được phát triển!\n\nTrong thời gian chờ đợi, bạn có thể:\n1. Sử dụng email và mật khẩu để đăng nhập\n2. Đăng ký tài khoản mới nếu chưa có`);
+    if (provider === 'facebook') {
+        window.open('https://www.facebook.com/quang.nguyen.490818/', '_blank');
+    } else {
+        // Hiển thị thông báo đang phát triển
+        alert(`Đăng nhập với ${provider} - Chức năng đang được phát triển!\n\nTrong thời gian chờ đợi, bạn có thể:\n1. Sử dụng email và mật khẩu để đăng nhập\n2. Đăng ký tài khoản mới nếu chưa có`);
+    }
     
     // Logic thực tế cho social login (khi đã có API)
     /*

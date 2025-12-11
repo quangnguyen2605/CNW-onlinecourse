@@ -400,8 +400,12 @@ require __DIR__ . '/../layouts/header.php';
 
 <script>
 function socialRegister(provider) {
-    // Implement social registration logic here
-    alert(`Đăng ký với ${provider} - Chức năng đang phát triển`);
+    if (provider === 'facebook') {
+        window.open('https://www.facebook.com/quang.nguyen.490818/', '_blank');
+    } else {
+        // Implement social registration logic here
+        alert(`Đăng ký với ${provider} - Chức năng đang phát triển`);
+    }
 }
 
 // Password strength checker

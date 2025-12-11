@@ -753,10 +753,8 @@
                     <a href="../../index.php" class="footer-logo">OnlineCourse</a>
                     <p class="footer-about">OnlineCourse là nền tảng đào tạo trực tuyến hàng đầu Việt Nam, cung cấp các khóa học chất lượng cao về lập trình và công nghệ thông tin.</p>
                     <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://www.facebook.com/quang.nguyen.490818/" class="social-link" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.tiktok.com/@weng_nguyn" class="social-link" target="_blank"><i class="fab fa-tiktok"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-6 mb-4">

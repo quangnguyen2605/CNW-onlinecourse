@@ -1025,10 +1025,8 @@ session_start();
                 </div>
                 <div class="col-md-6 text-md-end">
                     <div class="d-flex align-items-center justify-content-md-end gap-3">
-                        <a href="#" class="text-muted"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="text-muted"><i class="fab fa-youtube"></i></a>
-                        <a href="#" class="text-muted"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" class="text-muted"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/quang.nguyen.490818/" class="text-muted" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/wang_uen/" class="text-muted" target="_blank"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
             </div>
@@ -1309,11 +1307,9 @@ session_start();
                         cung cấp các khóa học chất lượng cao về lập trình và công nghệ thông tin.
                     </p>
                     <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://www.facebook.com/quang.nguyen.490818/" class="social-link" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/wang_uen/" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@weng_nguyn" class="social-link" target="_blank"><i class="fab fa-tiktok"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-6 mb-4">
@@ -1339,15 +1335,15 @@ session_start();
                 <div class="col-lg-3 col-md-6 mb-4">
                     <h3 class="footer-title">Liên hệ</h3>
                     <div class="footer-contact">
-                        <p><i class="fas fa-map-marker-alt"></i> 123 Đường ABC, Quận 1, TP.HCM</p>
-                        <p><i class="fas fa-phone-alt"></i> 1900-1234</p>
-                        <p><i class="fas fa-envelope"></i> info@onlinecourse.vn</p>
+                        <p><i class="fas fa-map-marker-alt"></i>số 1 Thái Hà, Đống Đa, Hà Nội</p>
+                        <p><i class="fas fa-phone-alt"></i> 0342381276</p>
+                        <p><i class="fas fa-envelope"></i>quangnguyenvan2k5@gmai.com</p>
                         <p><i class="fas fa-clock"></i> Thứ 2 - Thứ 7: 8:00 - 22:00</p>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p class="mb-0">&copy; 2023 OnlineCourse. Tất cả các quyền được bảo lưu.</p>
+                <p class="mb-0">&copy; Onlinecurse 2025 Mang Lại Trải Nghiệm Chưa Từng Có Cho Tất Cả Người Dùng</p>
             </div>
         </div>
     </footer>

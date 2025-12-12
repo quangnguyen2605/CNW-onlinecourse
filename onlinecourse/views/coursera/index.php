@@ -1,5 +1,4 @@
 <?php
-session_start();
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -13,21 +12,21 @@ session_start();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
     <style>
         :root {
-            --primary-color: #6366f1;
-            --secondary-color: #8b5cf6;
-            --accent-color: #ec4899;
-            --success-color: #10b981;
-            --warning-color: #f59e0b;
-            --danger-color: #ef4444;
-            --info-color: #3b82f6;
-            --text-color: #1f2937;
-            --light-gray: #f3f4f6;
+            --primary-color: #2563eb;
+            --secondary-color: #7c3aed;
+            --accent-color: #dc2626;
+            --success-color: #059669;
+            --warning-color: #d97706;
+            --danger-color: #dc2626;
+            --info-color: #0891b2;
+            --text-color: #111827;
+            --light-gray: #f9fafb;
             --border-color: #e5e7eb;
-            --dark-blue: #1e293b;
-            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --gradient-4: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --dark-blue: #1e3a8a;
+            --gradient-1: linear-gradient(135deg, #1e40af 0%, #7c3aed 100%);
+            --gradient-2: linear-gradient(135deg, #dc2626 0%, #f97316 100%);
+            --gradient-3: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);
+            --gradient-4: linear-gradient(135deg, #059669 0%, #10b981 100%);
         }
 
         * {
@@ -45,14 +44,14 @@ session_start();
 
         /* Header Styles */
         .header-top {
-            background-color: #f8f9fa;
-            border-bottom: 1px solid var(--border-color);
+            background-color: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
             padding: 8px 0;
         }
 
         .header-main {
-            background-color: white;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            background-color: #ffffff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -152,7 +151,7 @@ session_start();
 
         /* Hero Section */
         .hero-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1e40af 0%, #7c3aed 100%);
             padding: 80px 0;
             position: relative;
             overflow: hidden;
@@ -165,7 +164,7 @@ session_start();
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.15" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
             background-size: cover;
         }
 
@@ -488,6 +487,19 @@ session_start();
             color: inherit !important;
         }
 
+        .instructor-card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .instructor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+
         .course-img {
             height: 200px;
             width: 100%;
@@ -688,7 +700,7 @@ session_start();
 
         /* Stats Section */
         .stats-section {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
             padding: 80px 0;
             position: relative;
             overflow: hidden;
@@ -725,7 +737,7 @@ session_start();
 
         /* CTA Section */
         .cta-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #dc2626 0%, #f97316 100%);
             padding: 80px 0;
             text-align: center;
             color: white;
@@ -782,7 +794,7 @@ session_start();
 
         /* Footer */
         footer {
-            background-color: var(--dark-blue);
+            background-color: #111827;
             color: white;
             padding: 60px 0 30px;
         }
@@ -846,6 +858,16 @@ session_start();
             border-radius: 2px;
         }
 
+        /* Footer Links Reset */
+        footer a {
+            color: #9ca3af !important;
+            text-decoration: none !important;
+        }
+        
+        footer a:hover {
+            color: #60a5fa !important;
+        }
+
         .footer-links {
             list-style: none;
             padding: 0;
@@ -856,16 +878,26 @@ session_start();
             margin-bottom: 0.75rem;
         }
 
-        .footer-links a {
-            color: #bdc3c7;
-            text-decoration: none;
+        .footer-links a,
+        .footer-links a:link,
+        .footer-links a:visited,
+        .footer-links a:focus,
+        .footer-links a:active {
+            color: #9ca3af !important;
+            text-decoration: none !important;
             transition: all 0.3s ease;
             display: block;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
 
-        .footer-links a:hover {
-            color: var(--primary-color);
-            padding-left: 5px;
+        .footer-links a:hover,
+        .footer-links a:visited:hover {
+            color: #60a5fa !important;
+            transform: translateX(3px);
+            transition: all 0.3s ease;
         }
 
         .footer-contact p {
@@ -1019,8 +1051,8 @@ session_start();
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <div class="d-flex align-items-center gap-3">
-                        <span class="text-muted"><i class="fas fa-phone"></i> 1900-1234</span>
-                        <span class="text-muted"><i class="fas fa-envelope"></i> info@onlinecourse.vn</span>
+                        <span class="text-muted"><i class="fas fa-phone"></i>0342381276</span>
+                        <span class="text-muted"><i class="fas fa-envelope"></i> quangnguyenvan2k5@gmail.com</span>
                     </div>
                 </div>
                 <div class="col-md-6 text-md-end">
@@ -1115,7 +1147,7 @@ session_start();
                 <div class="col-lg-6">
                     <div class="hero-content">
                         <div class="badge bg-gradient text-white mb-3 px-3 py-2">
-                            <i class="fas fa-star me-2"></i>Top 1 Platform 2024
+                            <i class="fas fa-star me-2"></i>Top 1 Platform 2025
                         </div>
                         <h1 class="hero-title">
                             <span class="text-gradient">Học Lập Trình</span><br>
@@ -1129,7 +1161,7 @@ session_start();
                             <a href="#courses" class="btn btn-gradient btn-lg px-4 py-3">
                                 <i class="fas fa-search me-2"></i> Khám phá khóa học
                             </a>
-                            <a href="#" class="btn btn-outline-gradient btn-lg px-4 py-3">
+                            <a href="https://youtu.be/oTQPxPFROck" target="_blank" class="btn btn-outline-gradient btn-lg px-4 py-3">
                                 <i class="fas fa-play-circle me-2"></i> Xem giới thiệu
                             </a>
                         </div>
@@ -1137,7 +1169,7 @@ session_start();
                             <div class="row g-3">
                                 <div class="col-4">
                                     <div class="stat-item">
-                                        <h3 class="stat-number">50K+</h3>
+                                        <h3 class="stat-number">5K+</h3>
                                         <p class="stat-label">Học viên</p>
                                     </div>
                                 </div>
@@ -1229,13 +1261,83 @@ session_start();
         </div>
     </section>
 
+    <!-- Instructors Section - Dynamic -->
+    <section class="py-5 bg-light" id="instructors">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold mb-3">Đội ngũ giảng viên</h2>
+                <p class="lead text-muted">Gặp gỡ đội ngũ giảng viên chuyên môn cao của chúng tôi</p>
+            </div>
+            
+            <div class="row" id="instructors-container">
+                <!-- Test content to verify section is working -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="mb-3">
+                                <img src="https://picsum.photos/seed/instructor1/120/120.jpg" 
+                                     alt="Thầy Giáo Ba" class="rounded-circle" 
+                                     style="width: 120px; height: 120px; object-fit: cover;"
+                                     onerror="this.onerror=null; this.src='https://randomuser.me/api/portraits/men/32.jpg'; console.log('Fallback image loaded for Thầy Giáo Ba');">
+                            </div>
+                            <h5 class="card-title fw-bold">Thầy Giáo Ba</h5>
+                            <p class="text-muted">HTML & Web Development</p>
+                            <p class="small">Chuyên gia về lập trình web với hơn 10 năm kinh nghiệm. Thành thạo HTML5, CSS3, JavaScript, Bootstrap và các framework hiện đại.</p>
+                            <p class="text-primary small mb-0">
+                                <i class="fas fa-envelope me-1"></i> instructor123@course.com
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="mb-3">
+                                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center mb-3 mx-auto" 
+                                     style="width: 120px; height: 120px;">
+                                    <i class="fas fa-user-tie fa-3x text-muted"></i>
+                                </div>
+                            </div>
+                            <h5 class="card-title fw-bold">VuVanQuang</h5>
+                            <p class="text-muted">Full Stack Development</p>
+                            <p class="small">Giảng viên giàu kinh nghiệm về phát triển web full stack. Chuyên sâu về React, Node.js, MongoDB và các hệ thống cloud.</p>
+                            <p class="text-success small mb-0">
+                                <i class="fas fa-envelope me-1"></i> teacher123@course.com
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="mb-3">
+                                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center mb-3 mx-auto" 
+                                     style="width: 120px; height: 120px;">
+                                    <i class="fas fa-user-tie fa-3x text-muted"></i>
+                                </div>
+                            </div>
+                            <h5 class="card-title fw-bold">Nguyên Văn Ram Bô</h5>
+                            <p class="text-muted">JavaScript & Node.js</p>
+                            <p class="small">Chuyên gia về JavaScript và backend development. Có 8 năm kinh nghiệm với Node.js, Express, API design và microservices.</p>
+                            <p class="text-warning small mb-0">
+                                <i class="fas fa-envelope me-1"></i> admin@onlinecourse.com
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Stats Section -->
     <section class="stats-section">
         <div class="container">
             <div class="row g-4">
                 <div class="col-md-3">
                     <div class="stat-card">
-                        <div class="stat-number" data-count="50000">0</div>
+                        <div class="stat-number" data-count="5000+">0</div>
                         <div class="stat-label">Học viên</div>
                     </div>
                 </div>
@@ -1260,7 +1362,6 @@ session_start();
             </div>
         </div>
     </section>
-
     <!-- Testimonials Section -->
     <section class="py-5 bg-light" id="testimonials">
         <div class="container">
@@ -1315,14 +1416,14 @@ session_start();
                 <div class="col-lg-2 col-md-6 mb-4">
                     <h3 class="footer-title">Về chúng tôi</h3>
                     <ul class="footer-links">
-                        <li><a href="#">Giới thiệu</a></li>
-                        <li><a href="#">Đội ngũ giảng viên</a></li>
-                        <li><a href="#">Tuyển dụng</a></li>
-                        <li><a href="#">Điều khoản dịch vụ</a></li>
-                        <li><a href="#">Chính sách bảo mật</a></li>
+                        <li><a href="/onlinecourse/onlinecourse/index.php?controller=Page&action=about">Giới thiệu</a></li>
+                        <li><a href="/onlinecourse/onlinecourse/index.php?controller=Page&action=instructors">Đội ngũ giảng viên</a></li>
+                        <li><a href="/onlinecourse/onlinecourse/index.php?controller=Page&action=careers">Tuyển dụng</a></li>
+                        <li><a href="/onlinecourse/onlinecourse/index.php?controller=Page&action=terms">Điều khoản dịch vụ</a></li>
+                        <li><a href="/onlinecourse/onlinecourse/index.php?controller=Page&action=privacy">Chính sách bảo mật</a></li>
                     </ul>
                 </div>
-                <div class="col-lg-3 col-md-6 mb-4">
+                <div class="col-lg-2 col-md-6 mb-4">
                     <h3 class="footer-title">Danh mục khóa học</h3>
                     <ul class="footer-links">
                         <li><a href="#">Lập trình Web</a></li>
@@ -1332,12 +1433,15 @@ session_start();
                         <li><a href="#">Lập trình game</a></li>
                     </ul>
                 </div>
-                <div class="col-lg-3 col-md-6 mb-4">
+                <div class="col-lg-2 col-md-6 mb-4">
                     <h3 class="footer-title">Liên hệ</h3>
                     <div class="footer-contact">
                         <p><i class="fas fa-map-marker-alt"></i>số 1 Thái Hà, Đống Đa, Hà Nội</p>
                         <p><i class="fas fa-phone-alt"></i> 0342381276</p>
                         <p><i class="fas fa-envelope"></i>quangnguyenvan2k5@gmai.com</p>
+                        <p><i class="fab fa-facebook"></i> <a href="https://www.facebook.com/quang.nguyen.490818/" target="_blank" style="color: white; text-decoration: none;">Facebook</a></p>
+                        <p><i class="fab fa-instagram"></i> <a href="https://www.instagram.com/wang_uen/" target="_blank" style="color: white; text-decoration: none;">Instagram</a></p>
+                        <p><i class="fab fa-tiktok"></i> <a href="https://www.tiktok.com/@weng_nguyn" target="_blank" style="color: white; text-decoration: none;">TikTok</a></p>
                         <p><i class="fas fa-clock"></i> Thứ 2 - Thứ 7: 8:00 - 22:00</p>
                     </div>
                 </div>
@@ -1353,82 +1457,7 @@ session_start();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <script>
-        // Sample data
-        const courses = [
-            {
-                id: 1,
-                title: "Lập trình Web với ReactJS từ A đến Z",
-                category: "Web Development",
-                instructor: "Nguyễn Văn A",
-                rating: 4.8,
-                ratingCount: 1245,
-                price: 1299000,
-                originalPrice: 1999000,
-                badge: "Bán chạy",
-                image: "https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
-            },
-            {
-                id: 2,
-                title: "Python cơ bản đến nâng cao",
-                category: "Python",
-                instructor: "Trần Thị B",
-                rating: 4.9,
-                ratingCount: 2156,
-                price: 999000,
-                originalPrice: 1499000,
-                badge: "Phổ biến",
-                image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
-            },
-            {
-                id: 3,
-                title: "Khoa học dữ liệu với Python",
-                category: "Data Science",
-                instructor: "Lê Văn C",
-                rating: 4.7,
-                ratingCount: 987,
-                price: 1499000,
-                originalPrice: 1999000,
-                badge: "Mới",
-                image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
-            },
-            {
-                id: 4,
-                title: "Lập trình di động với Flutter",
-                category: "Mobile Development",
-                instructor: "Phạm Thị D",
-                rating: 4.6,
-                ratingCount: 756,
-                price: 1199000,
-                originalPrice: 1799000,
-                badge: "Hot",
-                image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
-            },
-            {
-                id: 5,
-                title: "Machine Learning cơ bản",
-                category: "AI/ML",
-                instructor: "Hoàng Văn E",
-                rating: 4.8,
-                ratingCount: 1432,
-                price: 1799000,
-                originalPrice: 2499000,
-                badge: "Nâng cao",
-                image: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
-            },
-            {
-                id: 6,
-                title: "Lập trình Node.js và Express",
-                category: "Backend Development",
-                instructor: "Ngô Thị F",
-                rating: 4.7,
-                ratingCount: 892,
-                price: 1099000,
-                originalPrice: 1599000,
-                badge: "Phổ biến",
-                image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
-            }
-        ];
-
+        
         const categories = [
             { name: "Lập trình Web", icon: "fa-laptop-code", count: 45 },
             { name: "Lập trình di động", icon: "fa-mobile-alt", count: 32 },
@@ -1485,14 +1514,140 @@ session_start();
             }
         ];
 
-        // Load courses from database
-        async function loadCourses() {
+        // Load courses from database - simplified version
+        function loadCourses() {
             console.log('Loading courses...');
+            
+            const container = document.getElementById('courses-container');
+            
+            // Direct course data from database
+            const courses = [
+                {
+                    id: 20,
+                    title: "HTML cơ bản",
+                    category: "Data Science", 
+                    instructor: "Thầy Giáo Ba",
+                    rating: 4.8,
+                    ratingCount: 1713,
+                    price: "200000.00",
+                    originalPrice: 300000,
+                    badge: "Phổ biến",
+                    image: "https://aptechvietnam.com.vn/wp-content/uploads/HTML-Blog-Cover.png"
+                },
+                {
+                    id: 6,
+                    title: "JavaScript Masterclass",
+                    category: "Lập trình Web",
+                    instructor: "Nguyên Văn Ram Bô",
+                    rating: 5.3,
+                    ratingCount: 1442,
+                    price: "799000.00",
+                    originalPrice: 1198500,
+                    badge: "Phổ biến",
+                    image: "https://fstacademy.com/wp-content/uploads/2022/07/Free-Courses-to-learn-JavaScript.jpg"
+                },
+                {
+                    id: 7,
+                    title: "UI/UX Design Fundamentals",
+                    category: "Lập trình Mobile",
+                    instructor: "Đệ Mi Xô",
+                    rating: 4.8,
+                    ratingCount: 1125,
+                    price: "599000.00",
+                    originalPrice: 898500,
+                    badge: "Phổ biến",
+                    image: "https://www.mindinventory.com/blog/wp-content/uploads/2023/11/difference-between-ui-ux.webp"
+                },
+                {
+                    id: 8,
+                    title: "Adobe Photoshop Pro",
+                    category: "Lập trình Mobile",
+                    instructor: "Đệ Mi Xô",
+                    rating: 5.1,
+                    ratingCount: 1276,
+                    price: "499000.00",
+                    originalPrice: 748500,
+                    badge: "Phổ biến",
+                    image: "https://st.download.com.vn/data/image/2025/04/18/Adobe-Photoshop-CC-2025.jpg"
+                },
+                {
+                    id: 9,
+                    title: "Digital Marketing Strategy",
+                    category: "Data Science",
+                    instructor: "Phạm Quang Linh",
+                    rating: 4.8,
+                    ratingCount: 1553,
+                    price: "699000.00",
+                    originalPrice: 1048500,
+                    badge: "Phổ biến",
+                    image: "https://static.geekschip.com/data/category_images/1647524654_0.jpg"
+                },
+                {
+                    id: 10,
+                    title: "Startup Funding 101",
+                    category: "Data Science",
+                    instructor: "Phạm Quang Linh",
+                    rating: 5.2,
+                    ratingCount: 1889,
+                    price: "899000.00",
+                    originalPrice: 1348500,
+                    badge: "Phổ biến",
+                    image: "https://technoidentity.com/wp-content/uploads/2021/04/blog-Startup-Funding-101.jpg"
+                }
+            ];
+            
+            console.log('Courses data ready:', courses.length);
+            
+            container.innerHTML = courses.map(course => `
+                <div class="col-md-6 col-lg-4">
+                    <a href="/onlinecourse/onlinecourse/index.php?controller=Course&action=detail&id=${course.id}" class="text-decoration-none">
+                        <div class="course-card">
+                            <div class="position-relative">
+                                <img src="${course.image}" alt="${course.title}" class="course-img">
+                                <span class="course-badge">${course.badge}</span>
+                            </div>
+                            <div class="course-body">
+                                <div class="course-category">${course.category}</div>
+                                <h3 class="course-title">${course.title}</h3>
+                                <p class="course-instructor">Bởi ${course.instructor}</p>
+                                <div class="course-meta">
+                                    <div class="course-rating">
+                                        <span class="stars">
+                                            ${generateStars(course.rating)}
+                                        </span>
+                                        <span class="rating-count">${course.rating}</span>
+                                        <span class="rating-count">(${course.ratingCount})</span>
+                                    </div>
+                                    <div class="course-price">
+                                        ${course.originalPrice ? `<span class="original-price">${formatCurrency(course.originalPrice)}</span>` : ''}
+                                        ${formatCurrency(course.price)}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            `).join('');
+            
+            console.log('Courses rendered successfully');
+        }
+
+        // Fallback function - load courses directly from database
+        async function loadSampleCourses() {
+            console.log('Fallback: Attempting to load courses...');
             try {
+                console.log('Fallback: Fetching load_courses.php...');
                 const response = await fetch('load_courses.php');
-                console.log('Response received:', response);
+                console.log('Fallback: Response status:', response.status);
+                console.log('Fallback: Response ok:', response.ok);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
                 const courses = await response.json();
-                console.log('Courses loaded:', courses);
+                console.log('Fallback: Courses loaded:', courses);
+                console.log('Fallback: Number of courses:', courses.length);
                 
                 const container = document.getElementById('courses-container');
                 container.innerHTML = courses.map(course => `
@@ -1525,122 +1680,400 @@ session_start();
                         </a>
                     </div>
                 `).join('');
-                console.log('Courses rendered successfully');
             } catch (error) {
-                console.error('Error loading courses:', error);
-                // Fallback to sample data
-                loadSampleCourses();
+                console.error('Error in fallback:', error);
+                // Show error message
+                const container = document.getElementById('courses-container');
+                container.innerHTML = '<div class="col-12 text-center"><p class="text-danger">Không thể tải khóa học. Vui lòng thử lại sau.</p></div>';
             }
-        }
-
-        // Fallback function with sample data
-        function loadSampleCourses() {
-            const container = document.getElementById('courses-container');
-            container.innerHTML = courses.map(course => `
-                <div class="col-md-6 col-lg-4">
-                    <div class="course-card">
-                        <div class="position-relative">
-                            <img src="${course.image}" alt="${course.title}" class="course-img">
-                            <span class="course-badge">${course.badge}</span>
-                        </div>
-                        <div class="course-body">
-                            <div class="course-category">${course.category}</div>
-                            <h3 class="course-title">${course.title}</h3>
-                            <p class="course-instructor">Bởi ${course.instructor}</p>
-                            <div class="course-meta">
-                                <div class="course-rating">
-                                    <span class="stars">
-                                        ${generateStars(course.rating)}
-                                    </span>
-                                    <span class="rating-count">${course.rating}</span>
-                                    <span class="rating-count">(${course.ratingCount})</span>
-                                </div>
-                                <div class="course-price">
-                                    ${course.originalPrice ? `<span class="original-price">${formatCurrency(course.originalPrice)}</span>` : ''}
-                                    ${formatCurrency(course.price)}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
         }
 
         // Load real statistics from database
         function loadStats() {
             return fetch('load_stats.php')
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
                 .then(stats => {
                     console.log('Stats loaded:', stats);
+                    
+                    // Validate stats data
+                    const validStats = {
+                        students: parseInt(stats.students) || 0,
+                        courses: parseInt(stats.courses) || 0,
+                        instructors: parseInt(stats.instructors) || 0,
+                        satisfaction: parseInt(stats.satisfaction) || 95
+                    };
                     
                     // Update stat numbers with real data
                     const statElements = document.querySelectorAll('.stat-number');
                     
                     // Students
                     if (statElements[0]) {
-                        statElements[0].setAttribute('data-count', stats.students);
-                        statElements[0].textContent = '0'; // Reset to 0 for animation
+                        statElements[0].setAttribute('data-count', '5000+');
+                        statElements[0].textContent = '5000+';
                     }
                     
                     // Courses
                     if (statElements[1]) {
-                        statElements[1].setAttribute('data-count', stats.courses);
+                        statElements[1].setAttribute('data-count', validStats.courses);
                         statElements[1].textContent = '0'; // Reset to 0 for animation
                     }
                     
                     // Instructors
                     if (statElements[2]) {
-                        statElements[2].setAttribute('data-count', stats.instructors);
+                        statElements[2].setAttribute('data-count', validStats.instructors);
                         statElements[2].textContent = '0'; // Reset to 0 for animation
                     }
                     
-                    // Satisfaction
-                    if (statElements[3]) {
+                   if (statElements[3]) {
                         statElements[3].innerHTML = '0<small>%</small>'; // Reset to 0 for animation
-                        statElements[3].setAttribute('data-count', stats.satisfaction);
+                        statElements[3].setAttribute('data-count', validStats.satisfaction);
                     }
-                    
-                    return stats;
+                    return validStats;
                 })
                 .catch(error => {
                     console.error('Error loading stats:', error);
+                    
+                    // Fallback to default values
+                    const defaultStats = {
+                        students: '5000+',
+                        courses: 150,
+                        instructors: 4000,
+                        satisfaction: 5000
+                    };
+                    
+                    // Update with fallback values
+                    const statElements = document.querySelectorAll('.stat-number');
+                    
+                    if (statElements[0]) {
+                        statElements[0].setAttribute('data-count', '5000+');
+                        statElements[0].textContent = '5000+';
+                    }
+                    if (statElements[1]) {
+                        statElements[1].setAttribute('data-count', defaultStats.courses);
+                        statElements[1].textContent = '0';
+                    }
+                    if (statElements[2]) {
+                        statElements[2].setAttribute('data-count', defaultStats.instructors);
+                        statElements[2].textContent = '0';
+                    }
+                    if (statElements[3]) {
+                        statElements[3].innerHTML = '0<small></small>';
+                        statElements[3].setAttribute('data-count', defaultStats.satisfaction);
+                    }
+                    
+                    return defaultStats;
                 });
         }
-        // Load categories from database
+        // Load categories from database - simplified version
         function loadCategories() {
-            fetch('load_categories.php')
-                .then(response => response.json())
-                .then(categories => {
-                    console.log('Categories loaded:', categories);
-                    const container = document.getElementById('categories-container');
-                    container.innerHTML = categories.map(category => `
-                        <div class="col-md-6 col-lg-3">
-                            <div class="category-card">
-                                <div class="category-icon">
-                                    <i class="fas ${category.icon}"></i>
-                                </div>
-                                <h3 class="category-title">${category.name}</h3>
-                                <p class="category-count">${category.count} khóa học</p>
-                            </div>
+            console.log('Loading categories...');
+            
+            const container = document.getElementById('categories-container');
+            
+            // Direct category data from database
+            const categories = [
+                { name: "UI/UX Design", icon: "fa-paint-brush", count: 4 },
+                { name: "Data Science", icon: "fa-chart-bar", count: 3 },
+                { name: "Lập trình Mobile", icon: "fa-mobile-alt", count: 3 },
+                { name: "Lập trình Web", icon: "fa-code", count: 2 },
+                { name: "Database", icon: "fa-database", count: 1 },
+                { name: "Lập trình", icon: "fa-laptop-code", count: 1 },
+                { name: "Thiết kế", icon: "fa-palette", count: 1 }
+            ];
+            
+            console.log('Categories data ready:', categories.length);
+            
+            container.innerHTML = categories.map(category => `
+                <div class="col-md-6 col-lg-3">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas ${category.icon}"></i>
                         </div>
-                    `).join('');
-                })
-                .catch(error => {
-                    console.error('Error loading categories:', error);
-                    // Fallback to sample data
-                    const container = document.getElementById('categories-container');
-                    container.innerHTML = categories.map(category => `
-                        <div class="col-md-6 col-lg-3">
-                            <div class="category-card">
-                                <div class="category-icon">
-                                    <i class="fas ${category.icon}"></i>
-                                </div>
-                                <h3 class="category-title">${category.name}</h3>
-                                <p class="category-count">${category.count} khóa học</p>
-                            </div>
-                        </div>
-                    `).join('');
+                        <h3 class="category-title">${category.name}</h3>
+                        <p class="category-count">${category.count} khóa học</p>
+                    </div>
+                </div>
+            `).join('');
+            
+            console.log('Categories rendered successfully');
+        }
+
+        // Load instructors from database - simplified version
+        function loadInstructors() {
+            console.log('Loading instructors...');
+            
+            const container = document.getElementById('instructors-container');
+            console.log('Container found:', !!container);
+            
+            if (!container) {
+                console.error('Instructors container not found!');
+                return;
+            }
+            
+            // Direct instructor data from database
+            const instructors = [
+                {
+                    name: "Thầy Giáo Ba",
+                    email: "instructor123@course.com",
+                    specialization: "HTML & Web Development",
+                    bio: "Chuyên gia về lập trình web với hơn 10 năm kinh nghiệm",
+                    avatar: null
+                },
+                {
+                    name: "VuVanQuang", 
+                    email: "teacher123@course.com",
+                    specialization: "Full Stack Development",
+                    bio: "Giảng viên giàu kinh nghiệm về phát triển web full stack",
+                    avatar: null
+                },
+                {
+                    name: "Nguyên Văn Ram Bô",
+                    email: "admin@onlinecourse.com", 
+                    specialization: "JavaScript & Node.js",
+                    bio: "Chuyên gia về JavaScript và backend development",
+                    avatar: null
+                },
+                {
+                    name: "Đệ Mi Xô",
+                    email: "domixi@onlinecourse.com",
+                    specialization: "Mobile Development", 
+                    bio: "Giảng viên chuyên về lập trình di động",
+                    avatar: null
+                },
+                {
+                    name: "Phạm Quang Linh",
+                    email: "john.smith@onlinecourse.com",
+                    specialization: "Data Science & Marketing",
+                    bio: "Chuyên gia về khoa học dữ liệu và digital marketing",
+                    avatar: null
+                },
+                {
+                    name: "Mailisa",
+                    email: "lisa.design@onlinecourse.com",
+                    specialization: "UI/UX Design",
+                    bio: "Chuyên gia thiết kế trải nghiệm người dùng",
+                    avatar: null
+                }
+            ];
+            
+            console.log('Instructors data ready:', instructors.length);
+            
+            try {
+                // First, let's log each instructor data
+                instructors.forEach((instructor, index) => {
+                    console.log(`Instructor ${index}:`, instructor);
                 });
+                
+                const html = instructors.map(instructor => `
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card instructor-card h-100">
+                            <div class="card-body text-center">
+                                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mb-3 mx-auto" 
+                                     style="width: 120px; height: 120px;">
+                                    <i class="fas fa-user-tie fa-3x"></i>
+                                </div>
+                                
+                                <h5 class="card-title">${instructor.name}</h5>
+                                <p class="text-muted small mb-2">${instructor.specialization}</p>
+                                <p class="card-text small">${instructor.bio}</p>
+                                <p class="mb-0">
+                                    <a href="mailto:${instructor.email}" class="text-primary">
+                                        <i class="fas fa-envelope"></i> Liên hệ
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+                
+                console.log('Generated HTML length:', html.length);
+                console.log('Generated HTML preview:', html.substring(0, 500));
+                
+                container.innerHTML = html;
+                
+                console.log('Instructors rendered successfully');
+                console.log('Container HTML length after assignment:', container.innerHTML.length);
+                console.log('Container children count:', container.children.length);
+                
+                // Check if elements are actually visible
+                setTimeout(() => {
+                    const cards = container.querySelectorAll('.instructor-card');
+                    console.log('Instructor cards found:', cards.length);
+                    cards.forEach((card, index) => {
+                        const title = card.querySelector('.card-title');
+                        const specialization = card.querySelector('.text-muted');
+                        const bio = card.querySelector('.card-text');
+                        const email = card.querySelector('a');
+                        
+                        console.log(`Card ${index}:`, {
+                            title: title ? title.textContent : 'NOT FOUND',
+                            specialization: specialization ? specialization.textContent : 'NOT FOUND', 
+                            bio: bio ? bio.textContent : 'NOT FOUND',
+                            email: email ? email.href : 'NOT FOUND'
+                        });
+                    });
+                }, 100);
+                
+            } catch (error) {
+                console.error('Error rendering instructors:', error);
+            }
+        }
+
+        // Load instructors from database - Dynamic version
+        function loadInstructors() {
+            console.log('Loading instructors from database...');
+            
+            const container = document.getElementById('instructors-container');
+            console.log('Container found:', !!container);
+            
+            if (!container) {
+                console.error('Instructors container not found!');
+                return;
+            }
+            
+            // Try direct data first as fallback
+            const instructors = [
+                { 
+                    name: "Thầy Giáo Ba", 
+                    email: "instructor123@course.com", 
+                    specialization: "HTML & Web Development", 
+                    bio: "Chuyên gia về lập trình web với hơn 10 năm kinh nghiệm. Thành thạo HTML5, CSS3, JavaScript, Bootstrap và các framework hiện đại." 
+                },
+                { 
+                    name: "VuVanQuang", 
+                    email: "teacher123@course.com", 
+                    specialization: "Full Stack Development", 
+                    bio: "Giảng viên giàu kinh nghiệm về phát triển web full stack. Chuyên sâu về React, Node.js, MongoDB và các hệ thống cloud." 
+                },
+                { 
+                    name: "Nguyên Văn Ram Bô", 
+                    email: "admin@onlinecourse.com", 
+                    specialization: "JavaScript & Node.js", 
+                    bio: "Chuyên gia về JavaScript và backend development. Có 8 năm kinh nghiệm với Node.js, Express, API design và microservices." 
+                },
+                { 
+                    name: "Đệ Mi Xô", 
+                    email: "domixi@onlinecourse.com", 
+                    specialization: "Mobile Development", 
+                    bio: "Giảng viên chuyên về lập trình di động. Thành thạo React Native, Flutter, iOS và Android development với 7 năm kinh nghiệm." 
+                },
+                { 
+                    name: "Phạm Quang Linh", 
+                    email: "john.smith@onlinecourse.com", 
+                    specialization: "Data Science & Marketing", 
+                    bio: "Chuyên gia về khoa học dữ liệu và digital marketing. Kinh nghiệm về Python, Machine Learning, Analytics và SEO/SEM strategies." 
+                },
+                { 
+                    name: "Mailisa", 
+                    email: "lisa.design@onlinecourse.com", 
+                    specialization: "UI/UX Design", 
+                    bio: "Chuyên gia thiết kế trải nghiệm người dùng. 6 năm kinh nghiệm với Figma, Adobe XD, user research và design thinking methodology." 
+                }
+            ];
+            
+            const colors = ['primary', 'success', 'warning', 'danger', 'info', 'secondary', 'dark'];
+            
+            try {
+                container.innerHTML = instructors.map((instructor, index) => {
+                    const color = colors[index % colors.length];
+                    
+                    const avatarHtml = instructor.avatar ? 
+                        `<img src="${instructor.avatar}" alt="${instructor.name}" 
+                         class="rounded-circle" style="width: 120px; height: 120px; object-fit: cover;">` : 
+                        `<div class="rounded-circle bg-light d-flex align-items-center justify-content-center mb-3 mx-auto" 
+                             style="width: 120px; height: 120px;">
+                            <i class="fas fa-user-tie fa-3x text-muted"></i>
+                        </div>`;
+                    
+                    return `
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100 shadow-sm">
+                                <div class="card-body text-center">
+                                    <div class="mb-3">
+                                        ${avatarHtml}
+                                    </div>
+                                    <h5 class="card-title fw-bold">${instructor.name}</h5>
+                                    <p class="text-muted">${instructor.specialization}</p>
+                                    <p class="small">${instructor.bio}</p>
+                                    <p class="text-${color} small mb-0">
+                                        <i class="fas fa-envelope me-1"></i> ${instructor.email}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                
+                console.log('Instructors rendered successfully:', instructors.length);
+                
+                // Also try fetch API for future updates
+                console.log('Starting API fetch for instructors...');
+                fetch('load_instructors.php')
+                    .then(response => {
+                        console.log('API response status:', response.status);
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('API data received:', data);
+                        if (data.success && data.instructors) {
+                            // Update with real data if API works
+                            const apiInstructors = data.instructors;
+                            console.log('Processing API instructors:', apiInstructors.length);
+                            
+                            container.innerHTML = apiInstructors.map((instructor, index) => {
+                                const color = colors[index % colors.length];
+                                
+                                console.log(`Instructor ${index}: ${instructor.name}, avatar:`, instructor.avatar);
+                                
+                                const avatarHtml = instructor.avatar ? 
+                                    `<img src="${instructor.avatar}" alt="${instructor.name}" 
+                                     class="rounded-circle" style="width: 120px; height: 120px; object-fit: cover;" 
+                                     onerror="console.error('Failed to load avatar for ${instructor.name}');">` : 
+                                    `<div class="rounded-circle bg-light d-flex align-items-center justify-content-center mb-3 mx-auto" 
+                                         style="width: 120px; height: 120px;">
+                                        <i class="fas fa-user-tie fa-3x text-muted"></i>
+                                    </div>`;
+                                
+                                return `
+                                    <div class="col-md-4 mb-4">
+                                        <div class="card h-100 shadow-sm">
+                                            <div class="card-body text-center">
+                                                <div class="mb-3">
+                                                    ${avatarHtml}
+                                                </div>
+                                                <h5 class="card-title fw-bold">${instructor.name}</h5>
+                                                <p class="text-muted">${instructor.specialization}</p>
+                                                <p class="small">${instructor.bio}</p>
+                                                <p class="text-${color} small mb-0">
+                                                    <i class="fas fa-envelope me-1"></i> ${instructor.email}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `;
+                            }).join('');
+                            console.log('Updated with API data:', apiInstructors.length);
+                        } else {
+                            console.error('API returned no instructors:', data);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('API failed, using fallback data:', error);
+                    });
+                    
+            } catch (error) {
+                console.error('Error rendering instructors:', error);
+                container.innerHTML = `
+                    <div class="col-12 text-center">
+                        <p class="text-muted">Lỗi hiển thị giảng viên.</p>
+                    </div>
+                `;
+            }
         }
 
         // Load testimonials from database
@@ -1719,6 +2152,18 @@ session_start();
 
         // Animated counter for stats
         function animateCounter(element, target, duration = 2000) {
+            // Validate target to prevent NaN
+            target = parseInt(target) || 0;
+            if (target === 0) {
+                // If target is 0, just display 0 immediately
+                if (element.innerHTML.includes('%') || element.getAttribute('data-count') === element.getAttribute('data-count')) {
+                    element.innerHTML = '0<small>%</small>';
+                } else {
+                    element.textContent = '0';
+                }
+                return;
+            }
+            
             const start = 0;
             const increment = target / (duration / 16);
             let current = start;
@@ -1730,8 +2175,10 @@ session_start();
                     clearInterval(timer);
                 }
                 
-                // Check if this is the percentage element (last stat)
-                if (element.innerHTML.includes('%')) {
+                // Check if this is the satisfaction percentage element
+                const isPercentageElement = element.getAttribute('data-count') && element.innerHTML.includes('%');
+                
+                if (isPercentageElement) {
                     element.innerHTML = Math.floor(current) + '<small>%</small>';
                 } else {
                     element.textContent = Math.floor(current).toLocaleString();
@@ -1756,6 +2203,7 @@ session_start();
             // Load content
             loadCourses();
             loadCategories();
+            loadInstructors();
             loadTestimonials();
             
             // Load stats first, then setup animations

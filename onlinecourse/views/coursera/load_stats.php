@@ -22,8 +22,18 @@ $instructorCount = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
 $stmt = $db->query('SELECT COUNT(*) as total FROM enrollments');
 $enrollmentCount = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
 
-// Calculate satisfaction rate (mock data for now)
-$satisfactionRate = 95; // 95%
+// Calculate satisfaction rate from actual reviews
+$stmt = $db->query('SELECT AVG(rating) as avg_rating, COUNT(*) as total_reviews FROM reviews WHERE rating IS NOT NULL');
+$reviewResult = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if ($reviewResult['total_reviews'] > 0) {
+    $avgRating = $reviewResult['avg_rating'];
+    // Convert 5-star rating to percentage
+    $satisfactionRate = ($avgRating / 5) * 100;
+} else {
+    // Default satisfaction rate if no reviews
+    $satisfactionRate = 95;
+}
 
 $stats = [
     'students' => (int)$studentCount,

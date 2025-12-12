@@ -14,7 +14,8 @@
                     </p>
                     <div class="d-flex gap-3">
                         <a href="https://www.facebook.com/quang.nguyen.490818/" class="text-light" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-light"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/wang_uen/" class="text-light" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@weng_nguyn" class="text-light" target="_blank"><i class="fab fa-tiktok"></i></a>
                     </div>
                 </div>
                 
@@ -31,10 +32,11 @@
                 <div class="col-lg-2 mb-4">
                     <h6 class="fw-bold mb-3">Hỗ trợ</h6>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Trợ giúp</a></li>
-                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Liên hệ</a></li>
-                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">FAQ</a></li>
-                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Điều khoản</a></li>
+                        <li class="mb-2"><a href="/onlinecourse/onlinecourse/index.php?controller=Page&action=support" class="text-white text-decoration-none">Hỗ trợ</a></li>
+                        <li class="mb-2"><a href="/onlinecourse/onlinecourse/index.php?controller=Page&action=help" class="text-white text-decoration-none">Trợ giúp</a></li>
+                        <li class="mb-2"><a href="/onlinecourse/onlinecourse/index.php?controller=Page&action=contact" class="text-white text-decoration-none">Liên hệ</a></li>
+                        <li class="mb-2"><a href="/onlinecourse/onlinecourse/index.php?controller=Page&action=faq" class="text-white text-decoration-none">FAQ</a></li>
+                        <li class="mb-2"><a href="/onlinecourse/onlinecourse/index.php?controller=Page&action=terms" class="text-white text-decoration-none">Điều khoản</a></li>
                     </ul>
                 </div>
                 
@@ -53,7 +55,7 @@
             <div class="text-center">
                 <p class="mb-0 text-white">
                     &copy; <?= date('Y') ?> OnlineCourse. All rights reserved. 
-                    Made with <i class="fas fa-heart text-danger"></i> in Vietnam
+                    Made with <i class="fas fa-heart text-danger"></i> in QuangNguyen
                 </p>
             </div>
         </div>

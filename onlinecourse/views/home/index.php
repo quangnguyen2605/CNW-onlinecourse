@@ -330,7 +330,7 @@ require __DIR__ . '/../layouts/header.php';
         <h2 class="section-title">Con số biết nói</h2>
         <div class="stats-grid">
             <div class="stat-item">
-                <div class="stat-number">50,000+</div>
+                <div class="stat-number">5000+</div>
                 <div class="stat-label">Học viên</div>
             </div>
             <div class="stat-item">

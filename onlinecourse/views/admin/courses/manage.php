@@ -2,26 +2,7 @@
 <div class="container mt-4">
     <div class="row">
         <div class="col-12">
-            <!-- Simple Test Message -->
-            <div class="alert alert-success">
-                <h3>Test: Admin Courses Page Loaded Successfully!</h3>
-                <p>If you can see this message, the routing is working.</p>
-            </div>
             
-            <!-- Debug Info -->
-            <div class="alert alert-info">
-                <strong>Debug Info:</strong><br>
-                <?php
-                echo 'Courses variable exists: ' . (isset($courses) ? 'Yes' : 'No') . '<br>';
-                if (isset($courses)) {
-                    echo 'Courses count: ' . count($courses) . '<br>';
-                    if (!empty($courses)) {
-                        echo 'First course keys: ' . implode(', ', array_keys($courses[0]));
-                    }
-                }
-                ?>
-            </div>
-
             <!-- Header -->
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h2>

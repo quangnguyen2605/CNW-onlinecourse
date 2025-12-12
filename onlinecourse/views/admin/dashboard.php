@@ -81,6 +81,9 @@
                 <a href="/onlinecourse/onlinecourse/index.php?controller=Admin&action=allEnrollments" class="btn btn-outline-info">
                     <i class="fas fa-user-graduate"></i> Quản lý đăng ký
                 </a>
+                <a href="/onlinecourse/onlinecourse/index.php?controller=Page&action=manageApplications" class="btn btn-outline-success">
+                    <i class="fas fa-user-tie"></i> Quản lý đơn ứng tuyển
+                </a>
                 <a href="/onlinecourse/onlinecourse/index.php?controller=Admin&action=categories" class="btn btn-outline-success">
                     <i class="fas fa-folder"></i> Quản lý danh mục
                 </a>

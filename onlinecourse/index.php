@@ -22,7 +22,7 @@ spl_autoload_register(function ($class) {
 
 // Redirect to coursera index page if no controller specified
 if (empty($_GET['controller'])) {
-    header('Location: views/coursera/index.php');
+    require __DIR__ . '/views/coursera/index.php';
     exit;
 }
 

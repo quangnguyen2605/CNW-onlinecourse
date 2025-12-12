@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../config/Database.php';
+
 class Course
 {
     private $db;
@@ -6,6 +8,39 @@ class Course
     public function __construct()
     {
         $this->db = Database::getInstance()->getConnection();
+    }
+
+    public function getApprovedCourseCount()
+    {
+        $sql = 'SELECT COUNT(*) as count FROM courses WHERE status = "approved"';
+        $stmt = $this->db->query($sql);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return (int)$result['count'];
+    }
+
+    public function getAverageRating()
+    {
+        $sql = 'SELECT AVG(rating) as avg_rating FROM courses WHERE status = "approved" AND rating > 0';
+        $stmt = $this->db->query($sql);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $avgRating = $result['avg_rating'] ?? 0;
+        // Convert to percentage (multiply by 20 since rating is 1-5 scale)
+        return round($avgRating * 20, 1);
+    }
+
+    public function getFeaturedCourses($limit = 8)
+    {
+        $sql = 'SELECT c.*, u.fullname as instructor_name, cat.name as category_name 
+                FROM courses c 
+                LEFT JOIN users u ON c.instructor_id = u.id 
+                LEFT JOIN categories cat ON c.category_id = cat.id 
+                WHERE c.status = "approved" 
+                ORDER BY c.created_at DESC 
+                LIMIT :limit';
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getAllApproved()

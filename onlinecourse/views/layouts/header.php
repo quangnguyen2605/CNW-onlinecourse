@@ -22,7 +22,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
         <div class="container">
-            <a class="navbar-brand fw-bold text-primary" href="/onlinecourse/onlinecourse/views/coursera/index.php">
+            <a class="navbar-brand fw-bold text-primary" href="/onlinecourse/onlinecourse/">
                 <i class="fas fa-graduation-cap"></i> OnlineCourse
             </a>
             
@@ -33,10 +33,10 @@ if (session_status() === PHP_SESSION_NONE) {
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/onlinecourse/onlinecourse/views/coursera/index.php">Trang chủ</a>
+                        <a class="nav-link" href="/onlinecourse/onlinecourse/">Trang chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?controller=Course&action=index">Khóa học</a>
+                        <a class="nav-link" href="/onlinecourse/onlinecourse/index.php?controller=Course&action=index">Khóa học</a>
                     </li>
                 </ul>
                 

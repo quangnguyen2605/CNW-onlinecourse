@@ -760,11 +760,11 @@
                 <div class="col-lg-2 col-md-6 mb-4">
                     <h3 class="footer-title">Về chúng tôi</h3>
                     <ul class="footer-links">
-                        <li><a href="#">Giới thiệu</a></li>
-                        <li><a href="#">Đội ngũ giảng viên</a></li>
-                        <li><a href="#">Tuyển dụng</a></li>
-                        <li><a href="#">Điều khoản dịch vụ</a></li>
-                        <li><a href="#">Chính sách bảo mật</a></li>
+                        <li><a href="/onlinecourse/onlinecourse/index.php?controller=Page&action=about">Giới thiệu</a></li>
+                        <li><a href="/onlinecourse/onlinecourse/index.php?controller=Page&action=instructors">Đội ngũ giảng viên</a></li>
+                        <li><a href="/onlinecourse/onlinecourse/index.php?controller=Page&action=careers">Tuyển dụng</a></li>
+                        <li><a href="/onlinecourse/onlinecourse/index.php?controller=Page&action=terms">Điều khoản dịch vụ</a></li>
+                        <li><a href="/onlinecourse/onlinecourse/index.php?controller=Page&action=privacy">Chính sách bảo mật</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4">
@@ -783,6 +783,9 @@
                         <p><i class="fas fa-map-marker-alt"></i> 123 Đường ABC, Quận 1, TP.HCM</p>
                         <p><i class="fas fa-phone-alt"></i> 1900 1234</p>
                         <p><i class="fas fa-envelope"></i> info@onlinecourse.vn</p>
+                        <p><i class="fab fa-facebook"></i> <a href="https://www.facebook.com/quang.nguyen.490818/" target="_blank" style="color: white; text-decoration: none;">Facebook</a></p>
+                        <p><i class="fab fa-instagram"></i> <a href="https://www.instagram.com/wang_uen/" target="_blank" style="color: white; text-decoration: none;">Instagram</a></p>
+                        <p><i class="fab fa-tiktok"></i> <a href="https://www.tiktok.com/@weng_nguyn" target="_blank" style="color: white; text-decoration: none;">TikTok</a></p>
                         <p><i class="fas fa-clock"></i> Thứ 2 - Thứ 7: 8:00 - 22:00</p>
                     </div>
                 </div>

@@ -367,7 +367,7 @@ require __DIR__ . '/../layouts/header.php';
             <div class="terms-conditions">
                 <label>
                     <input type="checkbox" name="terms" required>
-                    Tôi đồng ý với <a href="#" style="color: #667eea;">Điều khoản dịch vụ</a> và <a href="#" style="color: #667eea;">Chính sách bảo mật</a>
+                    Tôi đồng ý với <a href="/onlinecourse/onlinecourse/index.php?controller=Page&action=terms" style="color: #667eea;">Điều khoản dịch vụ</a> và <a href="/onlinecourse/onlinecourse/index.php?controller=Page&action=privacy" style="color: #667eea;">Chính sách bảo mật</a>
                 </label>
             </div>
 

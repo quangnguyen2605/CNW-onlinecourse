@@ -71,7 +71,7 @@
 
         .nav-link {
             font-weight: 500;
-            color: var(--text-color) !important;
+            color: #6c757d !important;
             padding: 0.5rem 1rem !important;
             transition: color 0.3s ease;
             position: relative;
@@ -85,16 +85,15 @@
             color: var(--primary-color) !important;
         }
 
-        .nav-link.active::after {
-            content: '';
+        /* Navigation Indicator Bar */
+        .nav-indicator {
             position: absolute;
             bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 30px;
             height: 3px;
             background-color: var(--primary-color);
             border-radius: 2px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 10;
         }
 
         .search-box {
@@ -1077,7 +1076,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav me-auto">
+                    <ul class="navbar-nav me-auto position-relative">
                         <li class="nav-item">
                             <a class="nav-link active" href="#home">Trang chủ</a>
                         </li>
@@ -1093,11 +1092,16 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#testimonials">Đánh giá</a>
                         </li>
+                        <div class="nav-indicator"></div>
                     </ul>
                     <div class="d-flex align-items-center">
                         <div class="search-box me-3">
-                            <i class="fas fa-search"></i>
-                            <input type="text" class="form-control" placeholder="Tìm kiếm khóa học...">
+                            <form method="GET" action="/onlinecourse/onlinecourse/index.php" style="display: flex; align-items: center;">
+                                <input type="hidden" name="controller" value="Course">
+                                <input type="hidden" name="action" value="index">
+                                <i class="fas fa-search"></i>
+                                <input type="text" class="form-control" name="keyword" placeholder="Tìm kiếm khóa học..." style="border: none; background: transparent;">
+                            </form>
                         </div>
                         <?php if (!empty($_SESSION['user_id'])): ?>
                             <?php $role = (int)($_SESSION['user_role'] ?? 0); ?>
@@ -1223,6 +1227,40 @@
     <section class="py-5" id="about">
         <div class="container">
             <h2 class="section-title">Tại sao chọn OnlineCourse?</h2>
+            <p class="section-subtitle">
+                Chúng tôi mang đến trải nghiệm học tập tốt nhất cho bạn
+            </p>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3 class="feature-title">Giảng viên chất lượng</h3>
+                        <p class="feature-text">Đội ngũ giảng viên giàu kinh nghiệm, chuyên môn cao và tâm huyết với nghề.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3 class="feature-title">Linh hoạt thời gian</h3>
+                        <p class="feature-text">Học mọi lúc, mọi nơi với thời gian linh hoạt phù hợp với lịch trình của bạn.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <h3 class="feature-title">Chứng nhận giá trị</h3>
+                        <p class="feature-text">Nhận chứng chỉ được công nhận sau khi hoàn thành khóa học.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Popular Courses -->
     <section class="py-5 bg-light" id="courses">
@@ -1776,6 +1814,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script src="/onlinecourse/onlinecourse/assets/js/script.js"></script>
     <script>
         
         const categories = [

@@ -220,10 +220,7 @@ require __DIR__ . '/../layouts/header.php';
 
 .social-divider {
     text-align: center;
-    color: #2d3748;
-    font-size: 1rem;
-    font-weight: 500;
-    margin-bottom: 1.5rem;
+    margin: 2rem 0;
     position: relative;
 }
 
@@ -233,21 +230,39 @@ require __DIR__ . '/../layouts/header.php';
     top: 50%;
     left: 0;
     right: 0;
-    height: 1px;
-    background: #eee;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
     z-index: 1;
 }
 
-.social-divider::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 20px;
-    height: 20px;
-    background: white;
+.divider-text {
+    position: relative;
     z-index: 2;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    color: #4a5568;
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: inline-block;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.divider-text i {
+    color: #667eea;
+    animation: sparkle 2s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+    0%, 100% { 
+        opacity: 1; 
+        transform: scale(1);
+    }
+    50% { 
+        opacity: 0.6; 
+        transform: scale(1.1);
+    }
 }
 
 .social-buttons {
@@ -335,7 +350,13 @@ require __DIR__ . '/../layouts/header.php';
         </form>
 
         <div class="social-login">
-            <p class="social-divider">Hoặc đăng nhập với</p>
+            <div class="social-divider">
+                <span class="divider-text">
+                    <i class="fas fa-sparkles me-2"></i>
+                    Hoặc tiếp tục với
+                    <i class="fas fa-sparkles ms-2"></i>
+                </span>
+            </div>
             <div class="social-buttons">
                 <button type="button" class="social-btn google" onclick="socialLogin('google')">
                     <i class="fab fa-google"></i>

@@ -110,8 +110,22 @@ class AdminController
         $userId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
         
         if ($userId > 0) {
-            // Database không có status column, chỉ thông báo
-            $_SESSION['success'] = 'Tính năng status không được hỗ trợ trong database hiện tại';
+            $userModel = new User();
+            $user = $userModel->findById($userId);
+            
+            if ($user) {
+                // Toggle status: 1 -> 0, 0 -> 1
+                $newStatus = ($user['status'] == 1) ? 0 : 1;
+                
+                if ($userModel->update($userId, ['status' => $newStatus])) {
+                    $statusText = ($newStatus == 1) ? 'kích hoạt' : 'vô hiệu hóa';
+                    $_SESSION['success'] = "Đã $statusText người dùng '{$user['fullname']}' thành công!";
+                } else {
+                    $_SESSION['error'] = 'Có lỗi xảy ra, vui lòng thử lại!';
+                }
+            } else {
+                $_SESSION['error'] = 'Người dùng không tồn tại!';
+            }
         }
         
         header('Location: index.php?controller=Admin&action=users');

@@ -29,27 +29,32 @@ class AuthController
                     // Debug
                     error_log("Password verification SUCCESS!");
                     
-                    $_SESSION['user_id'] = $user['id'];
-                    $_SESSION['user_role'] = (int)$user['role'];
-                    $_SESSION['user_name'] = $user['fullname'];
-                    $_SESSION['user_email'] = $user['email'];
+                    // Check if user is active (status = 1)
+                    if (isset($user['status']) && (int)$user['status'] === 0) {
+                        $error = 'Tài khoản của bạn đã bị vô hiệu hóa. Vui lòng liên hệ quản trị viên.';
+                    } else {
+                        $_SESSION['user_id'] = $user['id'];
+                        $_SESSION['user_role'] = (int)$user['role'];
+                        $_SESSION['user_name'] = $user['fullname'];
+                        $_SESSION['user_email'] = $user['email'];
+                        
+                        // Debug session
+                        error_log("Session set: " . print_r($_SESSION, true));
                     
-                    // Debug session
-                    error_log("Session set: " . print_r($_SESSION, true));
-                
-                // Chuyển hướng theo vai trò
-                if ((int)$user['role'] === 0) {
-                    // Học viên
-                    header('Location: /onlinecourse/onlinecourse/index.php?controller=Student&action=dashboard');
-                } elseif ((int)$user['role'] === 1) {
-                    // Giảng viên
-                    header('Location: /onlinecourse/onlinecourse/index.php?controller=Instructor&action=dashboard');
+                    // Chuyển hướng theo vai trò
+                    if ((int)$user['role'] === 0) {
+                        // Học viên
+                        header('Location: /onlinecourse/onlinecourse/index.php?controller=Student&action=dashboard');
+                    } elseif ((int)$user['role'] === 1) {
+                        // Giảng viên
+                        header('Location: /onlinecourse/onlinecourse/index.php?controller=Instructor&action=dashboard');
+                    } else {
+                        // Admin
+                        header('Location: /onlinecourse/onlinecourse/index.php?controller=Admin&action=dashboard');
+                    }
+                    exit;
+                    }
                 } else {
-                    // Admin
-                    header('Location: /onlinecourse/onlinecourse/index.php?controller=Admin&action=dashboard');
-                }
-                exit;
-            } else {
                     // Debug
                     if ($user) {
                         error_log("Password verification FAILED for user: " . $user['email']);
@@ -135,7 +140,7 @@ class AuthController
     {
         session_unset();
         session_destroy();
-        header('Location: /onlinecourse/onlinecourse/views/coursera/index.php');
+        header('Location: /onlinecourse/onlinecourse/');
         exit;
     }
 }

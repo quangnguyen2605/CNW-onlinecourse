@@ -1169,7 +1169,7 @@
                             <div class="row g-3">
                                 <div class="col-4">
                                     <div class="stat-item">
-                                        <h3 class="stat-number">5K+</h3>
+                                        <h3 class="stat-number">5000</h3>
                                         <p class="stat-label">Học viên</p>
                                     </div>
                                 </div>
@@ -1269,61 +1269,381 @@
                 <p class="lead text-muted">Gặp gỡ đội ngũ giảng viên chuyên môn cao của chúng tôi</p>
             </div>
             
-            <div class="row" id="instructors-container">
-                <!-- Test content to verify section is working -->
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-body text-center">
+            <div class="row g-4" id="instructors-container">
+                <!-- Thầy Giáo Ba -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card instructor-card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-4">
                             <div class="mb-3">
-                                <img src="https://picsum.photos/seed/instructor1/120/120.jpg" 
+                                <img src="https://picsum.photos/seed/teacher1/150/150.jpg" 
                                      alt="Thầy Giáo Ba" class="rounded-circle" 
                                      style="width: 120px; height: 120px; object-fit: cover;"
-                                     onerror="this.onerror=null; this.src='https://randomuser.me/api/portraits/men/32.jpg'; console.log('Fallback image loaded for Thầy Giáo Ba');">
+                                     onerror="this.onerror=null; this.src='https://randomuser.me/api/portraits/men/32.jpg';">
                             </div>
-                            <h5 class="card-title fw-bold">Thầy Giáo Ba</h5>
-                            <p class="text-muted">HTML & Web Development</p>
-                            <p class="small">Chuyên gia về lập trình web với hơn 10 năm kinh nghiệm. Thành thạo HTML5, CSS3, JavaScript, Bootstrap và các framework hiện đại.</p>
-                            <p class="text-primary small mb-0">
-                                <i class="fas fa-envelope me-1"></i> instructor123@course.com
-                            </p>
+                            <h5 class="card-title fw-bold mb-2">Thầy Giáo Ba</h5>
+                            <p class="text-muted mb-2">Chuyên gia</p>
+                            <div class="row g-2 mb-3 text-center">
+                                <div class="col-4">
+                                    <div class="small text-muted">10 năm</div>
+                                    <div class="small fw-bold">kinh nghiệm</div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="small text-muted">15</div>
+                                    <div class="small fw-bold">khóa học</div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="small text-muted">4.8</div>
+                                    <div class="small">
+                                        <i class="fas fa-star text-warning"></i>
+                                        <span class="text-warning">Đánh giá</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <p class="small text-muted mb-2">
+                                    <i class="fas fa-graduation-cap me-1"></i> Thạc sĩ Công nghệ Thông tin - ĐH Bách Khoa
+                                </p>
+                                <p class="small text-primary mb-0">
+                                    <i class="fas fa-envelope me-1"></i> instructor123@course.com
+                                </p>
+                            </div>
+                            <button class="btn btn-primary btn-sm w-100">Liên hệ giảng viên</button>
                         </div>
                     </div>
                 </div>
                 
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-body text-center">
+                <!-- VuVanQuang -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card instructor-card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-4">
                             <div class="mb-3">
-                                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center mb-3 mx-auto" 
+                                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center mx-auto" 
                                      style="width: 120px; height: 120px;">
                                     <i class="fas fa-user-tie fa-3x text-muted"></i>
                                 </div>
                             </div>
-                            <h5 class="card-title fw-bold">VuVanQuang</h5>
-                            <p class="text-muted">Full Stack Development</p>
-                            <p class="small">Giảng viên giàu kinh nghiệm về phát triển web full stack. Chuyên sâu về React, Node.js, MongoDB và các hệ thống cloud.</p>
-                            <p class="text-success small mb-0">
-                                <i class="fas fa-envelope me-1"></i> teacher123@course.com
-                            </p>
+                            <h5 class="card-title fw-bold mb-2">VuVanQuang</h5>
+                            <p class="text-muted mb-2">Chuyên gia</p>
+                            <div class="row g-2 mb-3 text-center">
+                                <div class="col-4">
+                                    <div class="small text-muted">8 năm</div>
+                                    <div class="small fw-bold">kinh nghiệm</div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="small text-muted">12</div>
+                                    <div class="small fw-bold">khóa học</div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="small text-muted">4.8</div>
+                                    <div class="small">
+                                        <i class="fas fa-star text-warning"></i>
+                                        <span class="text-warning">Đánh giá</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <p class="small text-muted mb-2">
+                                    <i class="fas fa-graduation-cap me-1"></i> Kỹ sư Phần mềm - ĐH Công nghệ
+                                </p>
+                                <p class="small text-primary mb-0">
+                                    <i class="fas fa-envelope me-1"></i> teacher123@course.com
+                                </p>
+                            </div>
+                            <button class="btn btn-primary btn-sm w-100">Liên hệ giảng viên</button>
                         </div>
                     </div>
                 </div>
                 
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-body text-center">
+                <!-- Nguyễn Văn Ram Bô -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card instructor-card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-4">
                             <div class="mb-3">
-                                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center mb-3 mx-auto" 
+                                <img src="https://picsum.photos/seed/teacher3/150/150.jpg" 
+                                     alt="Nguyên Văn Ram Bô" class="rounded-circle" 
+                                     style="width: 120px; height: 120px; object-fit: cover;"
+                                     onerror="this.onerror=null; this.src='https://randomuser.me/api/portraits/men/32.jpg';">
+                            </div>
+                            <h5 class="card-title fw-bold mb-2">Nguyên Văn Ram Bô</h5>
+                            <p class="text-muted mb-2">Chuyên gia</p>
+                            <div class="row g-2 mb-3 text-center">
+                                <div class="col-4">
+                                    <div class="small text-muted">8 năm</div>
+                                    <div class="small fw-bold">kinh nghiệm</div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="small text-muted">18</div>
+                                    <div class="small fw-bold">khóa học</div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="small text-muted">4.9</div>
+                                    <div class="small">
+                                        <i class="fas fa-star text-warning"></i>
+                                        <span class="text-warning">Đánh giá</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <p class="small text-muted mb-2">
+                                    <i class="fas fa-graduation-cap me-1"></i> Chuyên gia Lập trình FPT Aptech
+                                </p>
+                                <p class="small text-primary mb-0">
+                                    <i class="fas fa-envelope me-1"></i> admin@onlinecourse.com
+                                </p>
+                            </div>
+                            <button class="btn btn-primary btn-sm w-100">Liên hệ giảng viên</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Đệ Mi Xô -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card instructor-card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <div class="mb-3">
+                                <img src="https://picsum.photos/seed/teacher4/150/150.jpg" 
+                                     alt="Đệ Mi Xô" class="rounded-circle" 
+                                     style="width: 120px; height: 120px; object-fit: cover;"
+                                     onerror="this.onerror=null; this.src='https://randomuser.me/api/portraits/men/32.jpg';">
+                            </div>
+                            <h5 class="card-title fw-bold mb-2">Đệ Mi Xô</h5>
+                            <p class="text-muted mb-2">Chuyên gia</p>
+                            <div class="row g-2 mb-3 text-center">
+                                <div class="col-4">
+                                    <div class="small text-muted">7 năm</div>
+                                    <div class="small fw-bold">kinh nghiệm</div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="small text-muted">10</div>
+                                    <div class="small fw-bold">khóa học</div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="small text-muted">4.7</div>
+                                    <div class="small">
+                                        <i class="fas fa-star text-warning"></i>
+                                        <span class="text-warning">Đánh giá</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <p class="small text-muted mb-2">
+                                    <i class="fas fa-graduation-cap me-1"></i> Kỹ sư Điện tử - Viễn thông
+                                </p>
+                                <p class="small text-primary mb-0">
+                                    <i class="fas fa-envelope me-1"></i> domixi@onlinecourse.com
+                                </p>
+                            </div>
+                            <button class="btn btn-primary btn-sm w-100">Liên hệ giảng viên</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Phạm Quang Linh -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card instructor-card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <div class="mb-3">
+                                <img src="https://picsum.photos/seed/teacher5/150/150.jpg" 
+                                     alt="Phạm Quang Linh" class="rounded-circle" 
+                                     style="width: 120px; height: 120px; object-fit: cover;"
+                                     onerror="this.onerror=null; this.src='https://randomuser.me/api/portraits/men/32.jpg';">
+                            </div>
+                            <h5 class="card-title fw-bold mb-2">Phạm Quang Linh</h5>
+                            <p class="text-muted mb-2">Chuyên gia</p>
+                            <div class="row g-2 mb-3 text-center">
+                                <div class="col-4">
+                                    <div class="small text-muted">6 năm</div>
+                                    <div class="small fw-bold">kinh nghiệm</div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="small text-muted">8</div>
+                                    <div class="small fw-bold">khóa học</div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="small text-muted">4.8</div>
+                                    <div class="small">
+                                        <i class="fas fa-star text-warning"></i>
+                                        <span class="text-warning">Đánh giá</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <p class="small text-muted mb-2">
+                                    <i class="fas fa-graduation-cap me-1"></i> Thạc sĩ Kinh doanh - Harvard Business School
+                                </p>
+                                <p class="small text-primary mb-0">
+                                    <i class="fas fa-envelope me-1"></i> john.smith@onlinecourse.com
+                                </p>
+                            </div>
+                            <button class="btn btn-primary btn-sm w-100">Liên hệ giảng viên</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Đỗ Mễ Xù -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card instructor-card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <div class="mb-3">
+                                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center mx-auto" 
                                      style="width: 120px; height: 120px;">
                                     <i class="fas fa-user-tie fa-3x text-muted"></i>
                                 </div>
                             </div>
-                            <h5 class="card-title fw-bold">Nguyên Văn Ram Bô</h5>
-                            <p class="text-muted">JavaScript & Node.js</p>
-                            <p class="small">Chuyên gia về JavaScript và backend development. Có 8 năm kinh nghiệm với Node.js, Express, API design và microservices.</p>
-                            <p class="text-warning small mb-0">
-                                <i class="fas fa-envelope me-1"></i> admin@onlinecourse.com
-                            </p>
+                            <h5 class="card-title fw-bold mb-2">Đỗ Mễ Xù</h5>
+                            <p class="text-muted mb-2">Chuyên gia</p>
+                            <div class="row g-2 mb-3 text-center">
+                                <div class="col-4">
+                                    <div class="small text-muted">5 năm</div>
+                                    <div class="small fw-bold">kinh nghiệm</div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="small text-muted">6</div>
+                                    <div class="small fw-bold">khóa học</div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="small text-muted">4.6</div>
+                                    <div class="small">
+                                        <i class="fas fa-star text-warning"></i>
+                                        <span class="text-warning">Đánh giá</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <p class="small text-muted mb-2">
+                                    <i class="fas fa-graduation-cap me-1"></i> Cử nhân Công nghệ thông tin
+                                </p>
+                                <p class="small text-primary mb-0">
+                                    <i class="fas fa-envelope me-1"></i> domixu@onlinecourse.com
+                                </p>
+                            </div>
+                            <button class="btn btn-primary btn-sm w-100">Liên hệ giảng viên</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Nguyễn Thúc Thủy Tiên -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card instructor-card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <div class="mb-3">
+                                <img src="https://picsum.photos/seed/teacher7/150/150.jpg" 
+                                     alt="Nguyễn Thúc Thủy Tiên" class="rounded-circle" 
+                                     style="width: 120px; height: 120px; object-fit: cover;"
+                                     onerror="this.onerror=null; this.src='https://randomuser.me/api/portraits/men/32.jpg';">
+                            </div>
+                            <h5 class="card-title fw-bold mb-2">Nguyễn Thúc Thủy Tiên</h5>
+                            <p class="text-muted mb-2">Chuyên gia</p>
+                            <div class="row g-2 mb-3 text-center">
+                                <div class="col-4">
+                                    <div class="small text-muted">4 năm</div>
+                                    <div class="small fw-bold">kinh nghiệm</div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="small text-muted">5</div>
+                                    <div class="small fw-bold">khóa học</div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="small text-muted">4.5</div>
+                                    <div class="small">
+                                        <i class="fas fa-star text-warning"></i>
+                                        <span class="text-warning">Đánh giá</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <p class="small text-muted mb-2">
+                                    <i class="fas fa-graduation-cap me-1"></i> Kỹ sư Phần mềm - ĐH FPT
+                                </p>
+                                <p class="small text-primary mb-0">
+                                    <i class="fas fa-envelope me-1"></i> thuytien@onlinecourse.com
+                                </p>
+                            </div>
+                            <button class="btn btn-primary btn-sm w-100">Liên hệ giảng viên</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Nguyễn Văn Tiến -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card instructor-card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <div class="mb-3">
+                                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center mx-auto" 
+                                     style="width: 120px; height: 120px;">
+                                    <i class="fas fa-user-tie fa-3x text-muted"></i>
+                                </div>
+                            </div>
+                            <h5 class="card-title fw-bold mb-2">Nguyễn Văn Tiến</h5>
+                            <p class="text-muted mb-2">Chuyên gia</p>
+                            <div class="row g-2 mb-3 text-center">
+                                <div class="col-4">
+                                    <div class="small text-muted">3 năm</div>
+                                    <div class="small fw-bold">kinh nghiệm</div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="small text-muted">4</div>
+                                    <div class="small fw-bold">khóa học</div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="small text-muted">4.4</div>
+                                    <div class="small">
+                                        <i class="fas fa-star text-warning"></i>
+                                        <span class="text-warning">Đánh giá</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <p class="small text-muted mb-2">
+                                    <i class="fas fa-graduation-cap me-1"></i> Cử nhân An toàn thông tin
+                                </p>
+                                <p class="small text-primary mb-0">
+                                    <i class="fas fa-envelope me-1"></i> nguyentien@onlinecourse.com
+                                </p>
+                            </div>
+                            <button class="btn btn-primary btn-sm w-100">Liên hệ giảng viên</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Lã Thị Anh -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card instructor-card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <div class="mb-3">
+                                <img src="https://picsum.photos/seed/teacher9/150/150.jpg" 
+                                     alt="Lã Thị Anh" class="rounded-circle" 
+                                     style="width: 120px; height: 120px; object-fit: cover;"
+                                     onerror="this.onerror=null; this.src='https://randomuser.me/api/portraits/men/32.jpg';">
+                            </div>
+                            <h5 class="card-title fw-bold mb-2">Lã Thị Anh</h5>
+                            <p class="text-muted mb-2">Chuyên gia</p>
+                            <div class="row g-2 mb-3 text-center">
+                                <div class="col-4">
+                                    <div class="small text-muted">2 năm</div>
+                                    <div class="small fw-bold">kinh nghiệm</div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="small text-muted">3</div>
+                                    <div class="small fw-bold">khóa học</div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="small text-muted">4.3</div>
+                                    <div class="small">
+                                        <i class="fas fa-star text-warning"></i>
+                                        <span class="text-warning">Đánh giá</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <p class="small text-muted mb-2">
+                                    <i class="fas fa-graduation-cap me-1"></i> Kỹ sư Phần mềm - ĐH Công nghệ
+                                </p>
+                                <p class="small text-primary mb-0">
+                                    <i class="fas fa-envelope me-1"></i> lananh@onlinecourse.com
+                                </p>
+                            </div>
+                            <button class="btn btn-primary btn-sm w-100">Liên hệ giảng viên</button>
                         </div>
                     </div>
                 </div>
@@ -1469,50 +1789,6 @@
             { name: "Blockchain", icon: "fa-link", count: 8 }
         ];
 
-        const testimonials = [
-            {
-                name: "Ngọc Anh",
-                role: "Học viên khóa ReactJS",
-                avatar: "https://randomuser.me/api/portraits/women/32.jpg",
-                text: "Khóa học rất chi tiết và dễ hiểu. Giảng viên nhiệt tình hỗ trợ, mình đã tự tin xin việc sau khi hoàn thành khóa học.",
-                rating: 5
-            },
-            {
-                name: "Minh Đức",
-                role: "Học viên khóa Python",
-                avatar: "https://randomuser.me/api/portraits/men/45.jpg",
-                text: "Mình đã học được rất nhiều kiến thức bổ ích từ khóa học Python. Cảm ơn đội ngũ giảng viên đã hỗ trợ nhiệt tình.",
-                rating: 5
-            },
-            {
-                name: "Thu Hà",
-                role: "Học viên khóa Data Science",
-                avatar: "https://randomuser.me/api/portraits/women/65.jpg",
-                text: "Chất lượng khóa học rất tốt, bài giảng chi tiết và thực tế. Mình đã áp dụng ngay vào công việc hiện tại.",
-                rating: 5
-            },
-            {
-                name: "Quang Huy",
-                role: "Học viên khóa Flutter",
-                avatar: "https://randomuser.me/api/portraits/men/32.jpg",
-                text: "Khóa học rất chất lượng, nội dung bám sát thực tế. Giảng viên giải thích rất rõ ràng và dễ hiểu.",
-                rating: 5
-            },
-            {
-                name: "Lan Chi",
-                role: "Học viên khóa Machine Learning",
-                avatar: "https://randomuser.me/api/portraits/women/28.jpg",
-                text: "Mình rất hài lòng với khóa học. Kiến thức được truyền đạt một cách hệ thống và dễ tiếp thu.",
-                rating: 5
-            },
-            {
-                name: "Anh Tuấn",
-                role: "Học viên khóa Node.js",
-                avatar: "https://randomuser.me/api/portraits/men/56.jpg",
-                text: "Khóa học vượt xa mong đợi. Giảng viên rất chuyên môn và luôn sẵn sàng giải đáp thắc mắc.",
-                rating: 5
-            }
-        ];
 
         // Load courses from database - simplified version
         function loadCourses() {
@@ -1803,127 +2079,7 @@
             console.log('Categories rendered successfully');
         }
 
-        // Load instructors from database - simplified version
-        function loadInstructors() {
-            console.log('Loading instructors...');
-            
-            const container = document.getElementById('instructors-container');
-            console.log('Container found:', !!container);
-            
-            if (!container) {
-                console.error('Instructors container not found!');
-                return;
-            }
-            
-            // Direct instructor data from database
-            const instructors = [
-                {
-                    name: "Thầy Giáo Ba",
-                    email: "instructor123@course.com",
-                    specialization: "HTML & Web Development",
-                    bio: "Chuyên gia về lập trình web với hơn 10 năm kinh nghiệm",
-                    avatar: null
-                },
-                {
-                    name: "VuVanQuang", 
-                    email: "teacher123@course.com",
-                    specialization: "Full Stack Development",
-                    bio: "Giảng viên giàu kinh nghiệm về phát triển web full stack",
-                    avatar: null
-                },
-                {
-                    name: "Nguyên Văn Ram Bô",
-                    email: "admin@onlinecourse.com", 
-                    specialization: "JavaScript & Node.js",
-                    bio: "Chuyên gia về JavaScript và backend development",
-                    avatar: null
-                },
-                {
-                    name: "Đệ Mi Xô",
-                    email: "domixi@onlinecourse.com",
-                    specialization: "Mobile Development", 
-                    bio: "Giảng viên chuyên về lập trình di động",
-                    avatar: null
-                },
-                {
-                    name: "Phạm Quang Linh",
-                    email: "john.smith@onlinecourse.com",
-                    specialization: "Data Science & Marketing",
-                    bio: "Chuyên gia về khoa học dữ liệu và digital marketing",
-                    avatar: null
-                },
-                {
-                    name: "Mailisa",
-                    email: "lisa.design@onlinecourse.com",
-                    specialization: "UI/UX Design",
-                    bio: "Chuyên gia thiết kế trải nghiệm người dùng",
-                    avatar: null
-                }
-            ];
-            
-            console.log('Instructors data ready:', instructors.length);
-            
-            try {
-                // First, let's log each instructor data
-                instructors.forEach((instructor, index) => {
-                    console.log(`Instructor ${index}:`, instructor);
-                });
-                
-                const html = instructors.map(instructor => `
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card instructor-card h-100">
-                            <div class="card-body text-center">
-                                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mb-3 mx-auto" 
-                                     style="width: 120px; height: 120px;">
-                                    <i class="fas fa-user-tie fa-3x"></i>
-                                </div>
-                                
-                                <h5 class="card-title">${instructor.name}</h5>
-                                <p class="text-muted small mb-2">${instructor.specialization}</p>
-                                <p class="card-text small">${instructor.bio}</p>
-                                <p class="mb-0">
-                                    <a href="mailto:${instructor.email}" class="text-primary">
-                                        <i class="fas fa-envelope"></i> Liên hệ
-                                    </a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                `).join('');
-                
-                console.log('Generated HTML length:', html.length);
-                console.log('Generated HTML preview:', html.substring(0, 500));
-                
-                container.innerHTML = html;
-                
-                console.log('Instructors rendered successfully');
-                console.log('Container HTML length after assignment:', container.innerHTML.length);
-                console.log('Container children count:', container.children.length);
-                
-                // Check if elements are actually visible
-                setTimeout(() => {
-                    const cards = container.querySelectorAll('.instructor-card');
-                    console.log('Instructor cards found:', cards.length);
-                    cards.forEach((card, index) => {
-                        const title = card.querySelector('.card-title');
-                        const specialization = card.querySelector('.text-muted');
-                        const bio = card.querySelector('.card-text');
-                        const email = card.querySelector('a');
-                        
-                        console.log(`Card ${index}:`, {
-                            title: title ? title.textContent : 'NOT FOUND',
-                            specialization: specialization ? specialization.textContent : 'NOT FOUND', 
-                            bio: bio ? bio.textContent : 'NOT FOUND',
-                            email: email ? email.href : 'NOT FOUND'
-                        });
-                    });
-                }, 100);
-                
-            } catch (error) {
-                console.error('Error rendering instructors:', error);
-            }
-        }
-
+        
         // Load instructors from database - Dynamic version
         function loadInstructors() {
             console.log('Loading instructors from database...');
@@ -1936,45 +2092,8 @@
                 return;
             }
             
-            // Try direct data first as fallback
-            const instructors = [
-                { 
-                    name: "Thầy Giáo Ba", 
-                    email: "instructor123@course.com", 
-                    specialization: "HTML & Web Development", 
-                    bio: "Chuyên gia về lập trình web với hơn 10 năm kinh nghiệm. Thành thạo HTML5, CSS3, JavaScript, Bootstrap và các framework hiện đại." 
-                },
-                { 
-                    name: "VuVanQuang", 
-                    email: "teacher123@course.com", 
-                    specialization: "Full Stack Development", 
-                    bio: "Giảng viên giàu kinh nghiệm về phát triển web full stack. Chuyên sâu về React, Node.js, MongoDB và các hệ thống cloud." 
-                },
-                { 
-                    name: "Nguyên Văn Ram Bô", 
-                    email: "admin@onlinecourse.com", 
-                    specialization: "JavaScript & Node.js", 
-                    bio: "Chuyên gia về JavaScript và backend development. Có 8 năm kinh nghiệm với Node.js, Express, API design và microservices." 
-                },
-                { 
-                    name: "Đệ Mi Xô", 
-                    email: "domixi@onlinecourse.com", 
-                    specialization: "Mobile Development", 
-                    bio: "Giảng viên chuyên về lập trình di động. Thành thạo React Native, Flutter, iOS và Android development với 7 năm kinh nghiệm." 
-                },
-                { 
-                    name: "Phạm Quang Linh", 
-                    email: "john.smith@onlinecourse.com", 
-                    specialization: "Data Science & Marketing", 
-                    bio: "Chuyên gia về khoa học dữ liệu và digital marketing. Kinh nghiệm về Python, Machine Learning, Analytics và SEO/SEM strategies." 
-                },
-                { 
-                    name: "Mailisa", 
-                    email: "lisa.design@onlinecourse.com", 
-                    specialization: "UI/UX Design", 
-                    bio: "Chuyên gia thiết kế trải nghiệm người dùng. 6 năm kinh nghiệm với Figma, Adobe XD, user research và design thinking methodology." 
-                }
-            ];
+            // Load instructors from database API directly
+            const instructors = [];
             
             const colors = ['primary', 'success', 'warning', 'danger', 'info', 'secondary', 'dark'];
             
@@ -1982,9 +2101,10 @@
                 container.innerHTML = instructors.map((instructor, index) => {
                     const color = colors[index % colors.length];
                     
-                    const avatarHtml = instructor.avatar ? 
+                    const avatarHtml = instructor.avatar && instructor.avatar !== null && instructor.avatar.trim() !== '' ? 
                         `<img src="${instructor.avatar}" alt="${instructor.name}" 
-                         class="rounded-circle" style="width: 120px; height: 120px; object-fit: cover;">` : 
+                         class="rounded-circle" style="width: 120px; height: 120px; object-fit: cover;"
+                         onerror="this.onerror=null; this.src='https://picsum.photos/seed/${instructor.name.replace(/\s+/g, '')}/120/120.jpg';">` : 
                         `<div class="rounded-circle bg-light d-flex align-items-center justify-content-center mb-3 mx-auto" 
                              style="width: 120px; height: 120px;">
                             <i class="fas fa-user-tie fa-3x text-muted"></i>
@@ -2000,9 +2120,33 @@
                                     <h5 class="card-title fw-bold">${instructor.name}</h5>
                                     <p class="text-muted">${instructor.specialization}</p>
                                     <p class="small">${instructor.bio}</p>
-                                    <p class="text-${color} small mb-0">
+                                    
+                                    <div class="row text-center small mb-3">
+                                        <div class="col-4">
+                                            <div class="fw-bold text-primary">${instructor.experience}</div>
+                                            <div class="text-muted">Kinh nghiệm</div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="fw-bold text-success">${instructor.courses}</div>
+                                            <div class="text-muted">Khóa học</div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="fw-bold text-warning">${instructor.rating}</div>
+                                            <div class="text-muted">Đánh giá</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <p class="small text-muted mb-2">
+                                        <i class="fas fa-graduation-cap me-1"></i> ${instructor.education}
+                                    </p>
+                                    
+                                    <p class="text-${color} small mb-3">
                                         <i class="fas fa-envelope me-1"></i> ${instructor.email}
                                     </p>
+                                    
+                                    <button class="btn btn-outline-primary btn-sm w-100" onclick="openContactModal(${JSON.stringify(instructor).replace(/"/g, '&quot;')})">
+                                        <i class="fas fa-envelope me-1"></i> Liên hệ giảng viên
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -2030,10 +2174,10 @@
                                 
                                 console.log(`Instructor ${index}: ${instructor.name}, avatar:`, instructor.avatar);
                                 
-                                const avatarHtml = instructor.avatar ? 
+                                const avatarHtml = instructor.avatar && instructor.avatar !== null && instructor.avatar.trim() !== '' ? 
                                     `<img src="${instructor.avatar}" alt="${instructor.name}" 
                                      class="rounded-circle" style="width: 120px; height: 120px; object-fit: cover;" 
-                                     onerror="console.error('Failed to load avatar for ${instructor.name}');">` : 
+                                     onerror="this.onerror=null; this.src='https://picsum.photos/seed/${instructor.name.replace(/\s+/g, '')}/120/120.jpg';">` : 
                                     `<div class="rounded-circle bg-light d-flex align-items-center justify-content-center mb-3 mx-auto" 
                                          style="width: 120px; height: 120px;">
                                         <i class="fas fa-user-tie fa-3x text-muted"></i>
@@ -2049,9 +2193,33 @@
                                                 <h5 class="card-title fw-bold">${instructor.name}</h5>
                                                 <p class="text-muted">${instructor.specialization}</p>
                                                 <p class="small">${instructor.bio}</p>
-                                                <p class="text-${color} small mb-0">
+                                                
+                                                <div class="row text-center small mb-3">
+                                                    <div class="col-4">
+                                                        <div class="fw-bold text-primary">${instructor.experience || 'N/A'}</div>
+                                                        <div class="text-muted">Kinh nghiệm</div>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <div class="fw-bold text-success">${instructor.courses || 'N/A'}</div>
+                                                        <div class="text-muted">Khóa học</div>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <div class="fw-bold text-warning">${instructor.rating || 'N/A'}</div>
+                                                        <div class="text-muted">Đánh giá</div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <p class="small text-muted mb-2">
+                                                    <i class="fas fa-graduation-cap me-1"></i> ${instructor.education || 'Chưa cập nhật'}
+                                                </p>
+                                                
+                                                <p class="text-${color} small mb-3">
                                                     <i class="fas fa-envelope me-1"></i> ${instructor.email}
                                                 </p>
+                                                
+                                                <button class="btn btn-outline-primary btn-sm w-100" onclick="openContactModal(${JSON.stringify(instructor).replace(/"/g, '&quot;')})">
+                                                    <i class="fas fa-envelope me-1"></i> Liên hệ giảng viên
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -2080,46 +2248,37 @@
         function loadTestimonials() {
             fetch('load_testimonials.php')
                 .then(response => response.json())
-                .then(testimonials => {
-                    console.log('Testimonials loaded:', testimonials);
+                .then(data => {
+                    console.log('API response:', data);
                     const container = document.getElementById('testimonials-container');
-                    container.innerHTML = testimonials.map(testimonial => `
-                        <div class="col-md-6 col-lg-4">
-                            <div class="testimonial-card">
-                                <p class="testimonial-text">${testimonial.text}</p>
-                                <div class="testimonial-author">
-                                    <div class="testimonial-info">
-                                        <h5>${testimonial.name}</h5>
-                                        <p>${testimonial.role}</p>
+                    
+                    if (data.success && data.testimonials && data.testimonials.length > 0) {
+                        console.log('Testimonials loaded from database:', data.testimonials.length);
+                        container.innerHTML = data.testimonials.map(testimonial => `
+                            <div class="col-md-6 col-lg-4">
+                                <div class="testimonial-card">
+                                    <p class="testimonial-text">${testimonial.text}</p>
+                                    <div class="testimonial-author">
+                                        <div class="testimonial-info">
+                                            <h5>${testimonial.name}</h5>
+                                            <p>${testimonial.role}</p>
+                                        </div>
+                                    </div>
+                                    <div class="testimonial-rating">
+                                        ${generateStars(testimonial.rating)}
                                     </div>
                                 </div>
-                                <div class="testimonial-rating">
-                                    ${generateStars(testimonial.rating)}
-                                </div>
                             </div>
-                        </div>
-                    `).join('');
+                        `).join('');
+                    } else {
+                        console.log('No testimonials found in database');
+                        container.innerHTML = '<div class="col-12 text-center"><p class="text-muted">Chưa có đánh giá nào từ học viên.</p></div>';
+                    }
                 })
                 .catch(error => {
                     console.error('Error loading testimonials:', error);
-                    // Fallback to sample data
                     const container = document.getElementById('testimonials-container');
-                    container.innerHTML = testimonials.map(testimonial => `
-                        <div class="col-md-6 col-lg-4">
-                            <div class="testimonial-card">
-                                <p class="testimonial-text">${testimonial.text}</p>
-                                <div class="testimonial-author">
-                                    <div class="testimonial-info">
-                                        <h5>${testimonial.name}</h5>
-                                        <p>${testimonial.role}</p>
-                                    </div>
-                                </div>
-                                <div class="testimonial-rating">
-                                    ${generateStars(testimonial.rating)}
-                                </div>
-                            </div>
-                        </div>
-                    `).join('');
+                    container.innerHTML = '<div class="col-12 text-center"><p class="text-muted">Không thể tải đánh giá. Vui lòng thử lại sau.</p></div>';
                 });
         }
 
@@ -2263,5 +2422,178 @@
             });
         });
     </script>
+
+    <!-- Modal Liên hệ Giảng viên -->
+    <div class="modal fade" id="contactInstructorModal" tabindex="-1" aria-labelledby="contactInstructorModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="contactInstructorModalLabel">
+                        <i class="fas fa-envelope me-2"></i>
+                        Liên hệ Giảng viên
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-3">
+                        <div class="col-md-3 text-center">
+                            <img id="modalInstructorAvatar" src="https://picsum.photos/seed/instructor/150/150.jpg" 
+                                 class="rounded-circle mb-2" style="width: 100px; height: 100px; object-fit: cover;">
+                            <h6 id="modalInstructorName" class="mb-1">Tên giảng viên</h6>
+                            <small id="modalInstructorSpecialization" class="text-muted">Chuyên môn</small>
+                        </div>
+                        <div class="col-md-9">
+                            <form id="contactInstructorForm">
+                                <input type="hidden" id="instructorId" name="instructor_id">
+                                <input type="hidden" id="instructorEmail" name="instructor_email">
+                                
+                                <div class="mb-3">
+                                    <label for="studentName" class="form-label">Họ và tên của bạn *</label>
+                                    <input type="text" class="form-control" id="studentName" name="student_name" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="studentEmail" class="form-label">Email của bạn *</label>
+                                    <input type="email" class="form-control" id="studentEmail" name="student_email" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="studentPhone" class="form-label">Số điện thoại</label>
+                                    <input type="tel" class="form-control" id="studentPhone" name="student_phone">
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="subject" class="form-label">Chủ đề *</label>
+                                    <select class="form-select" id="subject" name="subject" required>
+                                        <option value="">Chọn chủ đề</option>
+                                        <option value="hoc_them">Hỏi thêm về khóa học</option>
+                                        <option value="tuvan">Tư vấn lộ trình học tập</option>
+                                        <option value="dangky">Đăng ký khóa học</option>
+                                        <option value="khac">Chủ đề khác</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="message" class="form-label">Nội dung tin nhắn *</label>
+                                    <textarea class="form-control" id="message" name="message" rows="4" required 
+                                              placeholder="Nhập nội dung bạn muốn gửi cho giảng viên..."></textarea>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-1"></i> Hủy
+                    </button>
+                    <button type="button" class="btn btn-primary" onclick="sendContactMessage()">
+                        <i class="fas fa-paper-plane me-1"></i> Gửi tin nhắn
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Hàm mở modal liên hệ giảng viên
+        function openContactModal(instructor) {
+            document.getElementById('instructorId').value = instructor.id;
+            document.getElementById('instructorEmail').value = instructor.email;
+            document.getElementById('modalInstructorName').textContent = instructor.name;
+            document.getElementById('modalInstructorSpecialization').textContent = instructor.specialization;
+            
+            // Cập nhật avatar
+            const avatarElement = document.getElementById('modalInstructorAvatar');
+            if (instructor.avatar && instructor.avatar.trim() !== '') {
+                avatarElement.src = instructor.avatar;
+            } else {
+                avatarElement.src = `https://picsum.photos/seed/${instructor.name}/150/150.jpg`;
+            }
+            
+            // Reset form
+            document.getElementById('contactInstructorForm').reset();
+            
+            // Hiển thị modal
+            const modal = new bootstrap.Modal(document.getElementById('contactInstructorModal'));
+            modal.show();
+        }
+        
+        // Hàm gửi tin nhắn liên hệ
+        function sendContactMessage() {
+            const form = document.getElementById('contactInstructorForm');
+            
+            // Validate form
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+            
+            const formData = new FormData(form);
+            formData.append('action', 'send_contact');
+            
+            // Hiển thị loading
+            const submitBtn = event.target;
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i> Đang gửi...';
+            submitBtn.disabled = true;
+            
+            fetch('contact_instructor.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Hiển thị thông báo thành công
+                    showAlert('success', 'Tin nhắn của bạn đã được gửi thành công! Giảng viên sẽ liên hệ lại sớm.');
+                    
+                    // Đóng modal
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('contactInstructorModal'));
+                    modal.hide();
+                } else {
+                    showAlert('danger', data.message || 'Có lỗi xảy ra. Vui lòng thử lại.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showAlert('danger', 'Có lỗi xảy ra. Vui lòng thử lại.');
+            })
+            .finally(() => {
+                // Reset button
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            });
+        }
+        
+        // Hàm hiển thị alert
+        function showAlert(type, message) {
+            // Xóa alert cũ nếu có
+            const oldAlert = document.querySelector('.alert-message');
+            if (oldAlert) {
+                oldAlert.remove();
+            }
+            
+            // Tạo alert mới
+            const alertHtml = `
+                <div class="alert alert-${type} alert-dismissible fade show alert-message position-fixed top-0 start-50 translate-middle-x mt-3" 
+                     style="z-index: 9999; min-width: 300px;" role="alert">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-triangle'} me-2"></i>
+                    ${message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            `;
+            
+            document.body.insertAdjacentHTML('afterbegin', alertHtml);
+            
+            // Tự động ẩn sau 5 giây
+            setTimeout(() => {
+                const alert = document.querySelector('.alert-message');
+                if (alert) {
+                    alert.remove();
+                }
+            }, 5000);
+        }
+    </script>
+
 </body>
 </html>

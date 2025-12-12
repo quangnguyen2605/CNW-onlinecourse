@@ -53,10 +53,12 @@
                                     </td>
                                     <td>
                                         <?php
-                                        // Since database doesn't have status column, show as active by default
-                                        $status = 'active';
-                                        $statusLabel = '<span class="badge bg-success">Hoạt động</span>';
-                                        echo $statusLabel;
+                                        $status = isset($u['status']) ? (int)$u['status'] : 1;
+                                        if ($status == 1) {
+                                            echo '<span class="badge bg-success">Hoạt động</span>';
+                                        } else {
+                                            echo '<span class="badge bg-secondary">Vô hiệu</span>';
+                                        }
                                         ?>
                                     </td>
                                     <td>
@@ -64,11 +66,12 @@
                                     </td>
                                     <td>
                                         <div class="btn-group btn-group-sm">
-                                            <button class="btn btn-outline-warning" 
-                                                    onclick="alert('Tính năng kích hoạt/vô hiệu hóa chưa được hỗ trợ trong database hiện tại.')"
-                                                    title="Kích hoạt/Vô hiệu hóa">
+                                            <a href="/onlinecourse/onlinecourse/index.php?controller=Admin&action=toggleUserStatus&id=<?= $u['id'] ?>" 
+                                               class="btn btn-<?= (isset($u['status']) && (int)$u['status'] == 1) ? 'outline-warning' : 'outline-success' ?>"
+                                               onclick="return confirm('Bạn muốn <?= (isset($u['status']) && (int)$u['status'] == 1) ? 'vô hiệu hóa' : 'kích hoạt' ?> người dùng này?')"
+                                               title="<?= (isset($u['status']) && (int)$u['status'] == 1) ? 'Vô hiệu hóa' : 'Kích hoạt' ?> người dùng">
                                                 <i class="fas fa-power-off"></i>
-                                            </button>
+                                            </a>
                                             <a href="/onlinecourse/onlinecourse/index.php?controller=Admin&action=deleteUser&id=<?= $u['id'] ?>" 
                                                class="btn btn-outline-danger"
                                                onclick="return confirm('Xóa người dùng này? Hành động này không thể hoàn lại.')"
@@ -84,10 +87,6 @@
                 </div>
             <?php endif; ?>
             
-            <div class="alert alert-warning mt-3">
-                <i class="fas fa-exclamation-triangle"></i>
-                <strong>Lưu ý:</strong> Tính năng kích hoạt/vô hiệu hóa người dùng yêu cầu cột `status` trong bảng users. 
-                Hiện tại database chưa có cột này, nên tất cả người dùng đều ở trạng thái hoạt động.
             </div>
         </div>
     </div>

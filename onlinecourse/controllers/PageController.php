@@ -37,6 +37,49 @@ class PageController {
         require __DIR__ . '/../views/pages/contact.php';
     }
     
+    public function submitContact() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Validate and process contact form
+            $name = $_POST['name'] ?? '';
+            $email = $_POST['email'] ?? '';
+            $subject = $_POST['subject'] ?? '';
+            $message = $_POST['message'] ?? '';
+            
+            // Basic validation
+            if (empty($name) || empty($email) || empty($subject) || empty($message)) {
+                $_SESSION['error'] = 'Vui lòng điền đầy đủ thông tin!';
+            } else {
+                // Here you would typically save to database or send email
+                // For now, we'll just show success message
+                $_SESSION['success'] = 'Liên hệ thành công! Chúng tôi sẽ phản hồi cho bạn sớm nhất.';
+            }
+            
+            header('Location: /onlinecourse/onlinecourse/index.php?controller=Page&action=contact');
+            exit;
+        }
+    }
+    
+    public function submitSupport() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Validate and process support form
+            $name = $_POST['name'] ?? '';
+            $email = $_POST['email'] ?? '';
+            $message = $_POST['message'] ?? '';
+            
+            // Basic validation
+            if (empty($name) || empty($email) || empty($message)) {
+                $_SESSION['error'] = 'Vui lòng điền đầy đủ thông tin!';
+            } else {
+                // Here you would typically save to database or send email
+                // For now, we'll just show success message
+                $_SESSION['success'] = 'Gửi yêu cầu hỗ trợ thành công! Chúng tôi sẽ phản hồi cho bạn sớm nhất.';
+            }
+            
+            header('Location: /onlinecourse/onlinecourse/index.php?controller=Page&action=support');
+            exit;
+        }
+    }
+    
     public function faq() {
         $pageTitle = 'FAQ - OnlineCourse';
         require __DIR__ . '/../views/pages/faq.php';

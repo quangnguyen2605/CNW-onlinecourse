@@ -44,6 +44,28 @@
 
     <!-- Content -->
     <div class="container py-5">
+        <?php if (isset($_SESSION['success'])): ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="fas fa-check-circle me-2"></i>
+                <?php 
+                    echo $_SESSION['success']; 
+                    unset($_SESSION['success']);
+                ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php endif; ?>
+        
+        <?php if (isset($_SESSION['error'])): ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="fas fa-exclamation-circle me-2"></i>
+                <?php 
+                    echo $_SESSION['error']; 
+                    unset($_SESSION['error']);
+                ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php endif; ?>
+        
         <div class="row">
             <div class="col-lg-8 mx-auto">
                 <div class="card shadow mb-4">
@@ -77,7 +99,7 @@
                 <div class="card shadow">
                     <div class="card-body p-4">
                         <h3 class="h5 mb-3">Gửi yêu cầu hỗ trợ</h3>
-                        <form method="POST" action="">
+                        <form method="POST" action="/onlinecourse/onlinecourse/index.php?controller=Page&action=submitSupport">
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Họ và tên</label>

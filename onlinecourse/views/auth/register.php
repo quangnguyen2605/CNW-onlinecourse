@@ -385,9 +385,6 @@ require __DIR__ . '/../layouts/header.php';
                 <button class="social-btn facebook" onclick="socialRegister('facebook')">
                     <i class="fab fa-facebook-f"></i> Facebook
                 </button>
-                <button class="social-btn github" onclick="socialRegister('github')">
-                    <i class="fab fa-github"></i> GitHub
-                </button>
             </div>
         </div>
 
@@ -400,11 +397,25 @@ require __DIR__ . '/../layouts/header.php';
 
 <script>
 function socialRegister(provider) {
-    if (provider === 'facebook') {
-        window.open('https://www.facebook.com/quang.nguyen.490818/', '_blank');
+    // Hiển thị loading
+    const btn = event.target;
+    btn.style.opacity = '0.7';
+    btn.style.cursor = 'not-allowed';
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang xử lý...';
+    
+    // Chuyển hướng đến OAuth endpoint
+    if (provider === 'google') {
+        window.location.href = '/onlinecourse/onlinecourse/index.php?controller=Auth&action=googleOAuth';
+    } else if (provider === 'facebook') {
+        window.location.href = '/onlinecourse/onlinecourse/index.php?controller=Auth&action=facebookOAuth';
+    } else if (provider === 'github') {
+        window.location.href = '/onlinecourse/onlinecourse/index.php?controller=Auth&action=githubOAuth';
     } else {
-        // Implement social registration logic here
-        alert(`Đăng ký với ${provider} - Chức năng đang phát triển`);
+        // Fallback
+        alert(`Đăng ký với ${provider} - Chức năng đang được phát triển!`);
+        btn.style.opacity = '1';
+        btn.style.cursor = 'pointer';
+        btn.innerHTML = `<i class="fab fa-${provider}"></i> ${provider.charAt(0).toUpperCase() + provider.slice(1)}`;
     }
 }
 

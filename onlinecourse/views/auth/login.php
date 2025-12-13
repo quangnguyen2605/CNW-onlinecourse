@@ -395,29 +395,14 @@ document.querySelector('form').addEventListener('submit', function(e) {
 });
 
 function socialLogin(provider) {
-    if (provider === 'facebook') {
-        window.open('https://www.facebook.com/quang.nguyen.490818/', '_blank');
-    } else {
-        // Hiển thị thông báo đang phát triển
-        alert(`Đăng nhập với ${provider} - Chức năng đang được phát triển!\n\nTrong thời gian chờ đợi, bạn có thể:\n1. Sử dụng email và mật khẩu để đăng nhập\n2. Đăng ký tài khoản mới nếu chưa có`);
-    }
+    // Hiển thị loading
+    const btn = event.target;
+    btn.style.opacity = '0.7';
+    btn.style.cursor = 'not-allowed';
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Đang chuyển hướng...';
     
-    // Logic thực tế cho social login (khi đã có API)
-    /*
-    switch(provider) {
-        case 'google':
-            window.location.href = 'auth/google';
-            break;
-        case 'facebook':
-            window.location.href = 'auth/facebook';
-            break;
-        case 'github':
-            window.location.href = 'auth/github';
-            break;
-        default:
-            console.log('Provider not supported');
-    }
-    */
+    // Chuyển đến form đăng nhập bằng social link
+    window.location.href = '/onlinecourse/onlinecourse/index.php?controller=Auth&action=socialLinkLogin&provider=' + provider;
 }
 
 // Thêm hiệu ứng khi click vào social buttons
